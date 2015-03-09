@@ -2,14 +2,14 @@
 
 namespace GravityTidalCorrection
 {
-    public struct TidalAcceleration
+    public class TidalCorrection
     {
-        public double MoonTidal;
-        public double SunTidal;
-        public double TotalTidal;
-        public DateTime Date;
+        public double MoonTidal { get; set; }
+        public double SunTidal { get; set; }
+        public double TotalTidal { get; set; }
+        public DateTime Date { get; set; }
 
-        public TidalAcceleration(double moonTidal, double sunTidal, double totalTidal, DateTime dateTime)
+        public TidalCorrection(double moonTidal, double sunTidal, double totalTidal, DateTime dateTime)
         {
             MoonTidal = moonTidal;
             SunTidal = sunTidal;
@@ -21,24 +21,31 @@ namespace GravityTidalCorrection
    static class VerticalTide
     {
         // Constant
+/*
         const double pi = 3.1415926535897;
+*/
         const double mu = 6.67e-08;
         const double m = 7.3537e+25;
         const double s = 1.993e+33;
+/*
         const double il = 0.08979719;
+*/
+/*
         const double omega = 0.4093146162;
+*/
         const double ml = 0.074804;
         const double el = 0.0549;
         const double cl1 = 1.495e+13;
         const double cl = 3.84402e+10;
+/*
         const double al = 6.37827e+08;
+*/
 
         // Love Numbers
+       private const double h2 = 0.612;
+       private const double k2 = 0.303;
 
-        private static double h2 = 0.612;
-        private static double k2 = 0.303;
-
-        private static double MjdToExcel(double n)
+       private static double MjdToExcel(double n)
         {
             return n - 15018.0;
         }
@@ -73,7 +80,8 @@ namespace GravityTidalCorrection
             return Math.Pow(x, 4);
         }
 
-        public static double UtcToModifiedJulian(DateTime utcdate)
+       // ReSharper disable once InconsistentNaming
+        public static double UTC2ModifiedJulian(DateTime utcdate)
         {
             double hour = utcdate.Hour;
             double minute = utcdate.Minute;
@@ -98,12 +106,12 @@ namespace GravityTidalCorrection
 
             int fmjd = (year * 365) + (year / 4) - (year / 100) + (year / 400) + (489 * month) / 16 + day - 678973;
             double result = fmjd + ((hour * 60.0 + minute) * 60.0 + second) / 86400.0;
-
+            
             return result;
 
         }
 
-        public static TidalAcceleration TideCalcGal(double fmjd, double lat, double lon, double alt, double tz)
+        public static TidalCorrection TideCalcGal(double fmjd, double lat, double lon, double alt, double tz)
         {
             
             double tl0, j1900, t, n, el1, sl, pl, hl, pl1, i, nu, tl;
@@ -166,7 +174,7 @@ namespace GravityTidalCorrection
             //    (980 - g0)/100.0, -g0/980.0, g0*1e6, gm*love*1e6, gs*love*1e6);
 
             // in mGal
-            var tidalAcceleration = new TidalAcceleration(gm * love * 1e3, gs * love * 1e3, g0 * 1e3, DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0));
+            var tidalAcceleration = new TidalCorrection(gm * love * 1e3, gs * love * 1e3, g0 * 1e3, DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0));
             return tidalAcceleration;
         }
 

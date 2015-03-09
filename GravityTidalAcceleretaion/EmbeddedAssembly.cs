@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
 
-namespace CoordinateHelper
+namespace GravityTidalCorrection
 {
     public class EmbeddedAssembly
     {

@@ -1,6 +1,6 @@
 ﻿namespace GravityTidalCorrection
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -81,20 +82,27 @@
             this.textBoxInfo = new System.Windows.Forms.TextBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFilegObserved = new System.Windows.Forms.OpenFileDialog();
-            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readGobsgobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.decimalDegreeInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useDegMinSecToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTMInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTMLatLongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainPanel.SuspendLayout();
-            
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
             this.splitContainerLeftRight.SuspendLayout();
@@ -102,21 +110,25 @@
             this.groupLocation.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numLatDeg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numLongDeg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).BeginInit();
             this.flowLayoutPanel5.SuspendLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numElevation)).BeginInit();
             this.groupTime.SuspendLayout();
             this.flowLayoutPanel7.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
             this.splitContainerTableInfoWindow.Panel1.SuspendLayout();
             this.splitContainerTableInfoWindow.Panel2.SuspendLayout();
             this.splitContainerTableInfoWindow.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTable.SuspendLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPageChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -703,6 +715,11 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.col_date,
+            this.col_gmoon,
+            this.col_gsun,
+            this.col_gtotal});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -784,18 +801,6 @@
             // 
             this.openFilegObserved.Filter = "Gravity Observed Data (*.gobs)|*.gobs";
             // 
-            // mainMenuStrip
-            // 
-            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
-            this.mainMenuStrip.TabIndex = 0;
-            this.mainMenuStrip.Text = "menuStrip1";
-            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -836,15 +841,17 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
-            // editToolStripMenuItem
+            // inputToolStripMenuItem
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyTableToolStripMenuItem,
             this.toolStripSeparator7,
-            this.useDegMinSecToolStrip});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "&Edit";
+            this.decimalDegreeInputToolStripMenuItem,
+            this.useDegMinSecToolStrip,
+            this.uTMInputToolStripMenuItem});
+            this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
+            this.inputToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.inputToolStripMenuItem.Text = "&Input";
             // 
             // copyTableToolStripMenuItem
             // 
@@ -852,24 +859,36 @@
             this.copyTableToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyTableToolStripMenuItem.Image")));
             this.copyTableToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.copyTableToolStripMenuItem.Name = "copyTableToolStripMenuItem";
-            this.copyTableToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.copyTableToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.copyTableToolStripMenuItem.Text = "&Copy Table";
             this.copyTableToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem1_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(185, 6);
+            // 
+            // decimalDegreeInputToolStripMenuItem
+            // 
+            this.decimalDegreeInputToolStripMenuItem.Name = "decimalDegreeInputToolStripMenuItem";
+            this.decimalDegreeInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.decimalDegreeInputToolStripMenuItem.Text = "Decimal Degree Input";
             // 
             // useDegMinSecToolStrip
             // 
             this.useDegMinSecToolStrip.Checked = true;
             this.useDegMinSecToolStrip.CheckState = System.Windows.Forms.CheckState.Checked;
             this.useDegMinSecToolStrip.Name = "useDegMinSecToolStrip";
-            this.useDegMinSecToolStrip.Size = new System.Drawing.Size(193, 22);
-            this.useDegMinSecToolStrip.Text = "Use Deg Min Sec Input";
+            this.useDegMinSecToolStrip.Size = new System.Drawing.Size(188, 22);
+            this.useDegMinSecToolStrip.Text = "Deg Min Sec Input";
             this.useDegMinSecToolStrip.CheckedChanged += new System.EventHandler(this.useDegMinSec_CheckedChanged);
             this.useDegMinSecToolStrip.Click += new System.EventHandler(this.useDegMinSec_Click);
+            // 
+            // uTMInputToolStripMenuItem
+            // 
+            this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
+            this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.uTMInputToolStripMenuItem.Text = "UTM Input";
             // 
             // helpToolStripMenuItem
             // 
@@ -886,7 +905,66 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
-            // Form1
+            // convertToolStripMenuItem
+            // 
+            this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uTMLatLongToolStripMenuItem});
+            this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
+            this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.convertToolStripMenuItem.Text = "Convert";
+            // 
+            // uTMLatLongToolStripMenuItem
+            // 
+            this.uTMLatLongToolStripMenuItem.Name = "uTMLatLongToolStripMenuItem";
+            this.uTMLatLongToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.uTMLatLongToolStripMenuItem.Text = "UTM > Lat Long";
+            // 
+            // mainMenuStrip
+            // 
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.inputToolStripMenuItem,
+            this.convertToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
+            this.mainMenuStrip.TabIndex = 0;
+            this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // col_date
+            // 
+            this.col_date.DataPropertyName = "Date";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle1.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col_date.HeaderText = "Date Time";
+            this.col_date.Name = "col_date";
+            this.col_date.ReadOnly = true;
+            // 
+            // col_gmoon
+            // 
+            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.HeaderText = "g Moon (mGal)";
+            this.col_gmoon.Name = "col_gmoon";
+            this.col_gmoon.ReadOnly = true;
+            // 
+            // col_gsun
+            // 
+            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.HeaderText = "g Sun (mGal)";
+            this.col_gsun.Name = "col_gsun";
+            this.col_gsun.ReadOnly = true;
+            // 
+            // col_gtotal
+            // 
+            this.col_gtotal.DataPropertyName = "TotalTidal";
+            this.col_gtotal.HeaderText = "g Total (mGal)";
+            this.col_gtotal.Name = "col_gtotal";
+            this.col_gtotal.ReadOnly = true;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -896,13 +974,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Gravity Tidal Correction v1.0";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.mainPanel.ResumeLayout(false);
             this.splitContainerLeftRight.Panel1.ResumeLayout(false);
             this.splitContainerLeftRight.Panel2.ResumeLayout(false);
-          
             this.splitContainerLeftRight.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.groupLocation.ResumeLayout(false);
@@ -910,26 +987,29 @@
             this.flowLayoutPanel6.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numLatDeg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numLongDeg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).EndInit();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numElevation)).EndInit();
             this.groupTime.ResumeLayout(false);
             this.flowLayoutPanel7.ResumeLayout(false);
             this.flowLayoutPanel7.PerformLayout();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel4.PerformLayout();
-            
+            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
             this.splitContainerTableInfoWindow.Panel1.ResumeLayout(false);
             this.splitContainerTableInfoWindow.Panel2.ResumeLayout(false);
-            
             this.splitContainerTableInfoWindow.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
-            
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPageChart.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -978,18 +1058,6 @@
        
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.OpenFileDialog openFilegObserved;
-        private System.Windows.Forms.MenuStrip mainMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyTableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem useDegMinSecToolStrip;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem readGobsgobsToolStripMenuItem;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.NumericUpDown numLatDeg;
@@ -1008,6 +1076,26 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
         private System.Windows.Forms.GroupBox groupTime;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readGobsgobsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyTableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem useDegMinSecToolStrip;
+        private System.Windows.Forms.ToolStripMenuItem uTMInputToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem convertToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uTMLatLongToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem decimalDegreeInputToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_gmoon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_gsun;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_gtotal;
     }
 }
 

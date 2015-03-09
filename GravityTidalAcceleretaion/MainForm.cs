@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DotNetPerls;
 using GravityTidalCorrection.Properties;
@@ -11,24 +13,25 @@ using ZedGraph;
 
 namespace GravityTidalCorrection
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        private bool OnLoadDone;
-        private DataTable dtable;
-        private double lat;
-        private double lon;
-        private double elev;
-        private double duration;
-        private DateTime beginInUtc;
-        private DateTime endInUtc;
-        private double utcOffset;
-        private double interval;
-       public Form1()
+        private bool _onLoadDone;
+        private double _lat;
+        private double _lon;
+        private double _elev;
+        private double _duration;
+        private DateTime _beginInUtc;
+        private DateTime _endInUtc;
+        private double _utcOffset;
+        private double _timeInterval;
+        private List<TidalCorrection> corrections;
+ 
+       public MainForm()
         {
             InitializeComponent();
         }
 
-        private void DrawGraph(ZedGraphControl zgc, DataTable table,double multiplier, int xCol, int yCol, string title,
+        private void DrawGraph(ZedGraphControl zgc, List<TidalCorrection> corrlist,  double multiplier, int xCol, int yCol,
                string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
         {
                GraphPane myPane = zgc.GraphPane;
@@ -43,15 +46,14 @@ namespace GravityTidalCorrection
                myPane.YAxis.Title.Text = yAxisTitle;
                myPane.XAxis.Type = AxisType.Date;
 
-               PointPairList list = new PointPairList();
+               PointPairList plotList = new PointPairList();
 
-               foreach (DataRow drow in table.Rows)
+               foreach ( TidalCorrection corr in corrlist )
                {
-                   DateTime date = (DateTime) drow[xCol - 1];
-                   list.Add(date.ToOADate(), (double)drow[yCol - 1] * multiplier);
+                   plotList.Add(corr.Date.ToOADate(),corr.TotalTidal);
                }
 
-               LineItem myCurve = myPane.AddCurve(legend, list, clr, SymbolType.Square);
+               LineItem myCurve = myPane.AddCurve(legend, plotList, clr, SymbolType.Square);
                zgc.AxisChange();
 
                myCurve.Symbol.IsVisible = symbol;
@@ -88,7 +90,7 @@ namespace GravityTidalCorrection
             }
             if (Math.Abs(interval) < 5e-6)
             {
-                WriteErrorLog("Interval cannot be zero. ");
+                WriteErrorLog("Time interval cannot be zero. ");
                 valid = false;
             }
 
@@ -114,43 +116,31 @@ namespace GravityTidalCorrection
         {
             if (includeHeaders)
             {
-                List<string> headerValues = new List<string>();
-                foreach (DataColumn column in dtable.Columns)
-                {
-                    headerValues.Add(column.ColumnName);
-                }
-
                 writer.WriteLine("# ------------------------------------------------------");
                 writer.WriteLine("# Output from Grav-TC : Tidal Correction");
                 writer.WriteLine("# ------------------------------------------------------");
-                writer.WriteLine("# Time Zone\t: {0} (UTC{1:'+'00;'-'00})", cboxTimeZone.SelectedValue, utcOffset);
-                writer.WriteLine("# Begin\t\t: {0}", datepickBegin.Value);
-                writer.WriteLine("# End\t\t: {0}\t", datepickEnd.Value);
-                writer.WriteLine("# Interval\t: {0:F2} minutes", interval);
-                writer.WriteLine("# Time Span\t: {0:F2} minutes", duration);
-                writer.WriteLine("# Latitude\t: {0:F4}", lat);
-                writer.WriteLine("# Longitude\t: {0:F4}", lon);
-                writer.WriteLine("# Elevation\t: {0:F2} meters", elev);
+                writer.WriteLine("# Time Zone\t: {0} (UTC{1:'+'00;'-'00})", cboxTimeZone.SelectedValue, _utcOffset);
+                writer.WriteLine("# Begin\t\t: {0:dd-MMM-yyyy HH:mm:ss}", datepickBegin.Value);
+                writer.WriteLine("# End\t\t: {0:dd-MMM-yyyy HH:mm:ss}\t", datepickEnd.Value);
+                writer.WriteLine("# Interval\t: {0:F2} minutes", _timeInterval);
+                writer.WriteLine("# Time Span\t: {0:F2} minutes", _duration);
+                writer.WriteLine("# Latitude\t: {0:F4}", _lat);
+                writer.WriteLine("# Longitude\t: {0:F4}", _lon);
+                writer.WriteLine("# Elevation\t: {0:F2} meters", _elev);
                 writer.WriteLine("# ------------------------------------------------------");
-                writer.Write("# ");
-                
-                writer.WriteLine(String.Join(",", headerValues.ToArray()));
+                writer.WriteLine("# Date Time, g Moon (mGal), g Sun (mGal), g Total (mGal)");
             }
 
             List<string> items = new List<string>();
-            foreach (DataRow row in dtable.Rows)
+            foreach (TidalCorrection corr in corrections)
             {
                 // the first is a date column
-                string str = String.Format("{0:dd-MM-yyyy HH:mm:ss}", row[0]);
-                items.Add(str);
+                //items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
+                items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
+                items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
+                items.Add(String.Format("{0,10:F7}", corr.SunTidal));
+                items.Add(String.Format("{0,10:F7}", corr.TotalTidal));
                 
-                // the rest is number column
-                for (int i = 1; i < dtable.Columns.Count; i++)
-                {
-                    str = String.Format("{0:G7}", double.Parse(row[i].ToString()));
-                    items.Add(str);
-                }
-
                 writer.WriteLine(String.Join("\t", items.ToArray()));
                 items.Clear();
             }
@@ -161,123 +151,89 @@ namespace GravityTidalCorrection
         private void buttonGo_Click(object sender, EventArgs e)
         {
             // Latitude, Longitude, Elevation Informaton
-            lat = Convert.ToDouble(numLatDeg.Value + (numLatMin.Value / (decimal)60.0) + (numLatSec.Value / (decimal)3600.0));
+            _lat = Convert.ToDouble(numLatDeg.Value + (numLatMin.Value / (decimal)60.0) + (numLatSec.Value / (decimal)3600.0));
             if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
             {
-                lat = lat * -1.0;
+                _lat = _lat * -1.0;
             }
-            lon = Convert.ToDouble(numLongDeg.Value + (numLongMin.Value / (decimal)60.0) + (numLongSec.Value / (decimal)3600.0));
+            _lon = Convert.ToDouble(numLongDeg.Value + (numLongMin.Value / (decimal)60.0) + (numLongSec.Value / (decimal)3600.0));
             if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
             {
-                lon = lon * -1.0;
+                _lon = _lon * -1.0;
             }
 
-            // the algorithm used WEST Longitude as positive, so I had to reverse it first
-            //lon = -lon;
-            elev = Convert.ToDouble(numElevation.Value);
+            // elevation in metres
+            _elev = Convert.ToDouble(numElevation.Value);
 
             // duration in minutes
-            duration = (datepickEnd.Value - datepickBegin.Value).TotalMinutes;
+            _duration = (datepickEnd.Value - datepickBegin.Value).TotalMinutes;
 
             // convert input to UTC+00
-            beginInUtc = TimeZoneInfo.ConvertTime(datepickBegin.Value,
+            _beginInUtc = TimeZoneInfo.ConvertTime(datepickBegin.Value,
                 TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), TimeZoneInfo.Utc);
 
-            endInUtc = TimeZoneInfo.ConvertTime(datepickEnd.Value,
+            _endInUtc = TimeZoneInfo.ConvertTime(datepickEnd.Value,
                 TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), TimeZoneInfo.Utc);
 
             // offset from UTC in hours
-            utcOffset = TimeZoneInfo.FindSystemTimeZoneById((string)cboxTimeZone.SelectedValue)
+            _utcOffset = TimeZoneInfo.FindSystemTimeZoneById((string)cboxTimeZone.SelectedValue)
                     .GetUtcOffset(datepickBegin.Value)
                     .TotalHours;
 
             // interval
-            interval = Convert.ToDouble(numInterval.Value);
+            _timeInterval = Convert.ToDouble(numInterval.Value);
 
             // Checks the input, if input is invalid, it return void.
-            if (IsInputInvalid(elev, duration, interval))
+            if (IsInputInvalid(_elev, _duration, _timeInterval))
             {
                 dataGridView1.DataSource = null;
                 return;
             }
 
 
-            // writing to datatable
+            // Start writing to list and display on gridview
 
-            dtable.Rows.Clear();
-            double fmjd = VerticalTide.UtcToModifiedJulian(beginInUtc);
+            corrections.Clear();
+            double fmjd = VerticalTide.UTC2ModifiedJulian(_beginInUtc);
             double minute = 0;
 
             Cursor.Current = Cursors.WaitCursor;
             Application.DoEvents();
-            for (var i = 0; minute <= duration; i++)
+            for (var i = 0; minute <= _duration; i++)
             {
-                var workRow = dtable.NewRow();
-
-                var tidal = VerticalTide.TideCalcGal(fmjd + minute / 1440.0, lat, lon, elev, utcOffset);
-
-                workRow[0] = tidal.Date;
-                workRow[1] = tidal.MoonTidal;
-                workRow[2] = tidal.SunTidal;
-                workRow[3] = tidal.TotalTidal;
-                dtable.Rows.Add(workRow);
-
-                minute += interval;
+                var tidal = VerticalTide.TideCalcGal(fmjd + minute / 1440.0, _lat, _lon, _elev, _utcOffset);
+                corrections.Add(tidal);
+                minute += _timeInterval;
             }
 
             // Binding to datagridview
-            dataGridView1.DataSource = dtable;
-            dataGridView1.Columns[0].DefaultCellStyle.Format = "dd-MMM-yy HH:mm";
-            dataGridView1.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView1.DataSource = corrections;
 
             // plotting the chart
 
-            DrawGraph(zedGraphControl1,dtable,1e3,1,4,"Test","Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
+            DrawGraph(zedGraphControl1,corrections,1e3,1,4,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
 
             Cursor.Current = Cursors.Default;
 
             // write to console log
-            textBoxInfo.Clear();
             textBoxInfo.AppendText("Processing . . . .\r\n");
-            textBoxInfo.AppendText(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) \r\n", cboxTimeZone.SelectedValue, utcOffset));
-            textBoxInfo.AppendText(string.Format("Begin\t\t: {0}\t({1} in UTC+00)\r\n", datepickBegin.Value, beginInUtc));
-            textBoxInfo.AppendText(string.Format("End\t\t: {0}\t({1} in UTC+00) \r\n", datepickEnd.Value, endInUtc));
-            textBoxInfo.AppendText(string.Format("Interval\t: {0:F2} minutes \r\n", interval));
-            textBoxInfo.AppendText(string.Format("Time Span\t: {0:F2} minutes \r\n", duration));
-            textBoxInfo.AppendText(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°\r\n", lat, lon));
-            textBoxInfo.AppendText(string.Format("Elevation\t: {0:F2} meters\r\n", elev));
+            textBoxInfo.AppendText(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) \r\n", cboxTimeZone.SelectedValue, _utcOffset));
+            textBoxInfo.AppendText(string.Format("Begin\t\t: {0}\t({1} in UTC+00)\r\n", datepickBegin.Value, _beginInUtc));
+            textBoxInfo.AppendText(string.Format("End\t\t: {0}\t({1} in UTC+00) \r\n", datepickEnd.Value, _endInUtc));
+            textBoxInfo.AppendText(string.Format("Interval\t: {0:F2} minutes \r\n", _timeInterval));
+            textBoxInfo.AppendText(string.Format("Time Span\t: {0:F2} minutes \r\n", _duration));
+            textBoxInfo.AppendText(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°\r\n", _lat, _lon));
+            textBoxInfo.AppendText(string.Format("Elevation\t: {0:F2} meters\r\n", _elev));
             textBoxInfo.AppendText("Completed... ");
             WriteLineConsoleLog(string.Format("{0} data point(s).", dataGridView1.RowCount));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
+            corrections = new List<TidalCorrection>();
             SetSize(zedGraphControl1);
             zedGraphControl1.Visible = false;
             
-            // Create Data Table
-            dtable = new DataTable();
-            
-                DataColumn myDataColumn;
-
-                // Create First Column
-                myDataColumn = new DataColumn { DataType = Type.GetType("System.DateTime"), ColumnName = "Date Time"};
-                dtable.Columns.Add(myDataColumn);
-
-                // Create second column.
-                myDataColumn = new DataColumn { DataType = Type.GetType("System.Double"), ColumnName = "g Moon (mGal)" };
-                dtable.Columns.Add(myDataColumn);
-
-                // Create third column.
-                myDataColumn = new DataColumn { DataType = Type.GetType("System.Double"), ColumnName = "g Sun (mGal)" };
-                dtable.Columns.Add(myDataColumn);
-
-                // Create 4th column.
-                myDataColumn = new DataColumn { DataType = Type.GetType("System.Double"), ColumnName = "g Total (mGal)" };
-                dtable.Columns.Add(myDataColumn);
-
-
-
             // Add Time Zones and Set Selected to Local TimeZone
             ReadOnlyCollection<TimeZoneInfo> zones = TimeZoneInfo.GetSystemTimeZones();
             cboxTimeZone.DataSource = zones;
@@ -294,14 +250,14 @@ namespace GravityTidalCorrection
             cboxLonSign.SelectedIndex = 0;
 
             // Tell the other if onload event is finished
-            OnLoadDone = true;
+            _onLoadDone = true;
             WriteConsoleLog("Welcome...");
 
         }
 
         private void cboxTimeZone_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (OnLoadDone)
+            if (_onLoadDone)
             {
                 string tz = cboxTimeZone.SelectedValue.ToString();
                 WriteLineConsoleLog(string.Format("Time Zone changed to {0} (UTC{1:'+'00;'-'00}).", cboxTimeZone.SelectedValue, TimeZoneInfo.FindSystemTimeZoneById(tz).GetUtcOffset(datepickBegin.Value).TotalHours));

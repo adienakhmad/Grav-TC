@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using CoordinateHelper;
 
 namespace GravityTidalCorrection
 {
@@ -15,14 +14,14 @@ namespace GravityTidalCorrection
         [STAThread]
         static void Main()
         {
-            var zedgraphlib = "GravityTidalCorrection.ZedGraph.dll";
+            const string zedgraphlib = "GravityTidalCorrection.ZedGraph.dll";
             EmbeddedAssembly.Load(zedgraphlib,"ZedGraph.dll");
-
+            
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
 
         }
 
