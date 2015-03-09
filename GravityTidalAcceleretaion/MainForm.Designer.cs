@@ -1,11 +1,15 @@
-﻿namespace GravityTidalCorrection
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+using ZedGraphControl = ZedGraph.ZedGraphControl;
+
+namespace GravityTidalCorrection
 {
     partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -30,26 +34,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupLocation = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelPositionY = new System.Windows.Forms.Label();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.numLatDeg = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelPositionY_unit = new System.Windows.Forms.Label();
             this.numLatMin = new System.Windows.Forms.NumericUpDown();
             this.labelLatMin = new System.Windows.Forms.Label();
             this.numLatSec = new System.Windows.Forms.NumericUpDown();
             this.labelLatSec = new System.Windows.Forms.Label();
             this.cboxLatSign = new System.Windows.Forms.ComboBox();
-            this.labelLonTitle = new System.Windows.Forms.Label();
+            this.labelPositionX = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.numLongDeg = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelPositionX_unit = new System.Windows.Forms.Label();
             this.numLongMin = new System.Windows.Forms.NumericUpDown();
             this.labelLonMin = new System.Windows.Forms.Label();
             this.numLongSec = new System.Windows.Forms.NumericUpDown();
@@ -75,7 +79,11 @@
             this.splitContainerTableInfoWindow = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTable = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvResult = new System.Windows.Forms.DataGridView();
+            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageChart = new System.Windows.Forms.TabPage();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -88,20 +96,16 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.decimalDegreeInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useDegMinSecToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.uTMInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uTMLatLongToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uTMZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBoxUTMZones = new System.Windows.Forms.ToolStripComboBox();
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -128,7 +132,7 @@
             this.splitContainerTableInfoWindow.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
             this.tabPageChart.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
@@ -190,9 +194,9 @@
             // 
             // flowLayoutPanel6
             // 
-            this.flowLayoutPanel6.Controls.Add(this.label5);
+            this.flowLayoutPanel6.Controls.Add(this.labelPositionY);
             this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel3);
-            this.flowLayoutPanel6.Controls.Add(this.labelLonTitle);
+            this.flowLayoutPanel6.Controls.Add(this.labelPositionX);
             this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel6.Controls.Add(this.label14);
             this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel5);
@@ -204,19 +208,19 @@
             this.flowLayoutPanel6.Size = new System.Drawing.Size(220, 149);
             this.flowLayoutPanel6.TabIndex = 0;
             // 
-            // label5
+            // labelPositionY
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Latitude";
+            this.labelPositionY.AutoSize = true;
+            this.labelPositionY.Location = new System.Drawing.Point(3, 0);
+            this.labelPositionY.Name = "labelPositionY";
+            this.labelPositionY.Size = new System.Drawing.Size(46, 13);
+            this.labelPositionY.TabIndex = 0;
+            this.labelPositionY.Text = "Latitude";
             // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.numLatDeg);
-            this.flowLayoutPanel3.Controls.Add(this.label6);
+            this.flowLayoutPanel3.Controls.Add(this.labelPositionY_unit);
             this.flowLayoutPanel3.Controls.Add(this.numLatMin);
             this.flowLayoutPanel3.Controls.Add(this.labelLatMin);
             this.flowLayoutPanel3.Controls.Add(this.numLatSec);
@@ -237,7 +241,7 @@
             this.numLatDeg.Location = new System.Drawing.Point(3, 3);
             this.numLatDeg.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.numLatDeg.Maximum = new decimal(new int[] {
-            90,
+            89,
             0,
             0,
             0});
@@ -246,22 +250,22 @@
             this.numLatDeg.TabIndex = 0;
             this.numLatDeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label6
+            // labelPositionY_unit
             // 
-            this.label6.AutoSize = true;
-            this.label6.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(48, 3);
-            this.label6.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 16);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "°";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPositionY_unit.AutoSize = true;
+            this.labelPositionY_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.labelPositionY_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
+            this.labelPositionY_unit.Location = new System.Drawing.Point(48, 3);
+            this.labelPositionY_unit.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+            this.labelPositionY_unit.Name = "labelPositionY_unit";
+            this.labelPositionY_unit.Size = new System.Drawing.Size(13, 13);
+            this.labelPositionY_unit.TabIndex = 1;
+            this.labelPositionY_unit.Text = "°";
+            this.labelPositionY_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numLatMin
             // 
-            this.numLatMin.Location = new System.Drawing.Point(66, 3);
+            this.numLatMin.Location = new System.Drawing.Point(64, 3);
             this.numLatMin.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.numLatMin.Maximum = new decimal(new int[] {
             59,
@@ -278,7 +282,7 @@
             this.labelLatMin.AutoSize = true;
             this.labelLatMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelLatMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLatMin.Location = new System.Drawing.Point(106, 3);
+            this.labelLatMin.Location = new System.Drawing.Point(104, 3);
             this.labelLatMin.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.labelLatMin.Name = "labelLatMin";
             this.labelLatMin.Size = new System.Drawing.Size(11, 16);
@@ -288,7 +292,7 @@
             // 
             // numLatSec
             // 
-            this.numLatSec.Location = new System.Drawing.Point(120, 3);
+            this.numLatSec.Location = new System.Drawing.Point(118, 3);
             this.numLatSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.numLatSec.Maximum = new decimal(new int[] {
             59,
@@ -305,7 +309,7 @@
             this.labelLatSec.AutoSize = true;
             this.labelLatSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelLatSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLatSec.Location = new System.Drawing.Point(160, 3);
+            this.labelLatSec.Location = new System.Drawing.Point(158, 3);
             this.labelLatSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.labelLatSec.Name = "labelLatSec";
             this.labelLatSec.Size = new System.Drawing.Size(13, 16);
@@ -323,25 +327,25 @@
             this.cboxLatSign.Items.AddRange(new object[] {
             "N",
             "S"});
-            this.cboxLatSign.Location = new System.Drawing.Point(176, 3);
+            this.cboxLatSign.Location = new System.Drawing.Point(174, 3);
             this.cboxLatSign.MaxDropDownItems = 2;
             this.cboxLatSign.Name = "cboxLatSign";
             this.cboxLatSign.Size = new System.Drawing.Size(33, 22);
             this.cboxLatSign.TabIndex = 6;
             // 
-            // labelLonTitle
+            // labelPositionX
             // 
-            this.labelLonTitle.AutoSize = true;
-            this.labelLonTitle.Location = new System.Drawing.Point(3, 49);
-            this.labelLonTitle.Name = "labelLonTitle";
-            this.labelLonTitle.Size = new System.Drawing.Size(54, 13);
-            this.labelLonTitle.TabIndex = 2;
-            this.labelLonTitle.Text = "Longitude";
+            this.labelPositionX.AutoSize = true;
+            this.labelPositionX.Location = new System.Drawing.Point(3, 49);
+            this.labelPositionX.Name = "labelPositionX";
+            this.labelPositionX.Size = new System.Drawing.Size(54, 13);
+            this.labelPositionX.TabIndex = 2;
+            this.labelPositionX.Text = "Longitude";
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.numLongDeg);
-            this.flowLayoutPanel2.Controls.Add(this.label2);
+            this.flowLayoutPanel2.Controls.Add(this.labelPositionX_unit);
             this.flowLayoutPanel2.Controls.Add(this.numLongMin);
             this.flowLayoutPanel2.Controls.Add(this.labelLonMin);
             this.flowLayoutPanel2.Controls.Add(this.numLongSec);
@@ -363,7 +367,7 @@
             this.numLongDeg.Location = new System.Drawing.Point(3, 3);
             this.numLongDeg.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.numLongDeg.Maximum = new decimal(new int[] {
-            180,
+            179,
             0,
             0,
             0});
@@ -372,22 +376,22 @@
             this.numLongDeg.TabIndex = 0;
             this.numLongDeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label2
+            // labelPositionX_unit
             // 
-            this.label2.AutoSize = true;
-            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(48, 3);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(15, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "°";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelPositionX_unit.AutoSize = true;
+            this.labelPositionX_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.labelPositionX_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
+            this.labelPositionX_unit.Location = new System.Drawing.Point(48, 3);
+            this.labelPositionX_unit.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
+            this.labelPositionX_unit.Name = "labelPositionX_unit";
+            this.labelPositionX_unit.Size = new System.Drawing.Size(13, 13);
+            this.labelPositionX_unit.TabIndex = 1;
+            this.labelPositionX_unit.Text = "°";
+            this.labelPositionX_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // numLongMin
             // 
-            this.numLongMin.Location = new System.Drawing.Point(66, 3);
+            this.numLongMin.Location = new System.Drawing.Point(64, 3);
             this.numLongMin.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.numLongMin.Maximum = new decimal(new int[] {
             59,
@@ -404,7 +408,7 @@
             this.labelLonMin.AutoSize = true;
             this.labelLonMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelLonMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLonMin.Location = new System.Drawing.Point(106, 3);
+            this.labelLonMin.Location = new System.Drawing.Point(104, 3);
             this.labelLonMin.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
             this.labelLonMin.Name = "labelLonMin";
             this.labelLonMin.Size = new System.Drawing.Size(11, 16);
@@ -414,7 +418,7 @@
             // 
             // numLongSec
             // 
-            this.numLongSec.Location = new System.Drawing.Point(120, 3);
+            this.numLongSec.Location = new System.Drawing.Point(118, 3);
             this.numLongSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.numLongSec.Maximum = new decimal(new int[] {
             59,
@@ -431,7 +435,7 @@
             this.labelLonSec.AutoSize = true;
             this.labelLonSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.labelLonSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLonSec.Location = new System.Drawing.Point(160, 3);
+            this.labelLonSec.Location = new System.Drawing.Point(158, 3);
             this.labelLonSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.labelLonSec.Name = "labelLonSec";
             this.labelLonSec.Size = new System.Drawing.Size(13, 16);
@@ -449,7 +453,7 @@
             this.cboxLonSign.Items.AddRange(new object[] {
             "E",
             "W"});
-            this.cboxLonSign.Location = new System.Drawing.Point(176, 3);
+            this.cboxLonSign.Location = new System.Drawing.Point(174, 3);
             this.cboxLonSign.MaxDropDownItems = 2;
             this.cboxLonSign.Name = "cboxLonSign";
             this.cboxLonSign.Size = new System.Drawing.Size(37, 22);
@@ -699,7 +703,7 @@
             // tabPageTable
             // 
             this.tabPageTable.BackColor = System.Drawing.Color.Transparent;
-            this.tabPageTable.Controls.Add(this.dataGridView1);
+            this.tabPageTable.Controls.Add(this.dgvResult);
             this.tabPageTable.Location = new System.Drawing.Point(4, 22);
             this.tabPageTable.Name = "tabPageTable";
             this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
@@ -707,37 +711,69 @@
             this.tabPageTable.TabIndex = 0;
             this.tabPageTable.Text = "Table";
             // 
-            // dataGridView1
+            // dgvResult
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvResult.AllowUserToAddRows = false;
+            this.dgvResult.AllowUserToDeleteRows = false;
+            this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvResult.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_date,
             this.col_gmoon,
             this.col_gsun,
             this.col_gtotal});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Format = "F4";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(479, 349);
-            this.dataGridView1.TabIndex = 13;
-            this.dataGridView1.TabStop = false;
-            this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle38.Format = "F4";
+            dataGridViewCellStyle38.NullValue = null;
+            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle38;
+            this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvResult.Location = new System.Drawing.Point(3, 3);
+            this.dgvResult.Name = "dgvResult";
+            this.dgvResult.ReadOnly = true;
+            this.dgvResult.Size = new System.Drawing.Size(479, 349);
+            this.dgvResult.TabIndex = 13;
+            this.dgvResult.TabStop = false;
+            this.dgvResult.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
+            // 
+            // col_date
+            // 
+            this.col_date.DataPropertyName = "Date";
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle37.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle37.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle37;
+            this.col_date.HeaderText = "Date Time";
+            this.col_date.Name = "col_date";
+            this.col_date.ReadOnly = true;
+            // 
+            // col_gmoon
+            // 
+            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.HeaderText = "g Moon (mGal)";
+            this.col_gmoon.Name = "col_gmoon";
+            this.col_gmoon.ReadOnly = true;
+            // 
+            // col_gsun
+            // 
+            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.HeaderText = "g Sun (mGal)";
+            this.col_gsun.Name = "col_gsun";
+            this.col_gsun.ReadOnly = true;
+            // 
+            // col_gtotal
+            // 
+            this.col_gtotal.DataPropertyName = "TotalTidal";
+            this.col_gtotal.HeaderText = "g Total (mGal)";
+            this.col_gtotal.Name = "col_gtotal";
+            this.col_gtotal.ReadOnly = true;
             // 
             // tabPageChart
             // 
@@ -776,7 +812,7 @@
             this.groupBox1.Size = new System.Drawing.Size(493, 91);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Information Window";
+            this.groupBox1.Text = "Log Console";
             // 
             // textBoxInfo
             // 
@@ -844,35 +880,21 @@
             // inputToolStripMenuItem
             // 
             this.inputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyTableToolStripMenuItem,
-            this.toolStripSeparator7,
             this.decimalDegreeInputToolStripMenuItem,
             this.useDegMinSecToolStrip,
-            this.uTMInputToolStripMenuItem});
+            this.uTMInputToolStripMenuItem,
+            this.uTMZoneToolStripMenuItem});
             this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
             this.inputToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.inputToolStripMenuItem.Text = "&Input";
-            // 
-            // copyTableToolStripMenuItem
-            // 
-            this.copyTableToolStripMenuItem.Enabled = false;
-            this.copyTableToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyTableToolStripMenuItem.Image")));
-            this.copyTableToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyTableToolStripMenuItem.Name = "copyTableToolStripMenuItem";
-            this.copyTableToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.copyTableToolStripMenuItem.Text = "&Copy Table";
-            this.copyTableToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(185, 6);
             // 
             // decimalDegreeInputToolStripMenuItem
             // 
             this.decimalDegreeInputToolStripMenuItem.Name = "decimalDegreeInputToolStripMenuItem";
             this.decimalDegreeInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.decimalDegreeInputToolStripMenuItem.Text = "Decimal Degree Input";
+            this.decimalDegreeInputToolStripMenuItem.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.decimalDegreeInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
             // 
             // useDegMinSecToolStrip
             // 
@@ -881,14 +903,16 @@
             this.useDegMinSecToolStrip.Name = "useDegMinSecToolStrip";
             this.useDegMinSecToolStrip.Size = new System.Drawing.Size(188, 22);
             this.useDegMinSecToolStrip.Text = "Deg Min Sec Input";
-            this.useDegMinSecToolStrip.CheckedChanged += new System.EventHandler(this.useDegMinSec_CheckedChanged);
-            this.useDegMinSecToolStrip.Click += new System.EventHandler(this.useDegMinSec_Click);
+            this.useDegMinSecToolStrip.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.useDegMinSecToolStrip.Click += new System.EventHandler(this.inputModeChange_click);
             // 
             // uTMInputToolStripMenuItem
             // 
             this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
             this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.uTMInputToolStripMenuItem.Text = "UTM Input";
+            this.uTMInputToolStripMenuItem.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.uTMInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
             // 
             // helpToolStripMenuItem
             // 
@@ -905,26 +929,27 @@
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
-            // convertToolStripMenuItem
+            // toolsToolStripMenuItem
             // 
-            this.convertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uTMLatLongToolStripMenuItem});
-            this.convertToolStripMenuItem.Name = "convertToolStripMenuItem";
-            this.convertToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.convertToolStripMenuItem.Text = "Convert";
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // uTMLatLongToolStripMenuItem
+            // copyToolStripMenuItem
             // 
-            this.uTMLatLongToolStripMenuItem.Name = "uTMLatLongToolStripMenuItem";
-            this.uTMLatLongToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.uTMLatLongToolStripMenuItem.Text = "UTM > Lat Long";
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.copyToolStripMenuItem.Text = "Copy Table";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // mainMenuStrip
             // 
             this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.inputToolStripMenuItem,
-            this.convertToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.mainMenuStrip.Name = "mainMenuStrip";
@@ -932,37 +957,21 @@
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
-            // col_date
+            // uTMZoneToolStripMenuItem
             // 
-            this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle1.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
-            this.col_date.HeaderText = "Date Time";
-            this.col_date.Name = "col_date";
-            this.col_date.ReadOnly = true;
+            this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBoxUTMZones});
+            this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
+            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
             // 
-            // col_gmoon
+            // toolStripComboBoxUTMZones
             // 
-            this.col_gmoon.DataPropertyName = "MoonTidal";
-            this.col_gmoon.HeaderText = "g Moon (mGal)";
-            this.col_gmoon.Name = "col_gmoon";
-            this.col_gmoon.ReadOnly = true;
-            // 
-            // col_gsun
-            // 
-            this.col_gsun.DataPropertyName = "SunTidal";
-            this.col_gsun.HeaderText = "g Sun (mGal)";
-            this.col_gsun.Name = "col_gsun";
-            this.col_gsun.ReadOnly = true;
-            // 
-            // col_gtotal
-            // 
-            this.col_gtotal.DataPropertyName = "TotalTidal";
-            this.col_gtotal.HeaderText = "g Total (mGal)";
-            this.col_gtotal.Name = "col_gtotal";
-            this.col_gtotal.ReadOnly = true;
+            this.toolStripComboBoxUTMZones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxUTMZones.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.toolStripComboBoxUTMZones.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.toolStripComboBoxUTMZones.Name = "toolStripComboBoxUTMZones";
+            this.toolStripComboBoxUTMZones.Size = new System.Drawing.Size(125, 21);
             // 
             // MainForm
             // 
@@ -1009,7 +1018,7 @@
             this.splitContainerTableInfoWindow.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPageTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
             this.tabPageChart.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -1023,79 +1032,79 @@
         #endregion
 
         
-        private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.SplitContainer splitContainerLeftRight;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label labelLonTitle;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.NumericUpDown numLongDeg;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numLongMin;
-        private System.Windows.Forms.NumericUpDown numLongSec;
-        private System.Windows.Forms.Label labelLonMin;
-        private System.Windows.Forms.Label labelLonSec;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.DateTimePicker datepickBegin;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker datepickEnd;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox cboxTimeZone;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.NumericUpDown numInterval;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button buttonGo;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.NumericUpDown numElevation;
-        private System.Windows.Forms.Label label15;
+        private Panel mainPanel;
+        private SplitContainer splitContainerLeftRight;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label labelPositionX;
+        private FlowLayoutPanel flowLayoutPanel2;
+        private NumericUpDown numLongDeg;
+        private Label labelPositionX_unit;
+        private NumericUpDown numLongMin;
+        private NumericUpDown numLongSec;
+        private Label labelLonMin;
+        private Label labelLonSec;
+        private Label label9;
+        private DateTimePicker datepickBegin;
+        private Label label10;
+        private DateTimePicker datepickEnd;
+        private Label label11;
+        private ComboBox cboxTimeZone;
+        private Label label12;
+        private FlowLayoutPanel flowLayoutPanel4;
+        private NumericUpDown numInterval;
+        private Label label13;
+        private Button buttonGo;
+        private Label label14;
+        private FlowLayoutPanel flowLayoutPanel5;
+        private NumericUpDown numElevation;
+        private Label label15;
         
-        private System.Windows.Forms.SplitContainer splitContainerTableInfoWindow;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBoxInfo;
+        private SplitContainer splitContainerTableInfoWindow;
+        private DataGridView dgvResult;
+        private GroupBox groupBox1;
+        private TextBox textBoxInfo;
         
        
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.Windows.Forms.OpenFileDialog openFilegObserved;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.NumericUpDown numLatDeg;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numLatMin;
-        private System.Windows.Forms.Label labelLatMin;
-        private System.Windows.Forms.NumericUpDown numLatSec;
-        private System.Windows.Forms.Label labelLatSec;
-        private System.Windows.Forms.ComboBox cboxLatSign;
-        private System.Windows.Forms.ComboBox cboxLonSign;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPageTable;
-        private System.Windows.Forms.TabPage tabPageChart;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
-        private System.Windows.Forms.GroupBox groupLocation;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.GroupBox groupTime;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem readGobsgobsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inputToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyTableToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripMenuItem useDegMinSecToolStrip;
-        private System.Windows.Forms.ToolStripMenuItem uTMInputToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem convertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uTMLatLongToolStripMenuItem;
-        private System.Windows.Forms.MenuStrip mainMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem decimalDegreeInputToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_gmoon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_gsun;
-        private System.Windows.Forms.DataGridViewTextBoxColumn col_gtotal;
+        private SaveFileDialog saveFileDialog;
+        private OpenFileDialog openFilegObserved;
+        private Label labelPositionY;
+        private FlowLayoutPanel flowLayoutPanel3;
+        private NumericUpDown numLatDeg;
+        private Label labelPositionY_unit;
+        private NumericUpDown numLatMin;
+        private Label labelLatMin;
+        private NumericUpDown numLatSec;
+        private Label labelLatSec;
+        private ComboBox cboxLatSign;
+        private ComboBox cboxLonSign;
+        private TabControl tabControl1;
+        private TabPage tabPageTable;
+        private TabPage tabPageChart;
+        private ZedGraphControl zedGraphControl1;
+        private GroupBox groupLocation;
+        private FlowLayoutPanel flowLayoutPanel6;
+        private GroupBox groupTime;
+        private FlowLayoutPanel flowLayoutPanel7;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem readGobsgobsToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem inputToolStripMenuItem;
+        private ToolStripMenuItem useDegMinSecToolStrip;
+        private ToolStripMenuItem uTMInputToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ToolStripMenuItem copyToolStripMenuItem;
+        private MenuStrip mainMenuStrip;
+        private ToolStripMenuItem decimalDegreeInputToolStripMenuItem;
+        private DataGridViewTextBoxColumn col_date;
+        private DataGridViewTextBoxColumn col_gmoon;
+        private DataGridViewTextBoxColumn col_gsun;
+        private DataGridViewTextBoxColumn col_gtotal;
+        private ToolStripMenuItem uTMZoneToolStripMenuItem;
+        private ToolStripComboBox toolStripComboBoxUTMZones;
     }
 }
 

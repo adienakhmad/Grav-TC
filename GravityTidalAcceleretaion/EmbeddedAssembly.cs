@@ -78,7 +78,7 @@ namespace GravityTidalCorrection
 
             if (!fileOk)
             {
-                System.IO.File.WriteAllBytes(tempFile, ba);
+                File.WriteAllBytes(tempFile, ba);
             }
 
             asm = Assembly.LoadFile(tempFile);

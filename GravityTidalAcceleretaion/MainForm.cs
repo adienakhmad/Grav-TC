@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data;
+using System.ComponentModel;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using DotNetPerls;
+using Gravity;
 using GravityTidalCorrection.Properties;
 using ZedGraph;
 
@@ -25,13 +24,15 @@ namespace GravityTidalCorrection
         private double _utcOffset;
         private double _timeInterval;
         private List<TidalCorrection> corrections;
+        private List<UTMZone> utmZones;
  
        public MainForm()
         {
             InitializeComponent();
+
         }
 
-        private void DrawGraph(ZedGraphControl zgc, List<TidalCorrection> corrlist,  double multiplier, int xCol, int yCol,
+        private void DrawGraph(ZedGraphControl zgc, List<TidalCorrection> corrlist,
                string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
         {
                GraphPane myPane = zgc.GraphPane;
@@ -148,6 +149,25 @@ namespace GravityTidalCorrection
             writer.Flush();
         }
 
+        private void InitializeUTMZones()
+        {
+            utmZones = new List<UTMZone>();
+            string[] hemisphere = new string[] { "N", "S" };
+
+            for (int i = 0; i < 60; i++)
+            {
+                int zoneNumber = i + 1;
+                bool isNorth = true;
+
+                foreach (string s in hemisphere)
+                {
+                    UTMZone zone = new UTMZone("WGS 84 Zone " + zoneNumber.ToString("00") + " " + s, zoneNumber, isNorth);
+                    utmZones.Add(zone);
+                    isNorth = !isNorth;
+                }
+
+            }
+        }
         private void buttonGo_Click(object sender, EventArgs e)
         {
             // Latitude, Longitude, Elevation Informaton
@@ -186,18 +206,18 @@ namespace GravityTidalCorrection
             // Checks the input, if input is invalid, it return void.
             if (IsInputInvalid(_elev, _duration, _timeInterval))
             {
-                dataGridView1.DataSource = null;
+                dgvResult.DataSource = null;
                 return;
             }
 
 
             // Start writing to list and display on gridview
-
             corrections.Clear();
             double fmjd = VerticalTide.UTC2ModifiedJulian(_beginInUtc);
             double minute = 0;
 
             Cursor.Current = Cursors.WaitCursor;
+            WriteLineConsoleLog("Processing . . . .");
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
@@ -207,25 +227,23 @@ namespace GravityTidalCorrection
             }
 
             // Binding to datagridview
-            dataGridView1.DataSource = corrections;
+            dgvResult.DataSource = corrections;
 
             // plotting the chart
 
-            DrawGraph(zedGraphControl1,corrections,1e3,1,4,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
+            DrawGraph(zedGraphControl1,corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
 
             Cursor.Current = Cursors.Default;
 
             // write to console log
-            textBoxInfo.AppendText("Processing . . . .\r\n");
-            textBoxInfo.AppendText(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) \r\n", cboxTimeZone.SelectedValue, _utcOffset));
-            textBoxInfo.AppendText(string.Format("Begin\t\t: {0}\t({1} in UTC+00)\r\n", datepickBegin.Value, _beginInUtc));
-            textBoxInfo.AppendText(string.Format("End\t\t: {0}\t({1} in UTC+00) \r\n", datepickEnd.Value, _endInUtc));
-            textBoxInfo.AppendText(string.Format("Interval\t: {0:F2} minutes \r\n", _timeInterval));
-            textBoxInfo.AppendText(string.Format("Time Span\t: {0:F2} minutes \r\n", _duration));
-            textBoxInfo.AppendText(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°\r\n", _lat, _lon));
-            textBoxInfo.AppendText(string.Format("Elevation\t: {0:F2} meters\r\n", _elev));
-            textBoxInfo.AppendText("Completed... ");
-            WriteLineConsoleLog(string.Format("{0} data point(s).", dataGridView1.RowCount));
+            WriteLineConsoleLog(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) ", cboxTimeZone.SelectedValue, _utcOffset));
+            WriteLineConsoleLog(string.Format("Begin\t\t: {0}\t({1} in UTC+00)\r\n", datepickBegin.Value, _beginInUtc));
+            WriteLineConsoleLog(string.Format("End\t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
+            WriteLineConsoleLog(string.Format("Interval\t: {0:F2} minutes ", _timeInterval));
+            WriteLineConsoleLog(string.Format("Time Span\t: {0:F2} minutes ", _duration));
+            WriteLineConsoleLog(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°", _lat, _lon));
+            WriteLineConsoleLog(string.Format("Elevation\t: {0:F2} meters", _elev));
+            WriteLineConsoleLog(string.Format("Completed...\t{0} data point(s).", dgvResult.RowCount));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -249,6 +267,15 @@ namespace GravityTidalCorrection
             cboxLatSign.SelectedIndex = 0;
             cboxLonSign.SelectedIndex = 0;
 
+            // Initialize UTM Zones
+            InitializeUTMZones();
+            toolStripComboBoxUTMZones.ComboBox.BindingContext = BindingContext;
+            toolStripComboBoxUTMZones.ComboBox.DataSource = utmZones;
+            toolStripComboBoxUTMZones.ComboBox.ValueMember = "Zone";
+            toolStripComboBoxUTMZones.ComboBox.DisplayMember = "DisplayName";
+
+            
+            
             // Tell the other if onload event is finished
             _onLoadDone = true;
             WriteConsoleLog("Welcome...");
@@ -265,7 +292,7 @@ namespace GravityTidalCorrection
 
         }
 
-        private void saveFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
             {
@@ -278,8 +305,8 @@ namespace GravityTidalCorrection
 
         private void CopyTableToClipBoard()
         {
-            dataGridView1.SelectAll();
-            DataObject dataObj = dataGridView1.GetClipboardContent();
+            dgvResult.SelectAll();
+            DataObject dataObj = dgvResult.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
             WriteLineConsoleLog("Table copied to clipboard.");
@@ -295,16 +322,6 @@ namespace GravityTidalCorrection
             Application.Exit();
         }
 
-        private void copyToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            CopyTableToClipBoard();
-        }
-
-        private void useDegMinSec_Click(object sender, EventArgs e)
-        {
-            useDegMinSecToolStrip.Checked = !useDegMinSecToolStrip.Checked;
-        }
-
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             BetterDialog.ShowDialog("About Grav-TC", "Gravity Tidal Correction v1.0",
@@ -314,60 +331,6 @@ namespace GravityTidalCorrection
                 (Image)Resources.ResourceManager.GetObject("aboutIcon"));
         }
 
-        private void useDegMinSec_CheckedChanged(object sender, EventArgs e)
-        {
-            switch (useDegMinSecToolStrip.Checked)
-            {
-                case false:
-                    numLongMin.Visible = false;
-                    numLongSec.Visible = false;
-                    numLatMin.Visible = false;
-                    numLatSec.Visible = false;
-
-                    labelLatMin.Visible = false;
-                    labelLatSec.Visible = false;
-                    labelLonMin.Visible = false;
-                    labelLonSec.Visible = false;
-
-                    numLatDeg.Width += 50;
-                    numLongDeg.Width += 50;
-
-                    numLatDeg.DecimalPlaces = 4;
-                    numLongDeg.DecimalPlaces = 4;
-
-                    numLongMin.Value = 0;
-                    numLongSec.Value = 0;
-                    numLatMin.Value = 0;
-                    numLatSec.Value = 0;
-
-                    WriteLineConsoleLog("Coordinate input format changed to decimal format.");
-
-                    break;
-                default:
-                    numLongMin.Visible = true;
-                    numLongSec.Visible = true;
-                    numLatMin.Visible = true;
-                    numLatSec.Visible = true;
-
-                    labelLatMin.Visible = true;
-                    labelLatSec.Visible = true;
-                    labelLonMin.Visible = true;
-                    labelLonSec.Visible = true;
-
-                    numLatDeg.Width -= 50;
-                    numLongDeg.Width -= 50;
-                    numLatDeg.DecimalPlaces = 0;
-                    numLongDeg.DecimalPlaces = 0;
-
-                    // Flooring value after switch back to deg min sec
-                    numLatDeg.Value = Decimal.Floor(numLatDeg.Value);
-                    numLongDeg.Value = Decimal.Floor(numLongDeg.Value);
-
-                    WriteLineConsoleLog("Coordinate input format changed to degrees minutes seconds format.");
-                    break;
-            }
-        }
-
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFilegObserved.ShowDialog();
@@ -375,18 +338,156 @@ namespace GravityTidalCorrection
 
         private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.DataSource == null)
+            if (dgvResult.DataSource == null)
             {
                 saveAsToolStripMenuItem.Enabled = false;
-                copyTableToolStripMenuItem.Enabled = false;
+                copyToolStripMenuItem.Enabled = false;
                 zedGraphControl1.Visible = false;
             }
 
             else
             {
                 saveAsToolStripMenuItem.Enabled = true;
-                copyTableToolStripMenuItem.Enabled = true;
+                copyToolStripMenuItem.Enabled = true;
                 zedGraphControl1.Visible = true;
+            }
+        }
+
+        private void inputModeChange_click(object sender, EventArgs e)
+        {
+            var menu = sender as ToolStripMenuItem;
+
+            if (menu != null && menu.CheckState == CheckState.Unchecked)
+            {
+                foreach (ToolStripMenuItem tsm in inputToolStripMenuItem.DropDownItems)
+                {
+                        tsm.CheckState = CheckState.Unchecked;
+                }
+
+                menu.CheckState = CheckState.Checked;    
+            }
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyTableToClipBoard();
+        }
+
+        private void InputModeChanged(object sender, EventArgs e)
+        {
+            var menu = sender as ToolStripMenuItem;
+            if (menu != null)
+            {
+                int index = (menu.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(menu);
+
+                switch (index)
+                {
+                    case 0:
+                        labelPositionX.Text = @"Longitude";
+                        labelPositionY.Text = @"Latitude";
+                        labelPositionX_unit.Visible = true;
+                        labelPositionY_unit.Visible = true;
+
+                        numLongMin.Visible = false;
+                        numLongSec.Visible = false;
+                        numLatMin.Visible = false;
+                        numLatSec.Visible = false;
+
+                        labelLatMin.Visible = false;
+                        labelLatSec.Visible = false;
+                        labelLonMin.Visible = false;
+                        labelLonSec.Visible = false;
+
+                        cboxLatSign.Visible = true;
+                        cboxLonSign.Visible = true;
+
+                        numLatDeg.Width = 130;
+                        numLongDeg.Width = 130;
+
+                        numLatDeg.DecimalPlaces = 4;
+                        numLongDeg.DecimalPlaces = 4;
+
+                        numLongMin.Value = 0;
+                        numLongSec.Value = 0;
+                        numLatMin.Value = 0;
+                        numLatSec.Value = 0;
+
+                        numLatDeg.Maximum = 90;
+                        numLongDeg.Maximum = 180;
+
+                        WriteLineConsoleLog("Input format changed to decimal format.");
+                        break;
+
+                    case 1:
+                        labelPositionX.Text = @"Longitude";
+                        labelPositionY.Text = @"Latitude";
+                        labelPositionX_unit.Visible = true;
+                        labelPositionY_unit.Visible = true;
+
+                        numLongMin.Visible = true;
+                        numLongSec.Visible = true;
+                        numLatMin.Visible = true;
+                        numLatSec.Visible = true;
+
+                        cboxLatSign.Visible = true;
+                        cboxLonSign.Visible = true;
+
+                        labelLatMin.Visible = true;
+                        labelLatSec.Visible = true;
+                        labelLonMin.Visible = true;
+                        labelLonSec.Visible = true;
+
+                        numLatDeg.Width = 45;
+                        numLongDeg.Width = 45;
+                        numLatDeg.DecimalPlaces = 0;
+                        numLongDeg.DecimalPlaces = 0;
+
+                        numLatDeg.Maximum = 179;
+                        numLongDeg.Maximum = 89;
+
+                        // Flooring value after switch back to deg min sec
+                        numLatDeg.Value = Decimal.Floor(numLatDeg.Value);
+                        numLongDeg.Value = Decimal.Floor(numLongDeg.Value);
+
+                        WriteLineConsoleLog("Input format changed to degrees minutes seconds format.");
+                        break;
+
+                    case 2:
+                        labelPositionX.Text = @"Easting";
+                        labelPositionY.Text = @"Northing";
+                        labelPositionX_unit.Visible = false;
+                        labelPositionY_unit.Visible = false;
+
+                        numLongMin.Visible = false;
+                        numLongSec.Visible = false;
+                        numLatMin.Visible = false;
+                        numLatSec.Visible = false;
+
+                        cboxLatSign.Visible = false;
+                        cboxLonSign.Visible = false;
+
+                        labelLatMin.Visible = false;
+                        labelLatSec.Visible = false;
+                        labelLonMin.Visible = false;
+                        labelLonSec.Visible = false;
+
+                        numLatDeg.Maximum = 9300000;
+                        numLongDeg.Maximum = 833000;
+
+                        numLatDeg.Width = 130;
+                        numLongDeg.Width = 130;
+                        
+                        numLatDeg.DecimalPlaces = 2;
+                        numLongDeg.DecimalPlaces = 2;
+
+                        numLongMin.Value = 0;
+                        numLongSec.Value = 0;
+                        numLatMin.Value = 0;
+                        numLatSec.Value = 0;
+
+                        WriteLineConsoleLog("Input format changed to UTM.");
+                        break;
+                }
             }
         }
     }
