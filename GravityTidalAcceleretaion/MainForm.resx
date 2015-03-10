@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="buttonGo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAABsSURBVDhPrZA9DsAgCEZ7qA6dOZ6XbbuwamiK4cdGaTB5
-        AyDvM258ELFK3vb6oaWj7A8hgUyVglVUsoVmAPBJnoCRi8xokaG5+gebfJ13Z1Q7gSQsoEYUJ7AJszpf
-        ECX/BfbCrHaCKErwD6wNKvKGde3PcUcAAAAASUVORK5CYII=
-</value>
-  </data>
   <metadata name="col_gmoon.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -144,6 +135,15 @@
   <metadata name="mainMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>516, 17</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonGo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAABsSURBVDhPrZA9DsAgCEZ7qA6dOZ6XbbuwamiK4cdGaTB5
+        AyDvM258ELFK3vb6oaWj7A8hgUyVglVUsoVmAPBJnoCRi8xokaG5+gebfJ13Z1Q7gSQsoEYUJ7AJszpf
+        ECX/BfbCrHaCKErwD6wNKvKGde3PcUcAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAKysAAAEACADkDAAAFgAAACgAAAArAAAAVgAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA

@@ -33,9 +33,9 @@ namespace GravityTidalCorrection
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -75,7 +75,6 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.numInterval = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
-            this.buttonGo = new System.Windows.Forms.Button();
             this.splitContainerTableInfoWindow = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTable = new System.Windows.Forms.TabPage();
@@ -106,6 +105,7 @@ namespace GravityTidalCorrection
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.buttonGo = new System.Windows.Forms.Button();
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -653,21 +653,6 @@ namespace GravityTidalCorrection
             this.label13.Text = "minutes";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // buttonGo
-            // 
-            this.buttonGo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGo.Image = ((System.Drawing.Image)(resources.GetObject("buttonGo.Image")));
-            this.buttonGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonGo.Location = new System.Drawing.Point(25, 417);
-            this.buttonGo.Margin = new System.Windows.Forms.Padding(15, 5, 5, 5);
-            this.buttonGo.Name = "buttonGo";
-            this.buttonGo.Size = new System.Drawing.Size(214, 37);
-            this.buttonGo.TabIndex = 9;
-            this.buttonGo.Text = "Generate";
-            this.buttonGo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonGo.UseVisualStyleBackColor = true;
-            this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
-            // 
             // splitContainerTableInfoWindow
             // 
             this.splitContainerTableInfoWindow.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -724,16 +709,16 @@ namespace GravityTidalCorrection
             this.col_gmoon,
             this.col_gsun,
             this.col_gtotal});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Format = "F4";
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Format = "F4";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
@@ -746,10 +731,10 @@ namespace GravityTidalCorrection
             // col_date
             // 
             this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle7.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle5;
             this.col_date.HeaderText = "Date Time";
             this.col_date.Name = "col_date";
             this.col_date.ReadOnly = true;
@@ -850,30 +835,28 @@ namespace GravityTidalCorrection
             // 
             // readGobsgobsToolStripMenuItem
             // 
-            this.readGobsgobsToolStripMenuItem.Enabled = false;
             this.readGobsgobsToolStripMenuItem.Name = "readGobsgobsToolStripMenuItem";
-            this.readGobsgobsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.readGobsgobsToolStripMenuItem.Text = "Read g obs (*.gobs)";
-            this.readGobsgobsToolStripMenuItem.Visible = false;
+            this.readGobsgobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.readGobsgobsToolStripMenuItem.Text = "Read From File";
             this.readGobsgobsToolStripMenuItem.Click += new System.EventHandler(this.readGobsgobsToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click_1);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(174, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
@@ -957,7 +940,7 @@ namespace GravityTidalCorrection
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyToolStripMenuItem.Text = "Copy Table";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -973,6 +956,21 @@ namespace GravityTidalCorrection
             this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // buttonGo
+            // 
+            this.buttonGo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGo.Image = ((System.Drawing.Image)(resources.GetObject("buttonGo.Image")));
+            this.buttonGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonGo.Location = new System.Drawing.Point(25, 417);
+            this.buttonGo.Margin = new System.Windows.Forms.Padding(15, 5, 5, 5);
+            this.buttonGo.Name = "buttonGo";
+            this.buttonGo.Size = new System.Drawing.Size(214, 37);
+            this.buttonGo.TabIndex = 9;
+            this.buttonGo.Text = "Generate";
+            this.buttonGo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonGo.UseVisualStyleBackColor = true;
+            this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
             // 
             // MainForm
             // 

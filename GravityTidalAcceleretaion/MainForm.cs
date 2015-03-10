@@ -382,7 +382,8 @@ namespace GravityTidalCorrection
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFilegObserved.ShowDialog();
+            From_File_Mode form1 = new From_File_Mode();
+            form1.Show();
         }
 
         private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
