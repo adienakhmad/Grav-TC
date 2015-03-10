@@ -34,8 +34,8 @@ namespace GravityTidalCorrection
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,7 +43,7 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelPositionY = new System.Windows.Forms.Label();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.numLatDeg = new System.Windows.Forms.NumericUpDown();
+            this.num_yPos = new System.Windows.Forms.NumericUpDown();
             this.labelPositionY_unit = new System.Windows.Forms.Label();
             this.numLatMin = new System.Windows.Forms.NumericUpDown();
             this.labelLatMin = new System.Windows.Forms.Label();
@@ -52,7 +52,7 @@ namespace GravityTidalCorrection
             this.cboxLatSign = new System.Windows.Forms.ComboBox();
             this.labelPositionX = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.numLongDeg = new System.Windows.Forms.NumericUpDown();
+            this.num_xPos = new System.Windows.Forms.NumericUpDown();
             this.labelPositionX_unit = new System.Windows.Forms.Label();
             this.numLongMin = new System.Windows.Forms.NumericUpDown();
             this.labelLonMin = new System.Windows.Forms.Label();
@@ -99,13 +99,13 @@ namespace GravityTidalCorrection
             this.decimalDegreeInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.useDegMinSecToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.uTMInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTMZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBoxUTMZones = new System.Windows.Forms.ToolStripComboBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.uTMZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBoxUTMZones = new System.Windows.Forms.ToolStripComboBox();
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -114,11 +114,11 @@ namespace GravityTidalCorrection
             this.groupLocation.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatDeg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongDeg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).BeginInit();
             this.flowLayoutPanel5.SuspendLayout();
@@ -219,7 +219,7 @@ namespace GravityTidalCorrection
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Controls.Add(this.numLatDeg);
+            this.flowLayoutPanel3.Controls.Add(this.num_yPos);
             this.flowLayoutPanel3.Controls.Add(this.labelPositionY_unit);
             this.flowLayoutPanel3.Controls.Add(this.numLatMin);
             this.flowLayoutPanel3.Controls.Add(this.labelLatMin);
@@ -231,24 +231,24 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel3.Size = new System.Drawing.Size(245, 30);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
-            // numLatDeg
+            // num_yPos
             // 
-            this.numLatDeg.Increment = new decimal(new int[] {
+            this.num_yPos.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numLatDeg.Location = new System.Drawing.Point(3, 3);
-            this.numLatDeg.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.numLatDeg.Maximum = new decimal(new int[] {
+            this.num_yPos.Location = new System.Drawing.Point(3, 3);
+            this.num_yPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.num_yPos.Maximum = new decimal(new int[] {
             89,
             0,
             0,
             0});
-            this.numLatDeg.Name = "numLatDeg";
-            this.numLatDeg.Size = new System.Drawing.Size(45, 21);
-            this.numLatDeg.TabIndex = 0;
-            this.numLatDeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.num_yPos.Name = "num_yPos";
+            this.num_yPos.Size = new System.Drawing.Size(45, 21);
+            this.num_yPos.TabIndex = 0;
+            this.num_yPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelPositionY_unit
             // 
@@ -344,7 +344,7 @@ namespace GravityTidalCorrection
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Controls.Add(this.numLongDeg);
+            this.flowLayoutPanel2.Controls.Add(this.num_xPos);
             this.flowLayoutPanel2.Controls.Add(this.labelPositionX_unit);
             this.flowLayoutPanel2.Controls.Add(this.numLongMin);
             this.flowLayoutPanel2.Controls.Add(this.labelLonMin);
@@ -357,24 +357,24 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel2.TabIndex = 3;
             this.flowLayoutPanel2.TabStop = true;
             // 
-            // numLongDeg
+            // num_xPos
             // 
-            this.numLongDeg.Increment = new decimal(new int[] {
+            this.num_xPos.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numLongDeg.Location = new System.Drawing.Point(3, 3);
-            this.numLongDeg.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.numLongDeg.Maximum = new decimal(new int[] {
+            this.num_xPos.Location = new System.Drawing.Point(3, 3);
+            this.num_xPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.num_xPos.Maximum = new decimal(new int[] {
             179,
             0,
             0,
             0});
-            this.numLongDeg.Name = "numLongDeg";
-            this.numLongDeg.Size = new System.Drawing.Size(45, 21);
-            this.numLongDeg.TabIndex = 0;
-            this.numLongDeg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.num_xPos.Name = "num_xPos";
+            this.num_xPos.Size = new System.Drawing.Size(45, 21);
+            this.num_xPos.TabIndex = 0;
+            this.num_xPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelPositionX_unit
             // 
@@ -724,16 +724,16 @@ namespace GravityTidalCorrection
             this.col_gmoon,
             this.col_gsun,
             this.col_gtotal});
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle38.Format = "F4";
-            dataGridViewCellStyle38.NullValue = null;
-            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Format = "F4";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
@@ -746,10 +746,10 @@ namespace GravityTidalCorrection
             // col_date
             // 
             this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle37.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle37.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle7.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle7;
             this.col_date.HeaderText = "Date Time";
             this.col_date.Name = "col_date";
             this.col_date.ReadOnly = true;
@@ -893,7 +893,7 @@ namespace GravityTidalCorrection
             this.decimalDegreeInputToolStripMenuItem.Name = "decimalDegreeInputToolStripMenuItem";
             this.decimalDegreeInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.decimalDegreeInputToolStripMenuItem.Text = "Decimal Degree Input";
-            this.decimalDegreeInputToolStripMenuItem.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.decimalDegreeInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
             this.decimalDegreeInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
             // 
             // useDegMinSecToolStrip
@@ -903,7 +903,7 @@ namespace GravityTidalCorrection
             this.useDegMinSecToolStrip.Name = "useDegMinSecToolStrip";
             this.useDegMinSecToolStrip.Size = new System.Drawing.Size(188, 22);
             this.useDegMinSecToolStrip.Text = "Deg Min Sec Input";
-            this.useDegMinSecToolStrip.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.useDegMinSecToolStrip.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
             this.useDegMinSecToolStrip.Click += new System.EventHandler(this.inputModeChange_click);
             // 
             // uTMInputToolStripMenuItem
@@ -911,8 +911,25 @@ namespace GravityTidalCorrection
             this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
             this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.uTMInputToolStripMenuItem.Text = "UTM Input";
-            this.uTMInputToolStripMenuItem.CheckedChanged += new System.EventHandler(this.InputModeChanged);
+            this.uTMInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
             this.uTMInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
+            // 
+            // uTMZoneToolStripMenuItem
+            // 
+            this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBoxUTMZones});
+            this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
+            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
+            // 
+            // toolStripComboBoxUTMZones
+            // 
+            this.toolStripComboBoxUTMZones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxUTMZones.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.toolStripComboBoxUTMZones.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.toolStripComboBoxUTMZones.Name = "toolStripComboBoxUTMZones";
+            this.toolStripComboBoxUTMZones.Size = new System.Drawing.Size(125, 21);
+            this.toolStripComboBoxUTMZones.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxUTMZones_SelectedIndexChanged);
             // 
             // helpToolStripMenuItem
             // 
@@ -957,22 +974,6 @@ namespace GravityTidalCorrection
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
             // 
-            // uTMZoneToolStripMenuItem
-            // 
-            this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripComboBoxUTMZones});
-            this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
-            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
-            // 
-            // toolStripComboBoxUTMZones
-            // 
-            this.toolStripComboBoxUTMZones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxUTMZones.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.toolStripComboBoxUTMZones.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.toolStripComboBoxUTMZones.Name = "toolStripComboBoxUTMZones";
-            this.toolStripComboBoxUTMZones.Size = new System.Drawing.Size(125, 21);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -996,12 +997,12 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel6.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatDeg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongDeg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).EndInit();
             this.flowLayoutPanel5.ResumeLayout(false);
@@ -1037,7 +1038,7 @@ namespace GravityTidalCorrection
         private FlowLayoutPanel flowLayoutPanel1;
         private Label labelPositionX;
         private FlowLayoutPanel flowLayoutPanel2;
-        private NumericUpDown numLongDeg;
+        private NumericUpDown num_xPos;
         private Label labelPositionX_unit;
         private NumericUpDown numLongMin;
         private NumericUpDown numLongSec;
@@ -1069,7 +1070,7 @@ namespace GravityTidalCorrection
         private OpenFileDialog openFilegObserved;
         private Label labelPositionY;
         private FlowLayoutPanel flowLayoutPanel3;
-        private NumericUpDown numLatDeg;
+        private NumericUpDown num_yPos;
         private Label labelPositionY_unit;
         private NumericUpDown numLatMin;
         private Label labelLatMin;

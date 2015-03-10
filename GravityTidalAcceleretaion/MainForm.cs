@@ -4,10 +4,13 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DotNetPerls;
 using Gravity;
 using GravityTidalCorrection.Properties;
+using ProjNet.CoordinateSystems;
+using ProjNet.CoordinateSystems.Transformations;
 using ZedGraph;
 
 namespace GravityTidalCorrection
@@ -15,16 +18,16 @@ namespace GravityTidalCorrection
     public partial class MainForm : Form
     {
         private bool _onLoadDone;
-        private double _lat;
-        private double _lon;
+        private double _yPos;
+        private double _xPos;
         private double _elev;
         private double _duration;
         private DateTime _beginInUtc;
         private DateTime _endInUtc;
         private double _utcOffset;
         private double _timeInterval;
-        private List<TidalCorrection> corrections;
-        private List<UTMZone> utmZones;
+        private List<TidalCorrection> _corrections;
+        private List<UTMZone> _utmZones;
  
        public MainForm()
         {
@@ -125,15 +128,15 @@ namespace GravityTidalCorrection
                 writer.WriteLine("# End\t\t: {0:dd-MMM-yyyy HH:mm:ss}\t", datepickEnd.Value);
                 writer.WriteLine("# Interval\t: {0:F2} minutes", _timeInterval);
                 writer.WriteLine("# Time Span\t: {0:F2} minutes", _duration);
-                writer.WriteLine("# Latitude\t: {0:F4}", _lat);
-                writer.WriteLine("# Longitude\t: {0:F4}", _lon);
+                writer.WriteLine("# Latitude\t: {0:F4}", _yPos);
+                writer.WriteLine("# Longitude\t: {0:F4}", _xPos);
                 writer.WriteLine("# Elevation\t: {0:F2} meters", _elev);
                 writer.WriteLine("# ------------------------------------------------------");
                 writer.WriteLine("# Date Time, g Moon (mGal), g Sun (mGal), g Total (mGal)");
             }
 
             List<string> items = new List<string>();
-            foreach (TidalCorrection corr in corrections)
+            foreach (TidalCorrection corr in _corrections)
             {
                 // the first is a date column
                 //items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
@@ -151,7 +154,7 @@ namespace GravityTidalCorrection
 
         private void InitializeUTMZones()
         {
-            utmZones = new List<UTMZone>();
+            _utmZones = new List<UTMZone>();
             string[] hemisphere = new string[] { "N", "S" };
 
             for (int i = 0; i < 60; i++)
@@ -162,7 +165,7 @@ namespace GravityTidalCorrection
                 foreach (string s in hemisphere)
                 {
                     UTMZone zone = new UTMZone("WGS 84 Zone " + zoneNumber.ToString("00") + " " + s, zoneNumber, isNorth);
-                    utmZones.Add(zone);
+                    _utmZones.Add(zone);
                     isNorth = !isNorth;
                 }
 
@@ -170,17 +173,57 @@ namespace GravityTidalCorrection
         }
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            // Latitude, Longitude, Elevation Informaton
-            _lat = Convert.ToDouble(numLatDeg.Value + (numLatMin.Value / (decimal)60.0) + (numLatSec.Value / (decimal)3600.0));
-            if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
+            if (decimalDegreeInputToolStripMenuItem.CheckState == CheckState.Checked)
             {
-                _lat = _lat * -1.0;
+                // Latitude, Longitude with decimal degree
+                _yPos = Convert.ToDouble(num_yPos.Value);
+                if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
+                {
+                    _yPos = _yPos * -1.0;
+                }
+                _xPos = Convert.ToDouble(num_xPos.Value);
+                if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
+                {
+                    _xPos = _xPos * -1.0;
+                }
             }
-            _lon = Convert.ToDouble(numLongDeg.Value + (numLongMin.Value / (decimal)60.0) + (numLongSec.Value / (decimal)3600.0));
-            if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
+
+            if (useDegMinSecToolStrip.CheckState == CheckState.Checked)
             {
-                _lon = _lon * -1.0;
+                // Latitude, Longitude with degree minute seconds
+                _yPos = Convert.ToDouble(num_yPos.Value + (numLatMin.Value / (decimal)60.0) + (numLatSec.Value / (decimal)3600.0));
+                if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
+                {
+                    _yPos = _yPos * -1.0;
+                }
+                _xPos = Convert.ToDouble(num_xPos.Value + (numLongMin.Value / (decimal)60.0) + (numLongSec.Value / (decimal)3600.0));
+                if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
+                {
+                    _xPos = _xPos * -1.0;
+                }
             }
+
+            if (uTMInputToolStripMenuItem.CheckState == CheckState.Checked)
+            {
+                // X position and Y position in UTM
+                _yPos = Convert.ToDouble(num_yPos.Value);
+                _xPos = Convert.ToDouble(num_xPos.Value);
+
+                var utmzone = _utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex);
+                IGeographicCoordinateSystem geo = GeographicCoordinateSystem.WGS84;
+                IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM(utmzone.Zone, utmzone.IsNorthHemisphere);
+
+                CoordinateTransformationFactory ctfac = new CoordinateTransformationFactory();
+                ICoordinateTransformation trans = ctfac.CreateFromCoordinateSystems(utm, geo);
+
+                double[] fromPoint = {_xPos,_yPos};
+                double[] toPoint = trans.MathTransform.Transform(fromPoint);
+
+                _xPos = toPoint[0];
+                _yPos = toPoint[1];
+                
+            }
+            
 
             // elevation in metres
             _elev = Convert.ToDouble(numElevation.Value);
@@ -212,7 +255,7 @@ namespace GravityTidalCorrection
 
 
             // Start writing to list and display on gridview
-            corrections.Clear();
+            _corrections.Clear();
             double fmjd = VerticalTide.UTC2ModifiedJulian(_beginInUtc);
             double minute = 0;
 
@@ -221,17 +264,17 @@ namespace GravityTidalCorrection
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
-                var tidal = VerticalTide.TideCalcGal(fmjd + minute / 1440.0, _lat, _lon, _elev, _utcOffset);
-                corrections.Add(tidal);
+                var tidal = VerticalTide.TideCalcGal(fmjd + minute / 1440.0, _yPos, _xPos, _elev, _utcOffset);
+                _corrections.Add(tidal);
                 minute += _timeInterval;
             }
 
             // Binding to datagridview
-            dgvResult.DataSource = corrections;
+            dgvResult.DataSource = _corrections;
 
             // plotting the chart
 
-            DrawGraph(zedGraphControl1,corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
+            DrawGraph(zedGraphControl1,_corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
 
             Cursor.Current = Cursors.Default;
 
@@ -241,14 +284,14 @@ namespace GravityTidalCorrection
             WriteLineConsoleLog(string.Format("End\t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
             WriteLineConsoleLog(string.Format("Interval\t: {0:F2} minutes ", _timeInterval));
             WriteLineConsoleLog(string.Format("Time Span\t: {0:F2} minutes ", _duration));
-            WriteLineConsoleLog(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°", _lat, _lon));
+            WriteLineConsoleLog(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°", _yPos, _xPos));
             WriteLineConsoleLog(string.Format("Elevation\t: {0:F2} meters", _elev));
             WriteLineConsoleLog(string.Format("Completed...\t{0} data point(s).", dgvResult.RowCount));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            corrections = new List<TidalCorrection>();
+            _corrections = new List<TidalCorrection>();
             SetSize(zedGraphControl1);
             zedGraphControl1.Visible = false;
             
@@ -269,15 +312,21 @@ namespace GravityTidalCorrection
 
             // Initialize UTM Zones
             InitializeUTMZones();
-            toolStripComboBoxUTMZones.ComboBox.BindingContext = BindingContext;
-            toolStripComboBoxUTMZones.ComboBox.DataSource = utmZones;
-            toolStripComboBoxUTMZones.ComboBox.ValueMember = "Zone";
-            toolStripComboBoxUTMZones.ComboBox.DisplayMember = "DisplayName";
+            if (toolStripComboBoxUTMZones.ComboBox != null)
+            {
+                toolStripComboBoxUTMZones.ComboBox.BindingContext = BindingContext;
+                toolStripComboBoxUTMZones.ComboBox.DataSource = _utmZones;
+                toolStripComboBoxUTMZones.ComboBox.ValueMember = "Zone";
+                toolStripComboBoxUTMZones.ComboBox.DisplayMember = "DisplayName";
+            }
+
+            toolStripComboBoxUTMZones.SelectedIndex = 97; // set default projection to WGS84 UTM Zone 49S
 
             
             
             // Tell the other if onload event is finished
             _onLoadDone = true;
+            textBoxInfo.Clear();
             WriteConsoleLog("Welcome...");
 
         }
@@ -375,10 +424,21 @@ namespace GravityTidalCorrection
 
         private void InputModeChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void toolStripComboBoxUTMZones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WriteLineConsoleLog(string.Format("UTM Projection is set to {0}",
+                _utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex).DisplayName));
+        }
+
+        private void InputCheckStateChanged(object sender, EventArgs e)
+        {
             var menu = sender as ToolStripMenuItem;
-            if (menu != null)
+            if (menu != null && menu.CheckState == CheckState.Checked)
             {
-                int index = (menu.OwnerItem as ToolStripMenuItem).DropDownItems.IndexOf(menu);
+                int index = ((ToolStripMenuItem)menu.OwnerItem).DropDownItems.IndexOf(menu);
 
                 switch (index)
                 {
@@ -401,19 +461,19 @@ namespace GravityTidalCorrection
                         cboxLatSign.Visible = true;
                         cboxLonSign.Visible = true;
 
-                        numLatDeg.Width = 130;
-                        numLongDeg.Width = 130;
+                        num_yPos.Width = 130;
+                        num_xPos.Width = 130;
 
-                        numLatDeg.DecimalPlaces = 4;
-                        numLongDeg.DecimalPlaces = 4;
+                        num_yPos.DecimalPlaces = 4;
+                        num_xPos.DecimalPlaces = 4;
 
                         numLongMin.Value = 0;
                         numLongSec.Value = 0;
                         numLatMin.Value = 0;
                         numLatSec.Value = 0;
 
-                        numLatDeg.Maximum = 90;
-                        numLongDeg.Maximum = 180;
+                        num_yPos.Maximum = 90;
+                        num_xPos.Maximum = 180;
 
                         WriteLineConsoleLog("Input format changed to decimal format.");
                         break;
@@ -437,17 +497,17 @@ namespace GravityTidalCorrection
                         labelLonMin.Visible = true;
                         labelLonSec.Visible = true;
 
-                        numLatDeg.Width = 45;
-                        numLongDeg.Width = 45;
-                        numLatDeg.DecimalPlaces = 0;
-                        numLongDeg.DecimalPlaces = 0;
+                        num_yPos.Width = 45;
+                        num_xPos.Width = 45;
+                        num_yPos.DecimalPlaces = 0;
+                        num_xPos.DecimalPlaces = 0;
 
-                        numLatDeg.Maximum = 179;
-                        numLongDeg.Maximum = 89;
+                        num_yPos.Maximum = 179;
+                        num_xPos.Maximum = 89;
 
                         // Flooring value after switch back to deg min sec
-                        numLatDeg.Value = Decimal.Floor(numLatDeg.Value);
-                        numLongDeg.Value = Decimal.Floor(numLongDeg.Value);
+                        num_yPos.Value = Decimal.Floor(num_yPos.Value);
+                        num_xPos.Value = Decimal.Floor(num_xPos.Value);
 
                         WriteLineConsoleLog("Input format changed to degrees minutes seconds format.");
                         break;
@@ -471,14 +531,14 @@ namespace GravityTidalCorrection
                         labelLonMin.Visible = false;
                         labelLonSec.Visible = false;
 
-                        numLatDeg.Maximum = 9300000;
-                        numLongDeg.Maximum = 833000;
+                        num_yPos.Maximum = 9300000;
+                        num_xPos.Maximum = 833000;
 
-                        numLatDeg.Width = 130;
-                        numLongDeg.Width = 130;
-                        
-                        numLatDeg.DecimalPlaces = 2;
-                        numLongDeg.DecimalPlaces = 2;
+                        num_yPos.Width = 130;
+                        num_xPos.Width = 130;
+
+                        num_yPos.DecimalPlaces = 2;
+                        num_xPos.DecimalPlaces = 2;
 
                         numLongMin.Value = 0;
                         numLongSec.Value = 0;
