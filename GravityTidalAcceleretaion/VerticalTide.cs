@@ -16,6 +16,11 @@ namespace GravityTidalCorrection
             Date = dateTime;
             TotalTidal = totalTidal;
         }
+
+        public override string ToString()
+        {
+            return TotalTidal.ToString();
+        }
     }
 
    static class VerticalTide

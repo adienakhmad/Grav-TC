@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DotNetPerls;
-using Gravity;
 using GravityTidalCorrection.Properties;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
@@ -382,7 +381,7 @@ namespace GravityTidalCorrection
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            From_File_Mode form1 = new From_File_Mode();
+            FromFileMode form1 = new FromFileMode();
             form1.Show();
         }
 

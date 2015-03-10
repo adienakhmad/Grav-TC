@@ -1,4 +1,4 @@
-﻿namespace Gravity
+﻿namespace GravityTidalCorrection
 {
     class UTMZone
     {
