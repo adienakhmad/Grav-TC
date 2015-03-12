@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FromFileMode));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -49,10 +49,14 @@
             this.tsLabelTimeZone = new System.Windows.Forms.ToolStripLabel();
             this.tsComboBoxTimeZone = new System.Windows.Forms.ToolStripComboBox();
             this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_xPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_yPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colElevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_gTotalTidal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.tsComboBoxUTMZone = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileMode)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -141,28 +145,30 @@
             this.dgvFileMode.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFileMode.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvFileMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvFileMode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Date,
+            this.col_gmoon,
+            this.col_gsun,
             this.col_xPos,
             this.col_yPos,
             this.colElevation,
             this.col_gTotalTidal});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvFileMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFileMode.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvFileMode.Location = new System.Drawing.Point(10, 28);
@@ -172,11 +178,14 @@
             // 
             // toolStrip2
             // 
+            this.toolStrip2.CanOverflow = false;
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsLabelTimeZone,
-            this.tsComboBoxTimeZone});
+            this.tsComboBoxTimeZone,
+            this.toolStripLabel2,
+            this.tsComboBoxUTMZone});
             this.toolStrip2.Location = new System.Drawing.Point(10, 422);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -196,13 +205,27 @@
             this.tsComboBoxTimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tsComboBoxTimeZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.tsComboBoxTimeZone.Name = "tsComboBoxTimeZone";
-            this.tsComboBoxTimeZone.Size = new System.Drawing.Size(250, 25);
+            this.tsComboBoxTimeZone.Size = new System.Drawing.Size(208, 25);
             // 
             // col_Date
             // 
             this.col_Date.DataPropertyName = "Date";
             this.col_Date.HeaderText = "Date Time";
             this.col_Date.Name = "col_Date";
+            // 
+            // col_gmoon
+            // 
+            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.HeaderText = "g Moon (mGal)";
+            this.col_gmoon.Name = "col_gmoon";
+            this.col_gmoon.Visible = false;
+            // 
+            // col_gsun
+            // 
+            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.HeaderText = "g Sun (mGal)";
+            this.col_gsun.Name = "col_gsun";
+            this.col_gsun.Visible = false;
             // 
             // col_xPos
             // 
@@ -225,12 +248,25 @@
             // col_gTotalTidal
             // 
             this.col_gTotalTidal.DataPropertyName = "CorrectionTotal";
-            dataGridViewCellStyle2.Format = "N5";
-            dataGridViewCellStyle2.NullValue = null;
-            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "N5";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle5;
             this.col_gTotalTidal.HeaderText = "g Total (mGal)";
             this.col_gTotalTidal.Name = "col_gTotalTidal";
             this.col_gTotalTidal.Visible = false;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(61, 22);
+            this.toolStripLabel2.Text = "Projection";
+            // 
+            // tsComboBoxUTMZone
+            // 
+            this.tsComboBoxUTMZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tsComboBoxUTMZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.tsComboBoxUTMZone.Name = "tsComboBoxUTMZone";
+            this.tsComboBoxUTMZone.Size = new System.Drawing.Size(180, 25);
             // 
             // FromFileMode
             // 
@@ -274,9 +310,13 @@
         private System.Windows.Forms.ToolStripLabel tsLabelTimeZone;
         private System.Windows.Forms.ToolStripComboBox tsComboBoxTimeZone;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_gmoon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn col_gsun;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_xPos;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_yPos;
         private System.Windows.Forms.DataGridViewTextBoxColumn colElevation;
         private System.Windows.Forms.DataGridViewTextBoxColumn col_gTotalTidal;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox tsComboBoxUTMZone;
     }
 }

@@ -26,7 +26,7 @@ namespace GravityTidalCorrection
         private double _utcOffset;
         private double _timeInterval;
         private BindingList<TidalCorrection> _corrections;
-        private List<UTMZone> _utmZones;
+        private ReadOnlyCollection<UTMZone> _utmZones;
  
        public MainForm()
         {
@@ -151,25 +151,6 @@ namespace GravityTidalCorrection
             writer.Flush();
         }
 
-        private void InitializeUTMZones()
-        {
-            _utmZones = new List<UTMZone>();
-            string[] hemisphere = new string[] { "N", "S" };
-
-            for (int i = 0; i < 60; i++)
-            {
-                int zoneNumber = i + 1;
-                bool isNorth = true;
-
-                foreach (string s in hemisphere)
-                {
-                    UTMZone zone = new UTMZone("WGS84 UTM Zone " + zoneNumber.ToString("00") + s, zoneNumber, isNorth);
-                    _utmZones.Add(zone);
-                    isNorth = !isNorth;
-                }
-
-            }
-        }
         private void buttonGo_Click(object sender, EventArgs e)
         {
             if (decimalDegreeInputToolStripMenuItem.CheckState == CheckState.Checked)
@@ -277,7 +258,7 @@ namespace GravityTidalCorrection
 
             // write to console log
             WriteLineConsoleLog(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) ", cboxTimeZone.SelectedValue, _utcOffset));
-            WriteLineConsoleLog(string.Format("Begin\t\t: {0}\t({1} in UTC+00)\r\n", datepickBegin.Value, _beginInUtc));
+            WriteLineConsoleLog(string.Format("Begin\t\t: {0}\t({1} in UTC+00)", datepickBegin.Value, _beginInUtc));
             WriteLineConsoleLog(string.Format("End\t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
             WriteLineConsoleLog(string.Format("Interval\t: {0:F2} minutes ", _timeInterval));
             WriteLineConsoleLog(string.Format("Time Span\t: {0:F2} minutes ", _duration));
@@ -288,6 +269,7 @@ namespace GravityTidalCorrection
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            _utmZones = UTMZoneInfo.GetAllZones();
             _corrections = new BindingList<TidalCorrection>();
             dgvResult.DataSource = _corrections;
             SetSize(zedGraphControl1);
@@ -308,8 +290,6 @@ namespace GravityTidalCorrection
             cboxLatSign.SelectedIndex = 0;
             cboxLonSign.SelectedIndex = 0;
 
-            // Initialize UTM Zones
-            InitializeUTMZones();
             if (toolStripComboBoxUTMZones.ComboBox != null)
             {
                 toolStripComboBoxUTMZones.ComboBox.BindingContext = BindingContext;

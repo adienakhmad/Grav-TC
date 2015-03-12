@@ -55,11 +55,15 @@ namespace GravityTidalCorrection
 
             ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
 
-            tsComboBoxTimeZone.ComboBox.BindingContext = BindingContext;
-            tsComboBoxTimeZone.ComboBox.DataSource = timeZones;
+            if (tsComboBoxTimeZone.ComboBox != null)
+            {
+                tsComboBoxTimeZone.ComboBox.BindingContext = BindingContext;
+                tsComboBoxTimeZone.ComboBox.DataSource = timeZones;
                 tsComboBoxTimeZone.ComboBox.ValueMember = "Id";
                 tsComboBoxTimeZone.ComboBox.DisplayMember = "DisplayName";
                 tsComboBoxTimeZone.ComboBox.SelectedValue = TimeZoneInfo.Local.Id;
+            }
+
             
         }
 
