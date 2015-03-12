@@ -1,6 +1,6 @@
 ﻿namespace GravityTidalCorrection
 {
-    class UTMZone
+    public class UTMZone
     {
         private int zone;
 

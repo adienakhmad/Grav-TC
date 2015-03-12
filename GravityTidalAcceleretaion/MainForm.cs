@@ -25,7 +25,7 @@ namespace GravityTidalCorrection
         private DateTime _endInUtc;
         private double _utcOffset;
         private double _timeInterval;
-        private List<TidalCorrection> _corrections;
+        private BindingList<TidalCorrection> _corrections;
         private List<UTMZone> _utmZones;
  
        public MainForm()
@@ -34,7 +34,7 @@ namespace GravityTidalCorrection
 
         }
 
-        private void DrawGraph(ZedGraphControl zgc, List<TidalCorrection> corrlist,
+        private void DrawGraph(ZedGraphControl zgc, BindingList<TidalCorrection> corrlist,
                string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
         {
                GraphPane myPane = zgc.GraphPane;
@@ -53,7 +53,7 @@ namespace GravityTidalCorrection
 
                foreach ( TidalCorrection corr in corrlist )
                {
-                   plotList.Add(corr.Date.ToOADate(),corr.TotalTidal);
+                   plotList.Add(corr.Date.ToOADate(),corr.CorrectionTotal);
                }
 
                LineItem myCurve = myPane.AddCurve(legend, plotList, clr, SymbolType.Square);
@@ -142,7 +142,7 @@ namespace GravityTidalCorrection
                 items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
                 items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
                 items.Add(String.Format("{0,10:F7}", corr.SunTidal));
-                items.Add(String.Format("{0,10:F7}", corr.TotalTidal));
+                items.Add(String.Format("{0,10:F7}", corr.CorrectionTotal));
                 
                 writer.WriteLine(String.Join("\t", items.ToArray()));
                 items.Clear();
@@ -163,7 +163,7 @@ namespace GravityTidalCorrection
 
                 foreach (string s in hemisphere)
                 {
-                    UTMZone zone = new UTMZone("WGS 84 Zone " + zoneNumber.ToString("00") + " " + s, zoneNumber, isNorth);
+                    UTMZone zone = new UTMZone("WGS84 UTM Zone " + zoneNumber.ToString("00") + s, zoneNumber, isNorth);
                     _utmZones.Add(zone);
                     isNorth = !isNorth;
                 }
@@ -268,10 +268,8 @@ namespace GravityTidalCorrection
                 minute += _timeInterval;
             }
 
-            // Binding to datagridview
-            dgvResult.DataSource = _corrections;
-
-            // plotting the chart
+            // Refresh Datagridview
+            dgvResult.Refresh();
 
             DrawGraph(zedGraphControl1,_corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
 
@@ -290,7 +288,8 @@ namespace GravityTidalCorrection
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            _corrections = new List<TidalCorrection>();
+            _corrections = new BindingList<TidalCorrection>();
+            dgvResult.DataSource = _corrections;
             SetSize(zedGraphControl1);
             zedGraphControl1.Visible = false;
             
@@ -381,7 +380,7 @@ namespace GravityTidalCorrection
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FromFileMode form1 = new FromFileMode();
+            FromFileMode form1 = new FromFileMode(_utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex));
             form1.Show();
         }
 
@@ -422,11 +421,7 @@ namespace GravityTidalCorrection
             CopyTableToClipBoard();
         }
 
-        private void InputModeChanged(object sender, EventArgs e)
-        {
-            
-        }
-
+        
         private void toolStripComboBoxUTMZones_SelectedIndexChanged(object sender, EventArgs e)
         {
             WriteLineConsoleLog(string.Format("UTM Projection is set to {0}",

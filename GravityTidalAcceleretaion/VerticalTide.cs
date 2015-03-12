@@ -2,28 +2,7 @@
 
 namespace GravityTidalCorrection
 {
-    public class TidalCorrection
-    {
-        public double MoonTidal { get; set; }
-        public double SunTidal { get; set; }
-        public double TotalTidal { get; set; }
-        public DateTime Date { get; set; }
-
-        public TidalCorrection(double moonTidal, double sunTidal, double totalTidal, DateTime dateTime)
-        {
-            MoonTidal = moonTidal;
-            SunTidal = sunTidal;
-            Date = dateTime;
-            TotalTidal = totalTidal;
-        }
-
-        public override string ToString()
-        {
-            return TotalTidal.ToString();
-        }
-    }
-
-   static class VerticalTide
+    static class VerticalTide
     {
         // Constant
 /*
@@ -174,12 +153,8 @@ namespace GravityTidalCorrection
             g0 = (gm + gs) * love;
 
 
-            //string result = String.Format("{0}      {1:f2}  {2:f2}  {3:f2}",DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0), g0 * 1e6, gm * love * 1e6, gs * love * 1e6);
-            //string result = String.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", fmjd, MjdToExcel(fmjd) + tz/24.0,
-            //    (980 - g0)/100.0, -g0/980.0, g0*1e6, gm*love*1e6, gs*love*1e6);
-
             // in mGal
-            var tidalAcceleration = new TidalCorrection(gm * love * 1e3, gs * love * 1e3, g0 * 1e3, DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0));
+            var tidalAcceleration = new TidalCorrection(DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0), lon, lat, alt, gm * love * 1e3, gs * love * 1e3, g0 * 1e3);
             return tidalAcceleration;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -12,25 +13,32 @@ namespace GravityTidalCorrection
 {
     public partial class FromFileMode : Form
     {
-        private List<TidalDatePosition> tdateDatePositions; 
+        private readonly UTMZone _zone;
+        private List<TidalCorrection> tDatePositions; 
         public FromFileMode()
         {
             InitializeComponent();
         }
 
+        public FromFileMode(UTMZone zone)
+        {
+            _zone = zone;
+            InitializeComponent();
+        }
+
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            tdateDatePositions = new List<TidalDatePosition>();
+            tDatePositions = new List<TidalCorrection>();
             DialogResult result = openFileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                tdateDatePositions.Clear();
-                FileHelperEngine engine = new FileHelperEngine(typeof(TidalDatePosition));
-                TidalDatePosition[] tides = engine.ReadFile(openFileDialog.FileName) as TidalDatePosition[];
-                if (tides != null) tdateDatePositions = tides.ToList();
+                tDatePositions.Clear();
+                FileHelperEngine engine = new FileHelperEngine(typeof(TidalCorrection));
+                TidalCorrection[] tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
+                if (tides != null) tDatePositions = tides.ToList();
 
-                dgvFileMode.DataSource = tdateDatePositions;
+                dgvFileMode.DataSource = tDatePositions;
             }
         }
 
@@ -41,7 +49,27 @@ namespace GravityTidalCorrection
 
         private void FromFileMode_Load(object sender, EventArgs e)
         {
-            toolStripComboBoxCoordSystem.SelectedIndex = 0;
+            tsComboBoxCoordSystem.Items.Add("WGS84 Geographic");
+            if (_zone != null) tsComboBoxCoordSystem.Items.Add(_zone.DisplayName);
+            tsComboBoxCoordSystem.SelectedIndex = 0;
+
+            ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
+
+            tsComboBoxTimeZone.ComboBox.BindingContext = BindingContext;
+            tsComboBoxTimeZone.ComboBox.DataSource = timeZones;
+                tsComboBoxTimeZone.ComboBox.ValueMember = "Id";
+                tsComboBoxTimeZone.ComboBox.DisplayMember = "DisplayName";
+                tsComboBoxTimeZone.ComboBox.SelectedValue = TimeZoneInfo.Local.Id;
+            
+        }
+
+        private void toolStripButtonGenerate_Click(object sender, EventArgs e)
+        {
+            switch (tsComboBoxCoordSystem.SelectedIndex)
+            {
+                case 1:
+                    break;
+            }
         }
     }
 }
