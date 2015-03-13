@@ -360,7 +360,7 @@ namespace GravityTidalCorrection
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FromFileMode form1 = new FromFileMode(_utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex));
+            FromFileMode form1 = new FromFileMode();
             form1.Show();
         }
 

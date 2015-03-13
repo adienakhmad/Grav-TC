@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using FileHelpers;
 
@@ -13,30 +9,25 @@ namespace GravityTidalCorrection
 {
     public partial class FromFileMode : Form
     {
-        private List<TidalCorrection> tDatePositions; 
+        private List<TidalCorrection> _corrections; 
         public FromFileMode()
-        {
-            InitializeComponent();
-        }
-
-        public FromFileMode(UTMZone zone)
         {
             InitializeComponent();
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            tDatePositions = new List<TidalCorrection>();
+            _corrections = new List<TidalCorrection>();
             DialogResult result = openFileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                tDatePositions.Clear();
+                _corrections.Clear();
                 FileHelperEngine engine = new FileHelperEngine(typeof(TidalCorrection));
                 TidalCorrection[] tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
-                if (tides != null) tDatePositions = tides.ToList();
+                if (tides != null) _corrections = tides.ToList();
 
-                dgvFileMode.DataSource = tDatePositions;
+                dgvFileMode.DataSource = _corrections;
             }
         }
 
