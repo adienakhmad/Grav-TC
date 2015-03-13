@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FromFileMode));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -43,11 +43,6 @@
             this.toolStripButtonGenerate = new System.Windows.Forms.ToolStripButton();
             this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.dgvFileMode = new System.Windows.Forms.DataGridView();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.tsLabelTimeZone = new System.Windows.Forms.ToolStripLabel();
-            this.tsComboBoxTimeZone = new System.Windows.Forms.ToolStripComboBox();
             this.col_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +50,11 @@
             this.col_yPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colElevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_gTotalTidal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsLabelTimeZone = new System.Windows.Forms.ToolStripLabel();
+            this.tsComboBoxTimeZone = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.tsComboBoxUTMZone = new System.Windows.Forms.ToolStripComboBox();
             this.toolStrip1.SuspendLayout();
@@ -145,14 +145,14 @@
             this.dgvFileMode.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvFileMode.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvFileMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvFileMode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Date,
             this.col_gmoon,
@@ -161,51 +161,20 @@
             this.col_yPos,
             this.colElevation,
             this.col_gTotalTidal});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvFileMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFileMode.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvFileMode.Location = new System.Drawing.Point(10, 28);
             this.dgvFileMode.Name = "dgvFileMode";
             this.dgvFileMode.Size = new System.Drawing.Size(554, 419);
             this.dgvFileMode.TabIndex = 3;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.CanOverflow = false;
-            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsLabelTimeZone,
-            this.tsComboBoxTimeZone,
-            this.toolStripLabel2,
-            this.tsComboBoxUTMZone});
-            this.toolStrip2.Location = new System.Drawing.Point(10, 422);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(554, 25);
-            this.toolStrip2.TabIndex = 4;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // tsLabelTimeZone
-            // 
-            this.tsLabelTimeZone.Name = "tsLabelTimeZone";
-            this.tsLabelTimeZone.Size = new System.Drawing.Size(70, 22);
-            this.tsLabelTimeZone.Text = "Time Zone :";
-            // 
-            // tsComboBoxTimeZone
-            // 
-            this.tsComboBoxTimeZone.BackColor = System.Drawing.SystemColors.Window;
-            this.tsComboBoxTimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.tsComboBoxTimeZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.tsComboBoxTimeZone.Name = "tsComboBoxTimeZone";
-            this.tsComboBoxTimeZone.Size = new System.Drawing.Size(208, 25);
             // 
             // col_Date
             // 
@@ -248,25 +217,59 @@
             // col_gTotalTidal
             // 
             this.col_gTotalTidal.DataPropertyName = "CorrectionTotal";
-            dataGridViewCellStyle5.Format = "N5";
-            dataGridViewCellStyle5.NullValue = null;
-            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Format = "N5";
+            dataGridViewCellStyle11.NullValue = null;
+            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle11;
             this.col_gTotalTidal.HeaderText = "g Total (mGal)";
             this.col_gTotalTidal.Name = "col_gTotalTidal";
             this.col_gTotalTidal.Visible = false;
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.CanOverflow = false;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsLabelTimeZone,
+            this.tsComboBoxTimeZone,
+            this.toolStripLabel2,
+            this.tsComboBoxUTMZone});
+            this.toolStrip2.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.toolStrip2.Location = new System.Drawing.Point(10, 422);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Padding = new System.Windows.Forms.Padding(0);
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip2.Size = new System.Drawing.Size(554, 25);
+            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // tsLabelTimeZone
+            // 
+            this.tsLabelTimeZone.Name = "tsLabelTimeZone";
+            this.tsLabelTimeZone.Size = new System.Drawing.Size(70, 22);
+            this.tsLabelTimeZone.Text = "Time Zone :";
+            // 
+            // tsComboBoxTimeZone
+            // 
+            this.tsComboBoxTimeZone.BackColor = System.Drawing.SystemColors.Window;
+            this.tsComboBoxTimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.tsComboBoxTimeZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.tsComboBoxTimeZone.Margin = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.tsComboBoxTimeZone.Name = "tsComboBoxTimeZone";
+            this.tsComboBoxTimeZone.Size = new System.Drawing.Size(220, 25);
+            // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(61, 22);
-            this.toolStripLabel2.Text = "Projection";
+            this.toolStripLabel2.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel2.Text = "Projection :";
             // 
             // tsComboBoxUTMZone
             // 
             this.tsComboBoxUTMZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tsComboBoxUTMZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.tsComboBoxUTMZone.Name = "tsComboBoxUTMZone";
-            this.tsComboBoxUTMZone.Size = new System.Drawing.Size(180, 25);
+            this.tsComboBoxUTMZone.Size = new System.Drawing.Size(160, 25);
             // 
             // FromFileMode
             // 
@@ -279,6 +282,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "FromFileMode";
             this.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "From_File_Mode";
             this.Load += new System.EventHandler(this.FromFileMode_Load);
             this.toolStrip1.ResumeLayout(false);

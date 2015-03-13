@@ -13,7 +13,6 @@ namespace GravityTidalCorrection
 {
     public partial class FromFileMode : Form
     {
-        private readonly UTMZone _zone;
         private List<TidalCorrection> tDatePositions; 
         public FromFileMode()
         {
@@ -22,7 +21,6 @@ namespace GravityTidalCorrection
 
         public FromFileMode(UTMZone zone)
         {
-            _zone = zone;
             InitializeComponent();
         }
 
@@ -50,20 +48,28 @@ namespace GravityTidalCorrection
         private void FromFileMode_Load(object sender, EventArgs e)
         {
             tsComboBoxCoordSystem.Items.Add("WGS84 Geographic");
-            if (_zone != null) tsComboBoxCoordSystem.Items.Add(_zone.DisplayName);
+            tsComboBoxCoordSystem.Items.Add("WGS84 UTM");
             tsComboBoxCoordSystem.SelectedIndex = 0;
 
             ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
 
-            if (tsComboBoxTimeZone.ComboBox != null)
+            if (tsComboBoxUTMZone.ComboBox != null)
             {
-                tsComboBoxTimeZone.ComboBox.BindingContext = BindingContext;
-                tsComboBoxTimeZone.ComboBox.DataSource = timeZones;
-                tsComboBoxTimeZone.ComboBox.ValueMember = "Id";
-                tsComboBoxTimeZone.ComboBox.DisplayMember = "DisplayName";
-                tsComboBoxTimeZone.ComboBox.SelectedValue = TimeZoneInfo.Local.Id;
+                tsComboBoxUTMZone.ComboBox.BindingContext = BindingContext;
+                tsComboBoxUTMZone.ComboBox.DataSource = UTMZoneInfo.GetAllZones();
+                tsComboBoxUTMZone.ComboBox.DisplayMember = "DisplayName";
+                tsComboBoxUTMZone.ComboBox.ValueMember = "DisplayName";
+                tsComboBoxUTMZone.ComboBox.SelectedValue = "WGS84 UTM Zone 49S";
             }
 
+            if (tsComboBoxTimeZone.ComboBox != null)
+                {
+                    tsComboBoxTimeZone.ComboBox.BindingContext = BindingContext;
+                    tsComboBoxTimeZone.ComboBox.DataSource = timeZones;
+                    tsComboBoxTimeZone.ComboBox.ValueMember = "Id";
+                    tsComboBoxTimeZone.ComboBox.DisplayMember = "DisplayName";
+                    tsComboBoxTimeZone.ComboBox.SelectedValue = TimeZoneInfo.Local.Id;
+                }
             
         }
 

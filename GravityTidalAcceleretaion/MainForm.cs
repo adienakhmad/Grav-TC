@@ -366,7 +366,7 @@ namespace GravityTidalCorrection
 
         private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
         {
-            if (dgvResult.DataSource == null)
+            if (dgvResult.DataSource == null || dgvResult.Rows.Count == 0)
             {
                 saveAsToolStripMenuItem.Enabled = false;
                 copyToolStripMenuItem.Enabled = false;

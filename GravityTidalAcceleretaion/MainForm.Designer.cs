@@ -80,6 +80,13 @@ namespace GravityTidalCorrection
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTable = new System.Windows.Forms.TabPage();
             this.dgvResult = new System.Windows.Forms.DataGridView();
+            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageChart = new System.Windows.Forms.TabPage();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -102,13 +109,6 @@ namespace GravityTidalCorrection
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -749,6 +749,62 @@ namespace GravityTidalCorrection
             this.dgvResult.TabStop = false;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             // 
+            // col_date
+            // 
+            this.col_date.DataPropertyName = "Date";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle1.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col_date.HeaderText = "Date Time";
+            this.col_date.Name = "col_date";
+            this.col_date.ReadOnly = true;
+            // 
+            // col_gmoon
+            // 
+            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.HeaderText = "g Moon (mGal)";
+            this.col_gmoon.Name = "col_gmoon";
+            this.col_gmoon.ReadOnly = true;
+            // 
+            // col_gsun
+            // 
+            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.HeaderText = "g Sun (mGal)";
+            this.col_gsun.Name = "col_gsun";
+            this.col_gsun.ReadOnly = true;
+            // 
+            // col_gtotal
+            // 
+            this.col_gtotal.DataPropertyName = "CorrectionTotal";
+            this.col_gtotal.HeaderText = "g Total (mGal)";
+            this.col_gtotal.Name = "col_gtotal";
+            this.col_gtotal.ReadOnly = true;
+            // 
+            // col_xpos
+            // 
+            this.col_xpos.DataPropertyName = "XPosition";
+            this.col_xpos.HeaderText = "X-Position";
+            this.col_xpos.Name = "col_xpos";
+            this.col_xpos.ReadOnly = true;
+            this.col_xpos.Visible = false;
+            // 
+            // col_ypos
+            // 
+            this.col_ypos.DataPropertyName = "YPosition";
+            this.col_ypos.HeaderText = "Y-Position";
+            this.col_ypos.Name = "col_ypos";
+            this.col_ypos.ReadOnly = true;
+            this.col_ypos.Visible = false;
+            // 
+            // col_elev
+            // 
+            this.col_elev.DataPropertyName = "Elevation";
+            this.col_elev.HeaderText = "Elevation";
+            this.col_elev.Name = "col_elev";
+            this.col_elev.ReadOnly = true;
+            this.col_elev.Visible = false;
+            // 
             // tabPageChart
             // 
             this.tabPageChart.Controls.Add(this.zedGraphControl1);
@@ -945,62 +1001,6 @@ namespace GravityTidalCorrection
             this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
-            // 
-            // col_date
-            // 
-            this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle1.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
-            this.col_date.HeaderText = "Date Time";
-            this.col_date.Name = "col_date";
-            this.col_date.ReadOnly = true;
-            // 
-            // col_gmoon
-            // 
-            this.col_gmoon.DataPropertyName = "MoonTidal";
-            this.col_gmoon.HeaderText = "g Moon (mGal)";
-            this.col_gmoon.Name = "col_gmoon";
-            this.col_gmoon.ReadOnly = true;
-            // 
-            // col_gsun
-            // 
-            this.col_gsun.DataPropertyName = "SunTidal";
-            this.col_gsun.HeaderText = "g Sun (mGal)";
-            this.col_gsun.Name = "col_gsun";
-            this.col_gsun.ReadOnly = true;
-            // 
-            // col_gtotal
-            // 
-            this.col_gtotal.DataPropertyName = "CorrectionTotal";
-            this.col_gtotal.HeaderText = "g Total (mGal)";
-            this.col_gtotal.Name = "col_gtotal";
-            this.col_gtotal.ReadOnly = true;
-            // 
-            // col_xpos
-            // 
-            this.col_xpos.DataPropertyName = "XPosition";
-            this.col_xpos.HeaderText = "X-Position";
-            this.col_xpos.Name = "col_xpos";
-            this.col_xpos.ReadOnly = true;
-            this.col_xpos.Visible = false;
-            // 
-            // col_ypos
-            // 
-            this.col_ypos.DataPropertyName = "YPosition";
-            this.col_ypos.HeaderText = "Y-Position";
-            this.col_ypos.Name = "col_ypos";
-            this.col_ypos.ReadOnly = true;
-            this.col_ypos.Visible = false;
-            // 
-            // col_elev
-            // 
-            this.col_elev.DataPropertyName = "Elevation";
-            this.col_elev.HeaderText = "Elevation";
-            this.col_elev.Name = "col_elev";
-            this.col_elev.ReadOnly = true;
-            this.col_elev.Visible = false;
             // 
             // MainForm
             // 
