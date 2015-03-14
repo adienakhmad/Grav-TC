@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -244,7 +245,7 @@ namespace GravityTidalCorrection
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
-                var tidal = VerticalTide.TideCalcGal(fmjd + minute / 1440.0, _yPos, _xPos, _elev, _utcOffset);
+                var tidal = VerticalTide.TideCalcGal(fmjd + (minute / 1440.0), _yPos, _xPos, _elev, _utcOffset);
                 _corrections.Add(tidal);
                 minute += _timeInterval;
             }

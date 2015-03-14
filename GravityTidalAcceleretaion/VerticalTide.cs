@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 
 namespace GravityTidalCorrection
 {
@@ -97,7 +99,6 @@ namespace GravityTidalCorrection
 
         public static TidalCorrection TideCalcGal(double fmjd, double lat, double lon, double alt, double tz)
         {
-            
             double tl0, j1900, t, n, el1, sl, pl, hl, pl1, i, nu, tl;
             double chi, chi1, ll1, cosalf, sinalf, alf, xi, sigma, ll, lm;
             double costht, cosphi, c, rl, ap, ap1, dl, D, gm, gs, g0, love;
@@ -154,7 +155,7 @@ namespace GravityTidalCorrection
 
 
             // in mGal
-            var tidalAcceleration = new TidalCorrection(DateTime.FromOADate(MjdToExcel(fmjd) + tz / 24.0), lon, lat, alt, gm * love * 1e3, gs * love * 1e3, g0 * 1e3);
+            var tidalAcceleration = new TidalCorrection(DateTime.FromOADate(MjdToExcel(fmjd) + (tz / 24.0)), lon, lat, alt, gm * love * 1e3, gs * love * 1e3, g0 * 1e3);
             return tidalAcceleration;
         }
 
