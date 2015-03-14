@@ -4,7 +4,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using DotNetPerls;
+using Excel;
 using FileHelpers;
+using JR.Utils.GUI.Forms;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 
@@ -20,20 +23,55 @@ namespace GravityTidalCorrection
 
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            _corrections = new List<TidalCorrection>();
-            DialogResult result = openFileDialog.ShowDialog();
+            var result = openFileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
             {
-                _corrections.Clear();
+                _corrections = new List<TidalCorrection>();
+
                 FileHelperEngine engine = new FileHelperEngine(typeof(TidalCorrection));
+                engine.ErrorManager.ErrorMode = ErrorMode.SaveAndContinue;
+
+                Cursor.Current = Cursors.WaitCursor;
+                this.Enabled = false;
                 TidalCorrection[] tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
+
+                this.Enabled = true;
+                Cursor.Current = DefaultCursor;
+
+                if (engine.ErrorManager.HasErrors)
+                {
+                    if (engine.ErrorManager.ErrorCount > 99)
+                    {
+                        MessageBox.Show(string.Format("Found {0} errors at reading the file, check error.log for detailed information.", engine.ErrorManager.ErrorCount), @"File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        engine.ErrorManager.SaveErrors("error.log");
+                    }
+
+                    else
+                    {
+                        string error =
+                            string.Format(
+                                "Possible format violation occured. There are {0} errors out of {1} records.\n\n",
+                                engine.ErrorManager.ErrorCount, engine.TotalRecords);
+                        foreach (ErrorInfo err in engine.ErrorManager.Errors)
+                        {
+                            error += string.Format("Line {0:00}: {1}{2}", err.LineNumber,
+                                err.ExceptionInfo.Message, Environment.NewLine);
+                        }
+
+                        FlexibleMessageBox.MAX_HEIGHT_FACTOR = 0.3;
+                        FlexibleMessageBox.Show(error, "File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+
                 if (tides != null) _corrections = tides.ToList();
 
                 dgvFileMode.DataSource = _corrections;
                 var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
                 if (dataGridViewColumn != null)
                     dataGridViewColumn.Visible = false;
+            
             }
         }
 

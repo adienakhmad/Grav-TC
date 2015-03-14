@@ -79,6 +79,7 @@
       <DependentUpon>BetterDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="EmbeddedAssembly.cs" />
+    <Compile Include="FlexibleMessageBox.cs" />
     <Compile Include="From File Mode.cs">
       <SubType>Form</SubType>
     </Compile>

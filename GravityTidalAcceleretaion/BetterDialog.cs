@@ -89,10 +89,10 @@ namespace DotNetPerls
                         label1.Font = new Font("Segoe UI", 12.0f, FontStyle.Regular, GraphicsUnit.Point);
 
                         // bigger for vista/aero
-                        this.Width += 50;
+                        this.Width += 200;
 
-                        label1.Width += 50;
-                        label2.Width += 50;
+                        label1.Width += 200;
+                        label2.Width += 200;
 
                         smallSize = graphics.MeasureString(smallExplanation, this.Font, this.label2.Width);
                         bigSize = graphics.MeasureString(largeHeading, label1.Font, this.label1.Width);
