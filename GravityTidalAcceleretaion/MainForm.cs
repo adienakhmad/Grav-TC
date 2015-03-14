@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -17,6 +16,7 @@ namespace GravityTidalCorrection
 {
     public partial class MainForm : Form
     {
+        private const string VersionNumber = "1.1";
         private bool _onLoadDone;
         private double _yPos;
         private double _xPos;
@@ -270,6 +270,7 @@ namespace GravityTidalCorrection
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            this.Text = string.Format("Gravity Tidal Correction v{0}", VersionNumber);
             _utmZones = UTMZoneInfo.GetAllZones();
             _corrections = new BindingList<TidalCorrection>();
             dgvResult.DataSource = _corrections;
@@ -352,10 +353,10 @@ namespace GravityTidalCorrection
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            BetterDialog.ShowDialog("About Grav-TC", "Gravity Tidal Correction v1.0",
+            BetterDialog.ShowDialog("About Grav-TC", string.Format("Gravity Tidal Correction v{0}",VersionNumber),
                 "This program can be used to generate tide corrections table for gravity data processing. " +
                 "This program is ported from TIDES program by J. L. Ahern which was originally written in QBASIC.\n\nThe algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" +
-                "Copyright © 2014 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
+                "Copyright © 2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
                 (Image)Resources.ResourceManager.GetObject("aboutIcon"));
         }
 

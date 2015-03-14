@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DotNetPerls;
@@ -15,7 +16,7 @@ namespace GravityTidalCorrection
 {
     public partial class FromFileMode : Form
     {
-        private List<TidalCorrection> _corrections; 
+        private List<TidalCorrection> _corrections;
         public FromFileMode()
         {
             InitializeComponent();
@@ -68,6 +69,7 @@ namespace GravityTidalCorrection
                 if (tides != null) _corrections = tides.ToList();
 
                 dgvFileMode.DataSource = _corrections;
+                this.Width -= 122;
                 var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
                 if (dataGridViewColumn != null)
                     dataGridViewColumn.Visible = false;
@@ -77,11 +79,51 @@ namespace GravityTidalCorrection
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-            saveFileDialog.ShowDialog();
+            var result = saveFileDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                StreamWriter writer = new StreamWriter(saveFileDialog.FileName);
+
+                    writer.WriteLine("# ------------------------------------------------------");
+                    writer.WriteLine("# Output from Grav-TC : Tidal Correction");
+                    writer.WriteLine("# ------------------------------------------------------");
+                var selectedTimeZone = tsComboBoxTimeZone.ComboBox.SelectedItem as TimeZoneInfo;
+
+                    writer.WriteLine("# Time Zone\t: {0}", selectedTimeZone.DisplayName);
+                    writer.WriteLine("# ------------------------------------------------------");
+                    writer.WriteLine("# Date Time, X-Position, Y-Position g Moon (mGal), g Sun (mGal), g Total (mGal)");
+                
+
+                List<string> items = new List<string>();
+                foreach (TidalCorrection corr in _corrections)
+                {
+                    // the first is a date column
+                    items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
+                    items.Add(String.Format("{0,10:F6}",corr.XPosition));
+                    items.Add(String.Format("{0,10:F6}", corr.YPosition));
+                    items.Add(String.Format("{0,7:F2}",corr.Elevation));
+                    items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
+                    items.Add(String.Format("{0,10:F7}", corr.SunTidal));
+                    items.Add(String.Format("{0,10:F7}", corr.CorrectionTotal));
+
+                    writer.WriteLine(String.Join("\t", items.ToArray()));
+                    items.Clear();
+                }
+
+                writer.Flush();
+                MessageBox.Show(@"File saved successfully", @"Save Success", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
 
         private void FromFileMode_Load(object sender, EventArgs e)
         {
+            Debug.Write("Column width:");
+            Debug.WriteLine(dgvFileMode.Columns["col_Date"].Width);
+            Debug.WriteLine(dgvFileMode.Columns["col_yPos"].Width);
+            Debug.WriteLine(dgvFileMode.Columns["col_xPos"].Width);
+            Debug.WriteLine(dgvFileMode.Columns["colElevation"].Width);
             tsComboBoxCoordSystem.Items.Add("WGS84 Geographic");
             tsComboBoxCoordSystem.Items.Add("WGS84 UTM");
             tsComboBoxCoordSystem.SelectedIndex = 0;
@@ -111,7 +153,7 @@ namespace GravityTidalCorrection
         private void toolStripButtonGenerate_Click(object sender, EventArgs e)
         {
             if (dgvFileMode.Rows.Count == 0) return;
-
+            
             DataGridViewColumn dataGridViewColumn;
             switch (tsComboBoxCoordSystem.SelectedIndex)
             {
@@ -136,12 +178,6 @@ namespace GravityTidalCorrection
                         tidalCorrection.SunTidal = result.SunTidal;
                         tidalCorrection.CorrectionTotal = result.CorrectionTotal;
                     }
-
-                    dgvFileMode.DataSource = _corrections;
-                    dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
-                    if (dataGridViewColumn != null)
-                        dataGridViewColumn.Visible = true;
-
                     break;
 
                 case 1:
@@ -182,13 +218,14 @@ namespace GravityTidalCorrection
                         tidalCorrection.CorrectionTotal = result.CorrectionTotal;
                     }
 
-                    dgvFileMode.DataSource = _corrections;
-                    dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
-                    if (dataGridViewColumn != null)
-                        dataGridViewColumn.Visible = true;
-
                     break;
             }
+
+            dgvFileMode.DataSource = _corrections;
+            this.Width += 122;
+            dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+            if (dataGridViewColumn != null)
+                dataGridViewColumn.Visible = true;
         }
 
         private void tsComboBoxCoordSystem_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,6 +264,15 @@ namespace GravityTidalCorrection
                     dataGridViewColumn.DefaultCellStyle.Format = "0.00";
                 }
             }
+        }
+
+        private void copyToolStripButton_Click(object sender, EventArgs e)
+        {
+            dgvFileMode.SelectAll();
+            DataObject dataObj = dgvFileMode.GetClipboardContent();
+            if (dataObj != null)
+                Clipboard.SetDataObject(dataObj);
+            MessageBox.Show("Table copied to clipboard.", "Copy Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }
 }
