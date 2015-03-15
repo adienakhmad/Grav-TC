@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FromFileMode));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tsComboBoxCoordSystem = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonGenerate = new System.Windows.Forms.ToolStripButton();
+            this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -59,7 +60,6 @@
             this.col_yPos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colElevation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.col_gTotalTidal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileMode)).BeginInit();
@@ -94,24 +94,6 @@
             this.openToolStripButton.Text = "&Open";
             this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
-            // saveToolStripButton
-            // 
-            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
-            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(51, 22);
-            this.saveToolStripButton.Text = "&Save";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
-            // 
-            // copyToolStripButton
-            // 
-            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
-            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.copyToolStripButton.Name = "copyToolStripButton";
-            this.copyToolStripButton.Size = new System.Drawing.Size(55, 22);
-            this.copyToolStripButton.Text = "&Copy";
-            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
@@ -135,6 +117,12 @@
             this.tsComboBoxCoordSystem.Size = new System.Drawing.Size(150, 25);
             this.tsComboBoxCoordSystem.SelectedIndexChanged += new System.EventHandler(this.tsComboBoxCoordSystem_SelectedIndexChanged);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonGenerate
             // 
             this.toolStripButtonGenerate.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonGenerate.Image")));
@@ -143,6 +131,24 @@
             this.toolStripButtonGenerate.Size = new System.Drawing.Size(74, 22);
             this.toolStripButtonGenerate.Text = "Generate";
             this.toolStripButtonGenerate.Click += new System.EventHandler(this.toolStripButtonGenerate_Click);
+            // 
+            // saveToolStripButton
+            // 
+            this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
+            this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveToolStripButton.Name = "saveToolStripButton";
+            this.saveToolStripButton.Size = new System.Drawing.Size(67, 22);
+            this.saveToolStripButton.Text = "&Save As";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
+            // 
+            // copyToolStripButton
+            // 
+            this.copyToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripButton.Image")));
+            this.copyToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.copyToolStripButton.Name = "copyToolStripButton";
+            this.copyToolStripButton.Size = new System.Drawing.Size(55, 22);
+            this.copyToolStripButton.Text = "&Copy";
+            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
             // 
             // openFileDialog
             // 
@@ -212,14 +218,14 @@
             this.dgvFileMode.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvFileMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvFileMode.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvFileMode.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvFileMode.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_Date,
             this.col_gmoon,
@@ -228,14 +234,14 @@
             this.col_yPos,
             this.colElevation,
             this.col_gTotalTidal});
-            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle28;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvFileMode.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvFileMode.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvFileMode.Location = new System.Drawing.Point(13, 31);
             this.dgvFileMode.Name = "dgvFileMode";
@@ -245,8 +251,8 @@
             // col_Date
             // 
             this.col_Date.DataPropertyName = "Date";
-            dataGridViewCellStyle23.Format = "dd-MMM-yy HH:mm";
-            this.col_Date.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle2.Format = "dd-MMM-yy HH:mm";
+            this.col_Date.DefaultCellStyle = dataGridViewCellStyle2;
             this.col_Date.HeaderText = "Date Time";
             this.col_Date.Name = "col_Date";
             // 
@@ -267,44 +273,38 @@
             // col_xPos
             // 
             this.col_xPos.DataPropertyName = "XPosition";
-            dataGridViewCellStyle24.Format = "N2";
-            dataGridViewCellStyle24.NullValue = null;
-            this.col_xPos.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.col_xPos.DefaultCellStyle = dataGridViewCellStyle3;
             this.col_xPos.HeaderText = "X-Position";
             this.col_xPos.Name = "col_xPos";
             // 
             // col_yPos
             // 
             this.col_yPos.DataPropertyName = "YPosition";
-            dataGridViewCellStyle25.Format = "N2";
-            dataGridViewCellStyle25.NullValue = null;
-            this.col_yPos.DefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.col_yPos.DefaultCellStyle = dataGridViewCellStyle4;
             this.col_yPos.HeaderText = "Y-Position";
             this.col_yPos.Name = "col_yPos";
             // 
             // colElevation
             // 
             this.colElevation.DataPropertyName = "Elevation";
-            dataGridViewCellStyle26.Format = "0.00";
-            this.colElevation.DefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle5.Format = "0.00";
+            this.colElevation.DefaultCellStyle = dataGridViewCellStyle5;
             this.colElevation.HeaderText = "Elevation";
             this.colElevation.Name = "colElevation";
             // 
             // col_gTotalTidal
             // 
             this.col_gTotalTidal.DataPropertyName = "CorrectionTotal";
-            dataGridViewCellStyle27.Format = "N5";
-            dataGridViewCellStyle27.NullValue = null;
-            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle6.Format = "N5";
+            dataGridViewCellStyle6.NullValue = null;
+            this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle6;
             this.col_gTotalTidal.HeaderText = "g tide (mGal)";
             this.col_gTotalTidal.Name = "col_gTotalTidal";
             this.col_gTotalTidal.Visible = false;
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // FromFileMode
             // 

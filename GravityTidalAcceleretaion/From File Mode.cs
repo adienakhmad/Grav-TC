@@ -113,7 +113,7 @@ namespace GravityTidalCorrection
                 if (tsComboBoxTimeZone.ComboBox != null)
                 {
                     var selectedTimeZone = tsComboBoxTimeZone.ComboBox.SelectedItem as TimeZoneInfo;
-                    if (selectedTimeZone != null) writer.WriteLine("# Time Zone\t\t: {0}", selectedTimeZone.DisplayName);
+                    if (selectedTimeZone != null) writer.WriteLine("# Time Zone\t: {0}", selectedTimeZone.DisplayName);
                 }
 
                 if (tsComboBoxCoordSystem.ComboBox != null && tsComboBoxUTMZone.ComboBox != null && tsComboBoxCoordSystem.ComboBox.SelectedIndex == 1)
@@ -142,6 +142,8 @@ namespace GravityTidalCorrection
                 }
 
                 writer.Flush();
+                writer.Close();
+                saveFileDialog.FileName = null;
                 MessageBox.Show(@"File has been saved successfully", @"Save Success", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }

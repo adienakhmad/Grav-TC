@@ -327,6 +327,7 @@ namespace GravityTidalCorrection
             }
 
             WriteLineConsoleLog(string.Format("Successfully saved to {0}",saveFileDialog.FileName));
+            MessageBox.Show(@"File has been saved.");
             saveFileDialog.FileName = null;
         }
 
