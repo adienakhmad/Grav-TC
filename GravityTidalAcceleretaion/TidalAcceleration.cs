@@ -1,7 +1,7 @@
 ﻿/*
  * GravTC TidalAcceleration -- Compute variations in g due to lunar/solar to be used in gravity survey corrections.
  * 
- * User gives position position in latitude, longitude and hour offset from UTC+0
+ * User gives datetime, position in latitude, longitude, elevation and time zone information
  * Output is a TidalCorrection object which consist of datetime, position, lunar component, solar component and total correction.
  * g is calculated in mGal units
  * 
@@ -179,7 +179,7 @@ namespace GravityTidalCorrection
         }
 
        // ReSharper disable once InconsistentNaming
-        public static double UTC2ModifiedJulian(DateTime utcDate)
+        private static double UTC2ModifiedJulian(DateTime utcDate)
         {
             double hour = utcDate.Hour;
             double minute = utcDate.Minute;
@@ -209,8 +209,13 @@ namespace GravityTidalCorrection
 
         }
 
-        public static TidalCorrection Calculate(double fmjd, double lat, double lon, double alt, double tz)
+        public static TidalCorrection Calculate(DateTime date, TimeZoneInfo source, double lat, double lon, double alt)
         {
+            var dateInUtc = TimeZoneInfo.ConvertTime(date, source, TimeZoneInfo.Utc);
+            var tz = source.BaseUtcOffset.TotalHours;
+            var fmjd = UTC2ModifiedJulian(dateInUtc);
+
+            
             double tl0, j1900, t, n, el1, sl, pl, hl, pl1, i, nu, tl;
             double chi, chi1, ll1, cosalf, sinalf, alf, xi, sigma, ll, lm;
             double costht, cosphi, c, rl, ap, ap1, dl, D, gm, gs, g0, love;

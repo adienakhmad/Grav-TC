@@ -33,9 +33,9 @@ namespace GravityTidalCorrection
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -109,6 +109,8 @@ namespace GravityTidalCorrection
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.tabPageImageList = new System.Windows.Forms.ImageList(this.components);
+            this.imageListButton = new System.Windows.Forms.ImageList(this.components);
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -214,11 +216,14 @@ namespace GravityTidalCorrection
             // labelPositionY
             // 
             this.labelPositionY.AutoSize = true;
+            this.labelPositionY.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelPositionY.ImageIndex = 9;
             this.labelPositionY.Location = new System.Drawing.Point(3, 0);
             this.labelPositionY.Name = "labelPositionY";
             this.labelPositionY.Size = new System.Drawing.Size(46, 13);
             this.labelPositionY.TabIndex = 0;
             this.labelPositionY.Text = "Latitude";
+            this.labelPositionY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel3
             // 
@@ -659,8 +664,9 @@ namespace GravityTidalCorrection
             // buttonGo
             // 
             this.buttonGo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGo.Image = ((System.Drawing.Image)(resources.GetObject("buttonGo.Image")));
             this.buttonGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonGo.ImageIndex = 0;
+            this.buttonGo.ImageList = this.imageListButton;
             this.buttonGo.Location = new System.Drawing.Point(25, 417);
             this.buttonGo.Margin = new System.Windows.Forms.Padding(15, 5, 5, 5);
             this.buttonGo.Name = "buttonGo";
@@ -697,6 +703,7 @@ namespace GravityTidalCorrection
             this.tabControl1.Controls.Add(this.tabPageTable);
             this.tabControl1.Controls.Add(this.tabPageChart);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.ImageList = this.tabPageImageList;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
@@ -708,10 +715,11 @@ namespace GravityTidalCorrection
             // 
             this.tabPageTable.BackColor = System.Drawing.Color.Transparent;
             this.tabPageTable.Controls.Add(this.dgvResult);
-            this.tabPageTable.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTable.ImageIndex = 0;
+            this.tabPageTable.Location = new System.Drawing.Point(4, 23);
             this.tabPageTable.Name = "tabPageTable";
             this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTable.Size = new System.Drawing.Size(485, 355);
+            this.tabPageTable.Size = new System.Drawing.Size(485, 354);
             this.tabPageTable.TabIndex = 0;
             this.tabPageTable.Text = "Table";
             // 
@@ -731,32 +739,31 @@ namespace GravityTidalCorrection
             this.col_xpos,
             this.col_ypos,
             this.col_elev});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Format = "F4";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Format = "F4";
+            dataGridViewCellStyle6.NullValue = null;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
             this.dgvResult.ReadOnly = true;
-            this.dgvResult.Size = new System.Drawing.Size(479, 349);
+            this.dgvResult.Size = new System.Drawing.Size(479, 348);
             this.dgvResult.TabIndex = 13;
             this.dgvResult.TabStop = false;
-            this.dgvResult.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             // 
             // col_date
             // 
             this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle1.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle5.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle5;
             this.col_date.HeaderText = "Date Time";
             this.col_date.Name = "col_date";
             this.col_date.ReadOnly = true;
@@ -809,10 +816,11 @@ namespace GravityTidalCorrection
             // tabPageChart
             // 
             this.tabPageChart.Controls.Add(this.zedGraphControl1);
-            this.tabPageChart.Location = new System.Drawing.Point(4, 22);
+            this.tabPageChart.ImageIndex = 1;
+            this.tabPageChart.Location = new System.Drawing.Point(4, 23);
             this.tabPageChart.Name = "tabPageChart";
             this.tabPageChart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageChart.Size = new System.Drawing.Size(485, 355);
+            this.tabPageChart.Size = new System.Drawing.Size(485, 354);
             this.tabPageChart.TabIndex = 1;
             this.tabPageChart.Text = "Chart";
             this.tabPageChart.UseVisualStyleBackColor = true;
@@ -830,7 +838,7 @@ namespace GravityTidalCorrection
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(479, 349);
+            this.zedGraphControl1.Size = new System.Drawing.Size(479, 348);
             this.zedGraphControl1.TabIndex = 0;
             // 
             // groupBox1
@@ -849,7 +857,7 @@ namespace GravityTidalCorrection
             // 
             this.textBoxInfo.BackColor = System.Drawing.SystemColors.Window;
             this.textBoxInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxInfo.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxInfo.Location = new System.Drawing.Point(3, 16);
             this.textBoxInfo.Multiline = true;
             this.textBoxInfo.Name = "textBoxInfo";
@@ -881,6 +889,7 @@ namespace GravityTidalCorrection
             // 
             // readGobsgobsToolStripMenuItem
             // 
+            this.readGobsgobsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("readGobsgobsToolStripMenuItem.Image")));
             this.readGobsgobsToolStripMenuItem.Name = "readGobsgobsToolStripMenuItem";
             this.readGobsgobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.readGobsgobsToolStripMenuItem.Text = "Read From File";
@@ -889,6 +898,7 @@ namespace GravityTidalCorrection
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
+            this.saveAsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem.Image")));
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
@@ -970,8 +980,9 @@ namespace GravityTidalCorrection
             // 
             // aboutToolStripMenuItem
             // 
+            this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About...";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -985,8 +996,9 @@ namespace GravityTidalCorrection
             // 
             // copyToolStripMenuItem
             // 
+            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.copyToolStripMenuItem.Text = "Copy Table";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
@@ -1002,6 +1014,29 @@ namespace GravityTidalCorrection
             this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // tabPageImageList
+            // 
+            this.tabPageImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tabPageImageList.ImageStream")));
+            this.tabPageImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.tabPageImageList.Images.SetKeyName(0, "table.png");
+            this.tabPageImageList.Images.SetKeyName(1, "chart-up.png");
+            // 
+            // imageListButton
+            // 
+            this.imageListButton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButton.ImageStream")));
+            this.imageListButton.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListButton.Images.SetKeyName(0, "table--arrow.png");
+            this.imageListButton.Images.SetKeyName(1, "disk-return-black.png");
+            this.imageListButton.Images.SetKeyName(2, "blue-document-copy.png");
+            this.imageListButton.Images.SetKeyName(3, "address-book-open.png");
+            this.imageListButton.Images.SetKeyName(4, "direction.png");
+            this.imageListButton.Images.SetKeyName(5, "alarm-clock-blue.png");
+            this.imageListButton.Images.SetKeyName(6, "compass--pencil.png");
+            this.imageListButton.Images.SetKeyName(7, "globe-green.png");
+            this.imageListButton.Images.SetKeyName(8, "grid.png");
+            this.imageListButton.Images.SetKeyName(9, "marker.png");
+            this.imageListButton.Images.SetKeyName(10, "zones.png");
             // 
             // MainForm
             // 
@@ -1138,6 +1173,8 @@ namespace GravityTidalCorrection
         private DataGridViewTextBoxColumn col_xpos;
         private DataGridViewTextBoxColumn col_ypos;
         private DataGridViewTextBoxColumn col_elev;
+        private ImageList tabPageImageList;
+        private ImageList imageListButton;
     }
 }
 

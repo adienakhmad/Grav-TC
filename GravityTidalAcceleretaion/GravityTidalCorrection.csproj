@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>smallRiskIcon28.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Blackvariant-Button-Ui-System-Folders-Drives-Server.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FileHelpers">
@@ -129,12 +129,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Haze.ico" />
+    <None Include="Resources\Blackvariant-Button-Ui-System-Folders-Drives-Server.ico" />
+    <None Include="Resources\Sites-icon.png" />
+    <None Include="Resources\twoball.png" />
     <EmbeddedResource Include="ZedGraph.dll" />
-    <None Include="Resources\smallRiskIcon28.gif" />
-    <None Include="Resources\smallRiskIcon28.ico" />
     <Content Include="License-LGPL.txt" />
-    <Content Include="smallRiskIcon28.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

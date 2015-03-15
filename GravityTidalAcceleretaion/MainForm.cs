@@ -11,8 +11,6 @@ using GravityTidalCorrection.Properties;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using ZedGraph;
-using Application = System.Windows.Forms.Application;
-using Point = System.Drawing.Point;
 
 namespace GravityTidalCorrection
 {
@@ -31,9 +29,7 @@ namespace GravityTidalCorrection
         private BindingList<TidalCorrection> _corrections;
         private ReadOnlyCollection<UTMZone> _utmZones;
         
-
- 
-       public MainForm()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -87,7 +83,7 @@ namespace GravityTidalCorrection
             bool valid = true;
             if (Math.Abs(elev) < 5e-6)
             {
-                WriteErrorLog("Elevation cannot be zero.");
+                WriteErrorLog("Elevation cannot be zero.\t");
                 
                 valid = false;
             }
@@ -98,7 +94,7 @@ namespace GravityTidalCorrection
             }
             if (Math.Abs(interval) < 5e-6)
             {
-                WriteErrorLog("Time interval cannot be zero. ");
+                WriteErrorLog("Time interval cannot be zero.\t");
                 valid = false;
             }
 
@@ -158,6 +154,18 @@ namespace GravityTidalCorrection
 
         private void buttonGo_Click(object sender, EventArgs e)
         {
+            // elevation in metres
+            _elev = Convert.ToDouble(numElevation.Value);
+            // duration in minutes
+            _duration = (datepickEnd.Value - datepickBegin.Value).TotalMinutes;
+            // interval
+            _timeInterval = Convert.ToDouble(numInterval.Value);
+
+            // Checks the input, if input is invalid, it return void.
+            if (IsInputInvalid(_elev, _duration, _timeInterval))
+            {
+               return;
+            }
             if (decimalDegreeInputToolStripMenuItem.CheckState == CheckState.Checked)
             {
                 // Latitude, Longitude with decimal degree
@@ -210,12 +218,6 @@ namespace GravityTidalCorrection
             }
             
 
-            // elevation in metres
-            _elev = Convert.ToDouble(numElevation.Value);
-
-            // duration in minutes
-            _duration = (datepickEnd.Value - datepickBegin.Value).TotalMinutes;
-
             // convert input to UTC+00
             _beginInUtc = TimeZoneInfo.ConvertTime(datepickBegin.Value,
                 TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), TimeZoneInfo.Utc);
@@ -224,24 +226,14 @@ namespace GravityTidalCorrection
                 TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), TimeZoneInfo.Utc);
 
             // offset from UTC in hours
-            _utcOffset = TimeZoneInfo.FindSystemTimeZoneById((string)cboxTimeZone.SelectedValue)
-                    .GetUtcOffset(datepickBegin.Value)
-                    .TotalHours;
-
+            _utcOffset =
+                TimeZoneInfo.FindSystemTimeZoneById((string) cboxTimeZone.SelectedValue).BaseUtcOffset.TotalHours;
+                    
             // interval
             _timeInterval = Convert.ToDouble(numInterval.Value);
 
-            // Checks the input, if input is invalid, it return void.
-            if (IsInputInvalid(_elev, _duration, _timeInterval))
-            {
-                dgvResult.DataSource = null;
-                return;
-            }
-
-
             // Start writing to list and display on gridview
             _corrections.Clear();
-            double fmjd = TidalAcceleration.UTC2ModifiedJulian(_beginInUtc);
             double minute = 0;
 
             Cursor.Current = Cursors.WaitCursor;
@@ -249,27 +241,29 @@ namespace GravityTidalCorrection
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
-                var tidal = TidalAcceleration.Calculate(fmjd + (minute / 1440.0), _yPos, _xPos, _elev, _utcOffset);
+                var tidal = TidalAcceleration.Calculate(datepickBegin.Value.AddMinutes(minute), TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), _yPos, _xPos, _elev);
                 _corrections.Add(tidal);
                 minute += _timeInterval;
             }
-
-            // Refresh Data Grid View
-            dgvResult.Refresh();
 
             DrawGraph(zedGraphControl1,_corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
 
             Cursor.Current = Cursors.Default;
 
             // write to console log
-            WriteLineConsoleLog(string.Format("Time Zone\t: {0} (UTC{1:'+'00;'-'00}) ", cboxTimeZone.SelectedValue, _utcOffset));
-            WriteLineConsoleLog(string.Format("Begin\t\t: {0}\t({1} in UTC+00)", datepickBegin.Value, _beginInUtc));
-            WriteLineConsoleLog(string.Format("End\t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
-            WriteLineConsoleLog(string.Format("Interval\t: {0:F2} minutes ", _timeInterval));
-            WriteLineConsoleLog(string.Format("Time Span\t: {0:F2} minutes ", _duration));
-            WriteLineConsoleLog(string.Format("Latitude\t: {0:F4}°\r\nLongitude\t: {1:F4}°", _yPos, _xPos));
-            WriteLineConsoleLog(string.Format("Elevation\t: {0:F2} meters", _elev));
+            WriteLineConsoleLog(string.Format("Time Zone \t: {0} (UTC{1:'+'00;'-'00}) ", cboxTimeZone.SelectedValue, _utcOffset));
+            WriteLineConsoleLog(string.Format("Begin     \t\t: {0}\t({1} in UTC+00)", datepickBegin.Value, _beginInUtc));
+            WriteLineConsoleLog(string.Format("End       \t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
+            WriteLineConsoleLog(string.Format("Interval  \t\t: {0:F2} minutes ", _timeInterval));
+            WriteLineConsoleLog(string.Format("Time Span \t: {0:F2} minutes ", _duration));
+            WriteLineConsoleLog(string.Format("Latitude  \t: {0:F4}°\r\nLongitude\t: {1:F4}°", _yPos, _xPos));
+            WriteLineConsoleLog(string.Format("Elevation \t: {0:F2} meters", _elev));
             WriteLineConsoleLog(string.Format("Completed...\t{0} data point(s).", dgvResult.RowCount));
+
+            saveAsToolStripMenuItem.Enabled = true;
+            copyToolStripMenuItem.Enabled = true;
+            zedGraphControl1.Visible = true;
+            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -361,30 +355,13 @@ namespace GravityTidalCorrection
                 "This program can be used to generate tide corrections table for gravity data processing. " +
                 "This program is ported from TIDES program by J. L. Ahern which was originally written in QBASIC.\n\nThe algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" +
                 "Copyright © 2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
-                (Image)Resources.ResourceManager.GetObject("aboutIcon"));
+                (Image)Resources.ResourceManager.GetObject("Sites_icon"));
         }
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form1 = new FromFileMode();
             form1.Show();
-        }
-
-        private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (dgvResult.DataSource == null || dgvResult.Rows.Count == 0)
-            {
-                saveAsToolStripMenuItem.Enabled = false;
-                copyToolStripMenuItem.Enabled = false;
-                zedGraphControl1.Visible = false;
-            }
-
-            else
-            {
-                saveAsToolStripMenuItem.Enabled = true;
-                copyToolStripMenuItem.Enabled = true;
-                zedGraphControl1.Visible = true;
-            }
         }
 
         private void inputModeChange_click(object sender, EventArgs e)
