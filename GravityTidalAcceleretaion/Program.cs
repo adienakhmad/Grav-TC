@@ -13,7 +13,12 @@ namespace GravityTidalCorrection
         static void Main()
         {
             const string zedgraphlib = "GravityTidalCorrection.ZedGraph.dll";
+            const string projnetlib = "GravityTidalCorrection.ProjNet.dll";
+            const string filehelplib = "GravityTidalCorrection.FileHelpers.dll";
+
             EmbeddedAssembly.Load(zedgraphlib,"ZedGraph.dll");
+            EmbeddedAssembly.Load(projnetlib,"ProjNet.dll");
+            EmbeddedAssembly.Load(filehelplib,"FileHelpers.dll");
             
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 

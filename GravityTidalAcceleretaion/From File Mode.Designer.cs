@@ -304,7 +304,7 @@
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(735, 700);
-            this.MinimumSize = new System.Drawing.Size(573, 500);
+            this.MinimumSize = new System.Drawing.Size(605, 500);
             this.Name = "FromFileMode";
             this.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
