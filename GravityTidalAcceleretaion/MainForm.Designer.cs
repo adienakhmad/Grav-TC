@@ -34,8 +34,8 @@ namespace GravityTidalCorrection
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -80,6 +80,13 @@ namespace GravityTidalCorrection
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageTable = new System.Windows.Forms.TabPage();
             this.dgvResult = new System.Windows.Forms.DataGridView();
+            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageChart = new System.Windows.Forms.TabPage();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -102,13 +109,6 @@ namespace GravityTidalCorrection
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainPanel.SuspendLayout();
             this.splitContainerLeftRight.Panel1.SuspendLayout();
             this.splitContainerLeftRight.Panel2.SuspendLayout();
@@ -186,7 +186,7 @@ namespace GravityTidalCorrection
             // groupLocation
             // 
             this.groupLocation.Controls.Add(this.flowLayoutPanel6);
-            this.groupLocation.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupLocation.Location = new System.Drawing.Point(13, 13);
             this.groupLocation.Name = "groupLocation";
             this.groupLocation.Padding = new System.Windows.Forms.Padding(15, 10, 3, 3);
@@ -206,9 +206,9 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(15, 23);
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(15, 25);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(220, 149);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(220, 147);
             this.flowLayoutPanel6.TabIndex = 0;
             // 
             // labelPositionY
@@ -231,7 +231,7 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel3.Controls.Add(this.cboxLatSign);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(245, 30);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(217, 30);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // num_yPos
@@ -333,7 +333,7 @@ namespace GravityTidalCorrection
             this.cboxLatSign.Location = new System.Drawing.Point(174, 3);
             this.cboxLatSign.MaxDropDownItems = 2;
             this.cboxLatSign.Name = "cboxLatSign";
-            this.cboxLatSign.Size = new System.Drawing.Size(33, 22);
+            this.cboxLatSign.Size = new System.Drawing.Size(36, 22);
             this.cboxLatSign.TabIndex = 6;
             // 
             // labelPositionX
@@ -356,7 +356,7 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel2.Controls.Add(this.cboxLonSign);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 65);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(245, 30);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(217, 30);
             this.flowLayoutPanel2.TabIndex = 3;
             this.flowLayoutPanel2.TabStop = true;
             // 
@@ -459,7 +459,7 @@ namespace GravityTidalCorrection
             this.cboxLonSign.Location = new System.Drawing.Point(174, 3);
             this.cboxLonSign.MaxDropDownItems = 2;
             this.cboxLonSign.Name = "cboxLonSign";
-            this.cboxLonSign.Size = new System.Drawing.Size(37, 22);
+            this.cboxLonSign.Size = new System.Drawing.Size(36, 22);
             this.cboxLonSign.TabIndex = 7;
             // 
             // label14
@@ -519,7 +519,7 @@ namespace GravityTidalCorrection
             // groupTime
             // 
             this.groupTime.Controls.Add(this.flowLayoutPanel7);
-            this.groupTime.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupTime.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupTime.Location = new System.Drawing.Point(13, 194);
             this.groupTime.Name = "groupTime";
             this.groupTime.Padding = new System.Windows.Forms.Padding(15, 10, 3, 3);
@@ -541,9 +541,9 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(15, 23);
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(15, 25);
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(220, 189);
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(220, 187);
             this.flowLayoutPanel7.TabIndex = 0;
             // 
             // label11
@@ -639,7 +639,7 @@ namespace GravityTidalCorrection
             0,
             0});
             this.numInterval.Name = "numInterval";
-            this.numInterval.Size = new System.Drawing.Size(49, 21);
+            this.numInterval.Size = new System.Drawing.Size(80, 21);
             this.numInterval.TabIndex = 0;
             this.numInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -648,7 +648,7 @@ namespace GravityTidalCorrection
             this.label13.AutoSize = true;
             this.label13.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.label13.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(52, 6);
+            this.label13.Location = new System.Drawing.Point(83, 6);
             this.label13.Margin = new System.Windows.Forms.Padding(0, 6, 3, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 13);
@@ -698,6 +698,7 @@ namespace GravityTidalCorrection
             this.tabControl1.Controls.Add(this.tabPageChart);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(493, 381);
@@ -730,16 +731,16 @@ namespace GravityTidalCorrection
             this.col_xpos,
             this.col_ypos,
             this.col_elev});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.Format = "F4";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Format = "F4";
+            dataGridViewCellStyle2.NullValue = null;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
@@ -748,6 +749,62 @@ namespace GravityTidalCorrection
             this.dgvResult.TabIndex = 13;
             this.dgvResult.TabStop = false;
             this.dgvResult.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
+            // 
+            // col_date
+            // 
+            this.col_date.DataPropertyName = "Date";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle1.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
+            this.col_date.HeaderText = "Date Time";
+            this.col_date.Name = "col_date";
+            this.col_date.ReadOnly = true;
+            // 
+            // col_gmoon
+            // 
+            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.HeaderText = "g Moon (mGal)";
+            this.col_gmoon.Name = "col_gmoon";
+            this.col_gmoon.ReadOnly = true;
+            // 
+            // col_gsun
+            // 
+            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.HeaderText = "g Sun (mGal)";
+            this.col_gsun.Name = "col_gsun";
+            this.col_gsun.ReadOnly = true;
+            // 
+            // col_gtotal
+            // 
+            this.col_gtotal.DataPropertyName = "CorrectionTotal";
+            this.col_gtotal.HeaderText = "g Total (mGal)";
+            this.col_gtotal.Name = "col_gtotal";
+            this.col_gtotal.ReadOnly = true;
+            // 
+            // col_xpos
+            // 
+            this.col_xpos.DataPropertyName = "XPosition";
+            this.col_xpos.HeaderText = "X-Position";
+            this.col_xpos.Name = "col_xpos";
+            this.col_xpos.ReadOnly = true;
+            this.col_xpos.Visible = false;
+            // 
+            // col_ypos
+            // 
+            this.col_ypos.DataPropertyName = "YPosition";
+            this.col_ypos.HeaderText = "Y-Position";
+            this.col_ypos.Name = "col_ypos";
+            this.col_ypos.ReadOnly = true;
+            this.col_ypos.Visible = false;
+            // 
+            // col_elev
+            // 
+            this.col_elev.DataPropertyName = "Elevation";
+            this.col_elev.HeaderText = "Elevation";
+            this.col_elev.Name = "col_elev";
+            this.col_elev.ReadOnly = true;
+            this.col_elev.Visible = false;
             // 
             // tabPageChart
             // 
@@ -945,62 +1002,6 @@ namespace GravityTidalCorrection
             this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
             this.mainMenuStrip.TabIndex = 0;
             this.mainMenuStrip.Text = "menuStrip1";
-            // 
-            // col_date
-            // 
-            this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle3.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle3;
-            this.col_date.HeaderText = "Date Time";
-            this.col_date.Name = "col_date";
-            this.col_date.ReadOnly = true;
-            // 
-            // col_gmoon
-            // 
-            this.col_gmoon.DataPropertyName = "MoonTidal";
-            this.col_gmoon.HeaderText = "g Moon (mGal)";
-            this.col_gmoon.Name = "col_gmoon";
-            this.col_gmoon.ReadOnly = true;
-            // 
-            // col_gsun
-            // 
-            this.col_gsun.DataPropertyName = "SunTidal";
-            this.col_gsun.HeaderText = "g Sun (mGal)";
-            this.col_gsun.Name = "col_gsun";
-            this.col_gsun.ReadOnly = true;
-            // 
-            // col_gtotal
-            // 
-            this.col_gtotal.DataPropertyName = "CorrectionTotal";
-            this.col_gtotal.HeaderText = "g Total (mGal)";
-            this.col_gtotal.Name = "col_gtotal";
-            this.col_gtotal.ReadOnly = true;
-            // 
-            // col_xpos
-            // 
-            this.col_xpos.DataPropertyName = "XPosition";
-            this.col_xpos.HeaderText = "X-Position";
-            this.col_xpos.Name = "col_xpos";
-            this.col_xpos.ReadOnly = true;
-            this.col_xpos.Visible = false;
-            // 
-            // col_ypos
-            // 
-            this.col_ypos.DataPropertyName = "YPosition";
-            this.col_ypos.HeaderText = "Y-Position";
-            this.col_ypos.Name = "col_ypos";
-            this.col_ypos.ReadOnly = true;
-            this.col_ypos.Visible = false;
-            // 
-            // col_elev
-            // 
-            this.col_elev.DataPropertyName = "Elevation";
-            this.col_elev.HeaderText = "Elevation";
-            this.col_elev.Name = "col_elev";
-            this.col_elev.ReadOnly = true;
-            this.col_elev.Visible = false;
             // 
             // MainForm
             // 

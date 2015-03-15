@@ -96,7 +96,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TidalCorrection.cs" />
     <Compile Include="UTMZone.cs" />
-    <Compile Include="VerticalTide.cs" />
+    <Compile Include="TidalAcceleration.cs" />
     <EmbeddedResource Include="BetterDialog.resx">
       <DependentUpon>BetterDialog.cs</DependentUpon>
     </EmbeddedResource>

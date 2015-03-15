@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using DotNetPerls;
-using Excel;
 using FileHelpers;
 using JR.Utils.GUI.Forms;
 using ProjNet.CoordinateSystems;
@@ -30,14 +27,14 @@ namespace GravityTidalCorrection
             {
                 _corrections = new List<TidalCorrection>();
 
-                FileHelperEngine engine = new FileHelperEngine(typeof(TidalCorrection));
+                var engine = new FileHelperEngine(typeof(TidalCorrection));
                 engine.ErrorManager.ErrorMode = ErrorMode.SaveAndContinue;
 
                 Cursor.Current = Cursors.WaitCursor;
-                this.Enabled = false;
-                TidalCorrection[] tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
+                Enabled = false;
+                var tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
 
-                this.Enabled = true;
+                Enabled = true;
                 Cursor.Current = DefaultCursor;
 
                 if (engine.ErrorManager.HasErrors)
@@ -54,6 +51,7 @@ namespace GravityTidalCorrection
                             string.Format(
                                 "Possible format violation occured. There are {0} errors out of {1} records.\n\n",
                                 engine.ErrorManager.ErrorCount, engine.TotalRecords);
+
                         foreach (ErrorInfo err in engine.ErrorManager.Errors)
                         {
                             error += string.Format("Line {0:00}: {1}{2}", err.LineNumber,
@@ -69,7 +67,7 @@ namespace GravityTidalCorrection
                 if (tides != null) _corrections = tides.ToList();
 
                 dgvFileMode.DataSource = _corrections;
-                this.Width -= 122;
+                Width -= 122;
                 var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
                 if (dataGridViewColumn != null)
                     dataGridViewColumn.Visible = false;
@@ -83,20 +81,23 @@ namespace GravityTidalCorrection
 
             if (result == DialogResult.OK)
             {
-                StreamWriter writer = new StreamWriter(saveFileDialog.FileName);
+                var writer = new StreamWriter(saveFileDialog.FileName);
 
                     writer.WriteLine("# ------------------------------------------------------");
                     writer.WriteLine("# Output from Grav-TC : Tidal Correction");
                     writer.WriteLine("# ------------------------------------------------------");
-                var selectedTimeZone = tsComboBoxTimeZone.ComboBox.SelectedItem as TimeZoneInfo;
-
-                    writer.WriteLine("# Time Zone\t: {0}", selectedTimeZone.DisplayName);
-                    writer.WriteLine("# ------------------------------------------------------");
+                if (tsComboBoxTimeZone.ComboBox != null)
+                {
+                    var selectedTimeZone = tsComboBoxTimeZone.ComboBox.SelectedItem as TimeZoneInfo;
+                    if (selectedTimeZone != null) writer.WriteLine("# Time Zone\t: {0}", selectedTimeZone.DisplayName);
+                }
+                writer.WriteLine("# ------------------------------------------------------");
                     writer.WriteLine("# Date Time, X-Position, Y-Position g Moon (mGal), g Sun (mGal), g Total (mGal)");
                 
 
-                List<string> items = new List<string>();
-                foreach (TidalCorrection corr in _corrections)
+                var items = new List<string>();
+
+                foreach (var corr in _corrections)
                 {
                     // the first is a date column
                     items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
@@ -119,16 +120,11 @@ namespace GravityTidalCorrection
 
         private void FromFileMode_Load(object sender, EventArgs e)
         {
-            Debug.Write("Column width:");
-            Debug.WriteLine(dgvFileMode.Columns["col_Date"].Width);
-            Debug.WriteLine(dgvFileMode.Columns["col_yPos"].Width);
-            Debug.WriteLine(dgvFileMode.Columns["col_xPos"].Width);
-            Debug.WriteLine(dgvFileMode.Columns["colElevation"].Width);
             tsComboBoxCoordSystem.Items.Add("WGS84 Geographic");
             tsComboBoxCoordSystem.Items.Add("WGS84 UTM");
             tsComboBoxCoordSystem.SelectedIndex = 0;
 
-            ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
+            var timeZones = TimeZoneInfo.GetSystemTimeZones();
 
             if (tsComboBoxUTMZone.ComboBox != null)
             {
@@ -153,30 +149,32 @@ namespace GravityTidalCorrection
         private void toolStripButtonGenerate_Click(object sender, EventArgs e)
         {
             if (dgvFileMode.Rows.Count == 0) return;
-            
-            DataGridViewColumn dataGridViewColumn;
+
             switch (tsComboBoxCoordSystem.SelectedIndex)
             {
                 case 0:
                    foreach (var tidalCorrection in _corrections)
                     {
-                        var dateInUtc = TimeZoneInfo.ConvertTime(tidalCorrection.Date,
-                            TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),
-                            TimeZoneInfo.Utc);
+                        if (tsComboBoxTimeZone.ComboBox != null)
+                        {
+                            var dateInUtc = TimeZoneInfo.ConvertTime(tidalCorrection.Date,
+                                TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),
+                                TimeZoneInfo.Utc);
 
-                       var utcOffset =
-                            TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString())
-                                .GetUtcOffset(tidalCorrection.Date)
-                                .TotalHours;
+                            var utcOffset =
+                                TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString())
+                                    .GetUtcOffset(tidalCorrection.Date)
+                                    .TotalHours;
 
-                       var fmjd = VerticalTide.UTC2ModifiedJulian(dateInUtc);
+                            var fmjd = TidalAcceleration.UTC2ModifiedJulian(dateInUtc);
                         
-                        var result = VerticalTide.TideCalcGal(fmjd, tidalCorrection.YPosition,
-                            tidalCorrection.XPosition, tidalCorrection.Elevation, utcOffset);
+                            var result = TidalAcceleration.Calculate(fmjd, tidalCorrection.YPosition,
+                                tidalCorrection.XPosition, tidalCorrection.Elevation, utcOffset);
 
-                        tidalCorrection.MoonTidal = result.MoonTidal;
-                        tidalCorrection.SunTidal = result.SunTidal;
-                        tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                            tidalCorrection.MoonTidal = result.MoonTidal;
+                            tidalCorrection.SunTidal = result.SunTidal;
+                            tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                        }
                     }
                     break;
 
@@ -184,46 +182,55 @@ namespace GravityTidalCorrection
                     foreach (var tidalCorrection in _corrections)
                     {
                         // Set the date to UTC and converting it to Modified Julian Date
-                        var dateInUtc = TimeZoneInfo.ConvertTime(tidalCorrection.Date,
-                            TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),
-                            TimeZoneInfo.Utc);
+                        if (tsComboBoxTimeZone.ComboBox != null)
+                        {
+                            var dateInUtc = TimeZoneInfo.ConvertTime(tidalCorrection.Date,
+                                TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),
+                                TimeZoneInfo.Utc);
 
-                        var utcOffset =
-                             TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString())
-                                 .GetUtcOffset(tidalCorrection.Date)
-                                 .TotalHours;
+                            var utcOffset =
+                                TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString())
+                                    .GetUtcOffset(tidalCorrection.Date)
+                                    .TotalHours;
 
-                        var fmjd = VerticalTide.UTC2ModifiedJulian(dateInUtc);
+                            var fmjd = TidalAcceleration.UTC2ModifiedJulian(dateInUtc);
 
-                        // Projection of coordinates
+                            // Projection of coordinates
 
-                        var utmzone = tsComboBoxUTMZone.ComboBox.SelectedItem as UTMZone;
-                        IGeographicCoordinateSystem geo = GeographicCoordinateSystem.WGS84;
-                        IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM(utmzone.Zone,
-                            utmzone.IsNorthHemisphere);
-                        CoordinateTransformationFactory ctfac = new CoordinateTransformationFactory();
-                        ICoordinateTransformation trans = ctfac.CreateFromCoordinateSystems(utm, geo);
+                            if (tsComboBoxUTMZone.ComboBox != null)
+                            {
+                                var  utmZone = tsComboBoxUTMZone.ComboBox.SelectedItem as UTMZone;
+                                IGeographicCoordinateSystem geo = GeographicCoordinateSystem.WGS84;
+                                if (utmZone != null)
+                                {
+                                    IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM( utmZone.Zone,
+                                        utmZone.IsNorthHemisphere);
+                                    var coordinateTransformationFactory = new CoordinateTransformationFactory();
+                                    ICoordinateTransformation trans = coordinateTransformationFactory.CreateFromCoordinateSystems(utm, geo);
 
-                        double[] longlat = {tidalCorrection.XPosition, tidalCorrection.YPosition};
-                        double[] east_north = trans.MathTransform.Transform(longlat);
+                                    double[] longlat = {tidalCorrection.XPosition, tidalCorrection.YPosition};
+                                    double[] eastNorth = trans.MathTransform.Transform(longlat);
 
-                        Debug.WriteLine(string.Format("{0}\t{1}",east_north[0],east_north[1]));
+                                    Debug.WriteLine(string.Format("{0}\t{1}",eastNorth[0],eastNorth[1]));
 
-                        // Calculating tidal correction
-                        var result = VerticalTide.TideCalcGal(fmjd, east_north[1],
-                            east_north[0], tidalCorrection.Elevation, utcOffset);
+                                    // Calculating tidal correction
+                                    var result = TidalAcceleration.Calculate(fmjd, eastNorth[1],
+                                        eastNorth[0], tidalCorrection.Elevation, utcOffset);
 
-                        tidalCorrection.MoonTidal = result.MoonTidal;
-                        tidalCorrection.SunTidal = result.SunTidal;
-                        tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                                    tidalCorrection.MoonTidal = result.MoonTidal;
+                                    tidalCorrection.SunTidal = result.SunTidal;
+                                    tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                                }
+                            }
+                        }
                     }
 
                     break;
             }
 
             dgvFileMode.DataSource = _corrections;
-            this.Width += 122;
-            dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+            Width += 122;
+            var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
             if (dataGridViewColumn != null)
                 dataGridViewColumn.Visible = true;
         }
@@ -272,7 +279,7 @@ namespace GravityTidalCorrection
             DataObject dataObj = dgvFileMode.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
-            MessageBox.Show("Table copied to clipboard.", "Copy Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(@"Table copied to clipboard.", @"Copy Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
     }
 }

@@ -11,12 +11,14 @@ using GravityTidalCorrection.Properties;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
 using ZedGraph;
+using Application = System.Windows.Forms.Application;
+using Point = System.Drawing.Point;
 
 namespace GravityTidalCorrection
 {
     public partial class MainForm : Form
     {
-        private const string VersionNumber = "1.1";
+        private const string VersionNumber = @"1.1";
         private bool _onLoadDone;
         private double _yPos;
         private double _xPos;
@@ -28,6 +30,8 @@ namespace GravityTidalCorrection
         private double _timeInterval;
         private BindingList<TidalCorrection> _corrections;
         private ReadOnlyCollection<UTMZone> _utmZones;
+        
+
  
        public MainForm()
         {
@@ -35,7 +39,7 @@ namespace GravityTidalCorrection
 
         }
 
-        private void DrawGraph(ZedGraphControl zgc, BindingList<TidalCorrection> corrlist,
+        private void DrawGraph(ZedGraphControl zgc, IEnumerable<TidalCorrection> corrlist,
                string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
         {
                GraphPane myPane = zgc.GraphPane;
@@ -50,7 +54,7 @@ namespace GravityTidalCorrection
                myPane.YAxis.Title.Text = yAxisTitle;
                myPane.XAxis.Type = AxisType.Date;
 
-               PointPairList plotList = new PointPairList();
+               var plotList = new PointPairList();
 
                foreach ( TidalCorrection corr in corrlist )
                {
@@ -99,6 +103,7 @@ namespace GravityTidalCorrection
             }
 
             return !valid;
+           
         }
 
         private void WriteErrorLog(string sentence)
@@ -135,11 +140,10 @@ namespace GravityTidalCorrection
                 writer.WriteLine("# Date Time, g Moon (mGal), g Sun (mGal), g Total (mGal)");
             }
 
-            List<string> items = new List<string>();
+            var items = new List<string>();
             foreach (TidalCorrection corr in _corrections)
             {
                 // the first is a date column
-                //items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
                 items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
                 items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
                 items.Add(String.Format("{0,10:F7}", corr.SunTidal));
@@ -194,8 +198,8 @@ namespace GravityTidalCorrection
                 IGeographicCoordinateSystem geo = GeographicCoordinateSystem.WGS84;
                 IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM(utmzone.Zone, utmzone.IsNorthHemisphere);
 
-                CoordinateTransformationFactory ctfac = new CoordinateTransformationFactory();
-                ICoordinateTransformation trans = ctfac.CreateFromCoordinateSystems(utm, geo);
+                var ctfac = new CoordinateTransformationFactory();
+                var trans = ctfac.CreateFromCoordinateSystems(utm, geo);
 
                 double[] fromPoint = {_xPos,_yPos};
                 double[] toPoint = trans.MathTransform.Transform(fromPoint);
@@ -237,7 +241,7 @@ namespace GravityTidalCorrection
 
             // Start writing to list and display on gridview
             _corrections.Clear();
-            double fmjd = VerticalTide.UTC2ModifiedJulian(_beginInUtc);
+            double fmjd = TidalAcceleration.UTC2ModifiedJulian(_beginInUtc);
             double minute = 0;
 
             Cursor.Current = Cursors.WaitCursor;
@@ -245,12 +249,12 @@ namespace GravityTidalCorrection
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
-                var tidal = VerticalTide.TideCalcGal(fmjd + (minute / 1440.0), _yPos, _xPos, _elev, _utcOffset);
+                var tidal = TidalAcceleration.Calculate(fmjd + (minute / 1440.0), _yPos, _xPos, _elev, _utcOffset);
                 _corrections.Add(tidal);
                 minute += _timeInterval;
             }
 
-            // Refresh Datagridview
+            // Refresh Data Grid View
             dgvResult.Refresh();
 
             DrawGraph(zedGraphControl1,_corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
@@ -270,7 +274,7 @@ namespace GravityTidalCorrection
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format("Gravity Tidal Correction v{0}", VersionNumber);
+            Text = string.Format("Gravity Tidal Correction v{0}", VersionNumber);
             _utmZones = UTMZoneInfo.GetAllZones();
             _corrections = new BindingList<TidalCorrection>();
             dgvResult.DataSource = _corrections;
@@ -323,7 +327,7 @@ namespace GravityTidalCorrection
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
+            using (var writer = new StreamWriter(saveFileDialog.FileName))
             {
                 Export(writer, true);
             }
@@ -362,7 +366,7 @@ namespace GravityTidalCorrection
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FromFileMode form1 = new FromFileMode();
+            var form1 = new FromFileMode();
             form1.Show();
         }
 

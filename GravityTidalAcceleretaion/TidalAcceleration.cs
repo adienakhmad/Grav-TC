@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 
 namespace GravityTidalCorrection
 {
-    static class VerticalTide
+    static class TidalAcceleration
     {
         // Constant
 /*
@@ -67,15 +65,15 @@ namespace GravityTidalCorrection
         }
 
        // ReSharper disable once InconsistentNaming
-        public static double UTC2ModifiedJulian(DateTime utcdate)
+        public static double UTC2ModifiedJulian(DateTime utcDate)
         {
-            double hour = utcdate.Hour;
-            double minute = utcdate.Minute;
-            double second = utcdate.Second;
+            double hour = utcDate.Hour;
+            double minute = utcDate.Minute;
+            double second = utcDate.Second;
 
-            int day = utcdate.Day;
-            int month = utcdate.Month;
-            int year = utcdate.Year;
+            int day = utcDate.Day;
+            int month = utcDate.Month;
+            int year = utcDate.Year;
 
             if (month < 3)
             {
@@ -97,7 +95,7 @@ namespace GravityTidalCorrection
 
         }
 
-        public static TidalCorrection TideCalcGal(double fmjd, double lat, double lon, double alt, double tz)
+        public static TidalCorrection Calculate(double fmjd, double lat, double lon, double alt, double tz)
         {
             double tl0, j1900, t, n, el1, sl, pl, hl, pl1, i, nu, tl;
             double chi, chi1, ll1, cosalf, sinalf, alf, xi, sigma, ll, lm;
