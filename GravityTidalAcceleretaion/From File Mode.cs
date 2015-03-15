@@ -39,9 +39,9 @@ namespace GravityTidalCorrection
 
                 if (engine.ErrorManager.HasErrors)
                 {
-                    if (engine.ErrorManager.ErrorCount > 99)
+                    if (engine.ErrorManager.ErrorCount > 50)
                     {
-                        MessageBox.Show(string.Format("Found {0} errors at reading the file, check error.log for detailed information.", engine.ErrorManager.ErrorCount), @"File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(string.Format("Found {0} errors while reading the file, please check error.log for detailed information.", engine.ErrorManager.ErrorCount), @"File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         engine.ErrorManager.SaveErrors("error.log");
                     }
 
@@ -49,19 +49,28 @@ namespace GravityTidalCorrection
                     {
                         string error =
                             string.Format(
-                                "Possible format violation occured. There are {0} errors out of {1} records.\n\n",
-                                engine.ErrorManager.ErrorCount, engine.TotalRecords);
+                                "Possible format violation occured. Found {0} errors:\n\n",
+                                engine.ErrorManager.ErrorCount);
 
                         foreach (ErrorInfo err in engine.ErrorManager.Errors)
                         {
-                            error += string.Format("Line {0:00}: {1}{2}", err.LineNumber,
+                            error += string.Format("(Line: {0:00}) {1}{2}", err.LineNumber,
                                 err.ExceptionInfo.Message, Environment.NewLine);
                         }
 
-                        FlexibleMessageBox.MAX_HEIGHT_FACTOR = 0.3;
-                        FlexibleMessageBox.Show(error, "File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        FlexibleMessageBox.MAX_HEIGHT_FACTOR = 0.5;
+                        FlexibleMessageBox.Show(error, "Error(s) found", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                    
+                    FlexibleMessageBox.Show(
+                    string.Format("There are {0} records successfully imported, {1} records failed and {2} records ignored.", tides.Count(), engine.ErrorManager.ErrorCount,
+                        engine.TotalRecords - tides.Count() - engine.ErrorManager.ErrorCount), "Read Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
+                else
+                {
+                    FlexibleMessageBox.Show(string.Format("Read complete, {0} records has been added.", tides.Count()),"Read Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
 
                 if (tides != null) _corrections = tides.ToList();
@@ -77,6 +86,19 @@ namespace GravityTidalCorrection
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
         {
+            if (dgvFileMode.Rows.Count == 0)
+            {
+                MessageBox.Show("The table is empty.", "Data Not Found", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+            var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+            if (dataGridViewColumn != null && dataGridViewColumn.Visible == false)
+            {
+                MessageBox.Show(@"You have to click [Generate] first.", @"Unable to Copy", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
             var result = saveFileDialog.ShowDialog();
 
             if (result == DialogResult.OK)
@@ -89,7 +111,12 @@ namespace GravityTidalCorrection
                 if (tsComboBoxTimeZone.ComboBox != null)
                 {
                     var selectedTimeZone = tsComboBoxTimeZone.ComboBox.SelectedItem as TimeZoneInfo;
-                    if (selectedTimeZone != null) writer.WriteLine("# Time Zone\t: {0}", selectedTimeZone.DisplayName);
+                    if (selectedTimeZone != null) writer.WriteLine("# Time Zone\t\t: {0}", selectedTimeZone.DisplayName);
+                }
+
+                if (tsComboBoxCoordSystem.ComboBox != null && tsComboBoxUTMZone.ComboBox != null && tsComboBoxCoordSystem.ComboBox.SelectedIndex == 1)
+                {
+                    writer.WriteLine("# Projection\t: {0}",tsComboBoxUTMZone.ComboBox.SelectedValue);
                 }
                 writer.WriteLine("# ------------------------------------------------------");
                     writer.WriteLine("# Date Time, X-Position, Y-Position g Moon (mGal), g Sun (mGal), g Total (mGal)");
@@ -150,7 +177,12 @@ namespace GravityTidalCorrection
 
         private void toolStripButtonGenerate_Click(object sender, EventArgs e)
         {
-            if (dgvFileMode.Rows.Count == 0) return;
+            if (dgvFileMode.Rows.Count == 0)
+            {
+                MessageBox.Show("The table is empty.", "Data Not Found", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
 
             switch (tsComboBoxCoordSystem.SelectedIndex)
             {
@@ -217,6 +249,10 @@ namespace GravityTidalCorrection
 
         private void tsComboBoxCoordSystem_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Width -= 130;
+            var GridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+            if (GridViewColumn != null)
+                GridViewColumn.Visible = false;
             if (tsComboBoxCoordSystem.SelectedIndex == 0)
             {
                
@@ -255,6 +291,21 @@ namespace GravityTidalCorrection
 
         private void copyToolStripButton_Click(object sender, EventArgs e)
         {
+            if (dgvFileMode.Rows.Count == 0)
+            {
+                MessageBox.Show(@"The table is empty.", @"Data Not Found", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+            if (dataGridViewColumn != null && dataGridViewColumn.Visible == false)
+            {
+                MessageBox.Show(@"You have to click [Generate] first.", @"Unable to Copy", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             dgvFileMode.SelectAll();
             DataObject dataObj = dgvFileMode.GetClipboardContent();
             if (dataObj != null)
