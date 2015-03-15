@@ -336,7 +336,7 @@ namespace GravityTidalCorrection
             DataObject dataObj = dgvResult.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
-            WriteLineConsoleLog("Table copied to clipboard.");
+            WriteLineConsoleLog("Table has been copied to clipboard.");
         }
 
         private void saveAsToolStripMenuItem1_Click_1(object sender, EventArgs e)
@@ -352,9 +352,13 @@ namespace GravityTidalCorrection
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             BetterDialog.ShowDialog("About Grav-TC", string.Format("Gravity Tidal Correction v{0}",VersionNumber),
-                "This program can be used to generate tide corrections table for gravity data processing. " +
-                "This program is ported from TIDES program by J. L. Ahern which was originally written in QBASIC.\n\nThe algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" +
-                "Copyright © 2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
+                "This program can be used to generate corrections table for measured gravity data.\n\n" 
+                + "Value calculated is the UPWARD pull due to the sun and moon. To use as correction to measured gravity data, you would need to ADD these numbers, not subtract them.\n\n"
+                +
+                "The algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" 
+                +
+                "Math calculation are ported from TIDES program by J. L. Ahern which written in QBASIC. Some icons are the work of Yusuke Kamiyamane.\n\n" +
+                "Copyright © 2014-2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
                 (Image)Resources.ResourceManager.GetObject("Sites_icon"));
         }
 
@@ -381,7 +385,14 @@ namespace GravityTidalCorrection
 
         private void copyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (dgvResult.Rows.Count == 0)
+            {
+                MessageBox.Show(@"Table is empty.");
+                return;
+            }
             CopyTableToClipBoard();
+
+            MessageBox.Show(@"Table has been copied to clipboard.");
         }
 
         
@@ -433,7 +444,7 @@ namespace GravityTidalCorrection
                         num_yPos.Maximum = 90;
                         num_xPos.Maximum = 180;
 
-                        WriteLineConsoleLog("Input format changed to decimal format.");
+                        WriteLineConsoleLog("Coord system changed to geographic decimal degree.");
                         break;
 
                     case 1:
@@ -467,7 +478,7 @@ namespace GravityTidalCorrection
                         num_yPos.Value = Decimal.Floor(num_yPos.Value);
                         num_xPos.Value = Decimal.Floor(num_xPos.Value);
 
-                        WriteLineConsoleLog("Input format changed to degrees minutes seconds format.");
+                        WriteLineConsoleLog("Coord system changed to geographic deg min sec.");
                         break;
 
                     case 2:
@@ -503,7 +514,8 @@ namespace GravityTidalCorrection
                         numLatMin.Value = 0;
                         numLatSec.Value = 0;
 
-                        WriteLineConsoleLog("Input format changed to UTM.");
+                        var utmZone = toolStripComboBoxUTMZones.SelectedItem as UTMZone;
+                        WriteLineConsoleLog(string.Format("Coord system changed to {0}", utmZone.DisplayName));
                         break;
                 }
             }

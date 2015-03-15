@@ -13,10 +13,13 @@ namespace GravityTidalCorrection
 {
     public partial class FromFileMode : Form
     {
+        private static int windowID = 0;
         private List<TidalCorrection> _corrections;
         public FromFileMode()
         {
+            windowID++;
             InitializeComponent();
+            Text = string.Format(@"GravTC - Read From File #{0:00}", windowID);
         }
 
         private void openToolStripButton_Click(object sender, EventArgs e)
@@ -33,9 +36,17 @@ namespace GravityTidalCorrection
                 Cursor.Current = Cursors.WaitCursor;
                 Enabled = false;
                 var tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
-
+                if (tides != null) _corrections = tides.ToList();
+                dgvFileMode.DataSource = _corrections;
                 Enabled = true;
                 Cursor.Current = DefaultCursor;
+
+                Text = string.Format(@"GravTC - Read From File #{0:00} [{1}]", windowID, openFileDialog.FileName);
+                Width -= 130;
+
+                var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
+                if (dataGridViewColumn != null)
+                    dataGridViewColumn.Visible = false;
 
                 if (engine.ErrorManager.HasErrors)
                 {
@@ -49,7 +60,7 @@ namespace GravityTidalCorrection
                     {
                         string error =
                             string.Format(
-                                "Possible format violation occured. Found {0} errors:\n\n",
+                                "Format violation occured. Found {0} errors:\n\n",
                                 engine.ErrorManager.ErrorCount);
 
                         foreach (ErrorInfo err in engine.ErrorManager.Errors)
@@ -72,15 +83,6 @@ namespace GravityTidalCorrection
                 {
                     FlexibleMessageBox.Show(string.Format("Read complete, {0} records has been added.", tides.Count()),"Read Success",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
-
-                if (tides != null) _corrections = tides.ToList();
-
-                dgvFileMode.DataSource = _corrections;
-                Width -= 130;
-                var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
-                if (dataGridViewColumn != null)
-                    dataGridViewColumn.Visible = false;
-            
             }
         }
 
@@ -88,14 +90,14 @@ namespace GravityTidalCorrection
         {
             if (dgvFileMode.Rows.Count == 0)
             {
-                MessageBox.Show("The table is empty.", "Data Not Found", MessageBoxButtons.OK,
+                MessageBox.Show(@"The table is empty.", @"Unable to Save", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return;
             }
             var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
             if (dataGridViewColumn != null && dataGridViewColumn.Visible == false)
             {
-                MessageBox.Show(@"You have to click [Generate] first.", @"Unable to Copy", MessageBoxButtons.OK,
+                MessageBox.Show(@"You have to click [Generate] first.", @"Unable to Save", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
                 return;
             }
@@ -106,7 +108,7 @@ namespace GravityTidalCorrection
                 var writer = new StreamWriter(saveFileDialog.FileName);
 
                     writer.WriteLine("# ------------------------------------------------------");
-                    writer.WriteLine("# Output from Grav-TC : Tidal Correction");
+                    writer.WriteLine("# Output from Grav-TC : Tidal Corrections");
                     writer.WriteLine("# ------------------------------------------------------");
                 if (tsComboBoxTimeZone.ComboBox != null)
                 {
@@ -140,7 +142,7 @@ namespace GravityTidalCorrection
                 }
 
                 writer.Flush();
-                MessageBox.Show(@"File saved successfully", @"Save Success", MessageBoxButtons.OK,
+                MessageBox.Show(@"File has been saved successfully", @"Save Success", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
         }
@@ -310,7 +312,7 @@ namespace GravityTidalCorrection
             DataObject dataObj = dgvFileMode.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
-            MessageBox.Show(@"Table copied to clipboard.", @"Copy Success", MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(@"Table has been copied to clipboard.", @"Copy Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
