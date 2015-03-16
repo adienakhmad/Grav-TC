@@ -120,6 +120,7 @@ You can find the controls by clicking [File] and [Read From File]. A pop up wind
 	- New: Tab Control and Chart
 	- Fixed: Application now show wait cursor on loading.
 # v1.1.0.0 (15 March 2015)
+	- Code restructure.
 	- GUI Improvement
 	- New: added support for coordinate input in Projected Coordinate System (WGS84 UTM)
 	- New: Coordinate System menu to switch between different coordinate system and format.
