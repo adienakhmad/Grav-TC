@@ -72,9 +72,9 @@ You can find the controls by clicking [File] and [Read From File]. A pop up wind
 		datetime    x-position    y-position    elevation
 
 	Supported datetime format :
-	
-		d-m-yyyy H:mm e.g. 16-3-2015 14:00
-		d-m-yyyy H:mm:ss e.g. 16-3-2015 7:00:05
+		d-M-yy H:mm 		16-3-15 14:00
+		d-M-yyyy H:mm 		16-3-2015 14:00
+		d-M-yyyy H:mm:ss	16-3-2015 14:00:00
 		
 	X-Position and Y-Position can be in either geographic decimal degree or UTM, elevation are in meters.
 
