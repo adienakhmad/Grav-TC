@@ -1,5 +1,5 @@
 ﻿/*
- * GravTC TidalAcceleration -- Compute variations in g due to lunar/solar to be used in gravity survey corrections.
+ * GravTC TidalAcceleration -- Compute variations in g due to lunar/solar to be used in gravity measured data.
  * 
  * User gives datetime, position in latitude, longitude, elevation and time zone information
  * Output is a TidalCorrection object which consist of datetime, position, lunar component, solar component and total correction.

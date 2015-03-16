@@ -104,8 +104,8 @@
             // 
             this.toolStripLabel1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripLabel1.Image")));
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(87, 22);
-            this.toolStripLabel1.Text = "Coordinates";
+            this.toolStripLabel1.Size = new System.Drawing.Size(97, 22);
+            this.toolStripLabel1.Text = "Coord System";
             // 
             // tsComboBoxCoordSystem
             // 

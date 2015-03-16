@@ -358,7 +358,7 @@ namespace GravityTidalCorrection
                 +
                 "The algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" 
                 +
-                "Math calculation are ported from TIDES program by J. L. Ahern which written in QBASIC. Some icons are the work of Yusuke Kamiyamane.\n\n" +
+                "Math calculation are ported from TIDES program by J. L. Ahern which was written in QBASIC. Some icons are the work of Yusuke Kamiyamane.\n\n" +
                 "Copyright © 2014-2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
                 (Image)Resources.ResourceManager.GetObject("Sites_icon"));
         }

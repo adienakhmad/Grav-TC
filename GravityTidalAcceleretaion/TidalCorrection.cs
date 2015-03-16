@@ -8,8 +8,8 @@ namespace GravityTidalCorrection
     [DelimitedRecord("	")]
     public class TidalCorrection
     {
-        
-        [FieldConverter(ConverterKind.DateMultiFormat,"d-M-yyyy HH:mm","d/M/yyyy HH:mm","d/M/yyyy HH:mm:ss")]
+
+        [FieldConverter(ConverterKind.DateMultiFormat, "d-M-yyyy H:mm", "d-M-yyyy H:mm:ss")]
         private DateTime _date;
         private double _xpos;
         private double _ypos;
