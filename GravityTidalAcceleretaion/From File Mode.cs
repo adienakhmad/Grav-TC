@@ -41,7 +41,7 @@ namespace GravityTidalCorrection
                 Enabled = true;
                 Cursor.Current = DefaultCursor;
 
-                Text = string.Format(@"GravTC - Read From File #{0:00} [{1}]", windowID, openFileDialog.FileName);
+                Text = string.Format(@"GravTC - Read From File #{0:00} [{1}]", windowID, openFileDialog.SafeFileName);
                 Width -= 130;
 
                 var dataGridViewColumn = dgvFileMode.Columns["col_gTotalTidal"];
