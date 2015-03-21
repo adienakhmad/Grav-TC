@@ -34,8 +34,8 @@ namespace GravityTidalCorrection
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mainPanel = new System.Windows.Forms.Panel();
             this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -45,18 +45,18 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.num_yPos = new System.Windows.Forms.NumericUpDown();
             this.labelPositionY_unit = new System.Windows.Forms.Label();
-            this.numLatMin = new System.Windows.Forms.NumericUpDown();
+            this.numYMinutes = new System.Windows.Forms.NumericUpDown();
             this.labelLatMin = new System.Windows.Forms.Label();
-            this.numLatSec = new System.Windows.Forms.NumericUpDown();
+            this.numYSeconds = new System.Windows.Forms.NumericUpDown();
             this.labelLatSec = new System.Windows.Forms.Label();
             this.cboxLatSign = new System.Windows.Forms.ComboBox();
             this.labelPositionX = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.num_xPos = new System.Windows.Forms.NumericUpDown();
             this.labelPositionX_unit = new System.Windows.Forms.Label();
-            this.numLongMin = new System.Windows.Forms.NumericUpDown();
+            this.numXMinutes = new System.Windows.Forms.NumericUpDown();
             this.labelLonMin = new System.Windows.Forms.Label();
-            this.numLongSec = new System.Windows.Forms.NumericUpDown();
+            this.numXSeconds = new System.Windows.Forms.NumericUpDown();
             this.labelLonSec = new System.Windows.Forms.Label();
             this.cboxLonSign = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -120,12 +120,12 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel6.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).BeginInit();
             this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numElevation)).BeginInit();
             this.groupTime.SuspendLayout();
@@ -229,9 +229,9 @@ namespace GravityTidalCorrection
             // 
             this.flowLayoutPanel3.Controls.Add(this.num_yPos);
             this.flowLayoutPanel3.Controls.Add(this.labelPositionY_unit);
-            this.flowLayoutPanel3.Controls.Add(this.numLatMin);
+            this.flowLayoutPanel3.Controls.Add(this.numYMinutes);
             this.flowLayoutPanel3.Controls.Add(this.labelLatMin);
-            this.flowLayoutPanel3.Controls.Add(this.numLatSec);
+            this.flowLayoutPanel3.Controls.Add(this.numYSeconds);
             this.flowLayoutPanel3.Controls.Add(this.labelLatSec);
             this.flowLayoutPanel3.Controls.Add(this.cboxLatSign);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
@@ -249,7 +249,7 @@ namespace GravityTidalCorrection
             this.num_yPos.Location = new System.Drawing.Point(3, 3);
             this.num_yPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.num_yPos.Maximum = new decimal(new int[] {
-            89,
+            90,
             0,
             0,
             0});
@@ -257,6 +257,7 @@ namespace GravityTidalCorrection
             this.num_yPos.Size = new System.Drawing.Size(45, 21);
             this.num_yPos.TabIndex = 0;
             this.num_yPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.num_yPos.Validated += new System.EventHandler(this.num_yPos_Validated);
             // 
             // labelPositionY_unit
             // 
@@ -271,19 +272,19 @@ namespace GravityTidalCorrection
             this.labelPositionY_unit.Text = "°";
             this.labelPositionY_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numLatMin
+            // numYMinutes
             // 
-            this.numLatMin.Location = new System.Drawing.Point(64, 3);
-            this.numLatMin.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numLatMin.Maximum = new decimal(new int[] {
+            this.numYMinutes.Location = new System.Drawing.Point(64, 3);
+            this.numYMinutes.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.numYMinutes.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numLatMin.Name = "numLatMin";
-            this.numLatMin.Size = new System.Drawing.Size(40, 21);
-            this.numLatMin.TabIndex = 2;
-            this.numLatMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numYMinutes.Name = "numYMinutes";
+            this.numYMinutes.Size = new System.Drawing.Size(40, 21);
+            this.numYMinutes.TabIndex = 2;
+            this.numYMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelLatMin
             // 
@@ -298,19 +299,19 @@ namespace GravityTidalCorrection
             this.labelLatMin.Text = "\'";
             this.labelLatMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numLatSec
+            // numYSeconds
             // 
-            this.numLatSec.Location = new System.Drawing.Point(118, 3);
-            this.numLatSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numLatSec.Maximum = new decimal(new int[] {
+            this.numYSeconds.Location = new System.Drawing.Point(118, 3);
+            this.numYSeconds.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.numYSeconds.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numLatSec.Name = "numLatSec";
-            this.numLatSec.Size = new System.Drawing.Size(40, 21);
-            this.numLatSec.TabIndex = 3;
-            this.numLatSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numYSeconds.Name = "numYSeconds";
+            this.numYSeconds.Size = new System.Drawing.Size(40, 21);
+            this.numYSeconds.TabIndex = 3;
+            this.numYSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelLatSec
             // 
@@ -354,9 +355,9 @@ namespace GravityTidalCorrection
             // 
             this.flowLayoutPanel2.Controls.Add(this.num_xPos);
             this.flowLayoutPanel2.Controls.Add(this.labelPositionX_unit);
-            this.flowLayoutPanel2.Controls.Add(this.numLongMin);
+            this.flowLayoutPanel2.Controls.Add(this.numXMinutes);
             this.flowLayoutPanel2.Controls.Add(this.labelLonMin);
-            this.flowLayoutPanel2.Controls.Add(this.numLongSec);
+            this.flowLayoutPanel2.Controls.Add(this.numXSeconds);
             this.flowLayoutPanel2.Controls.Add(this.labelLonSec);
             this.flowLayoutPanel2.Controls.Add(this.cboxLonSign);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 65);
@@ -375,7 +376,7 @@ namespace GravityTidalCorrection
             this.num_xPos.Location = new System.Drawing.Point(3, 3);
             this.num_xPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.num_xPos.Maximum = new decimal(new int[] {
-            179,
+            180,
             0,
             0,
             0});
@@ -383,6 +384,7 @@ namespace GravityTidalCorrection
             this.num_xPos.Size = new System.Drawing.Size(45, 21);
             this.num_xPos.TabIndex = 0;
             this.num_xPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.num_xPos.Validated += new System.EventHandler(this.num_xPos_Validated);
             // 
             // labelPositionX_unit
             // 
@@ -397,19 +399,19 @@ namespace GravityTidalCorrection
             this.labelPositionX_unit.Text = "°";
             this.labelPositionX_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numLongMin
+            // numXMinutes
             // 
-            this.numLongMin.Location = new System.Drawing.Point(64, 3);
-            this.numLongMin.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numLongMin.Maximum = new decimal(new int[] {
+            this.numXMinutes.Location = new System.Drawing.Point(64, 3);
+            this.numXMinutes.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.numXMinutes.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numLongMin.Name = "numLongMin";
-            this.numLongMin.Size = new System.Drawing.Size(40, 21);
-            this.numLongMin.TabIndex = 1;
-            this.numLongMin.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numXMinutes.Name = "numXMinutes";
+            this.numXMinutes.Size = new System.Drawing.Size(40, 21);
+            this.numXMinutes.TabIndex = 1;
+            this.numXMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelLonMin
             // 
@@ -424,19 +426,19 @@ namespace GravityTidalCorrection
             this.labelLonMin.Text = "\'";
             this.labelLonMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numLongSec
+            // numXSeconds
             // 
-            this.numLongSec.Location = new System.Drawing.Point(118, 3);
-            this.numLongSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numLongSec.Maximum = new decimal(new int[] {
+            this.numXSeconds.Location = new System.Drawing.Point(118, 3);
+            this.numXSeconds.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.numXSeconds.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numLongSec.Name = "numLongSec";
-            this.numLongSec.Size = new System.Drawing.Size(40, 21);
-            this.numLongSec.TabIndex = 2;
-            this.numLongSec.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numXSeconds.Name = "numXSeconds";
+            this.numXSeconds.Size = new System.Drawing.Size(40, 21);
+            this.numXSeconds.TabIndex = 2;
+            this.numXSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // labelLonSec
             // 
@@ -755,16 +757,16 @@ namespace GravityTidalCorrection
             this.col_xpos,
             this.col_ypos,
             this.col_elev});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.Format = "F4";
-            dataGridViewCellStyle4.NullValue = null;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.Format = "F4";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvResult.Location = new System.Drawing.Point(3, 3);
             this.dgvResult.Name = "dgvResult";
@@ -776,10 +778,10 @@ namespace GravityTidalCorrection
             // col_date
             // 
             this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle3.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.Format = "dd-MMM-yy HH:mm";
+            dataGridViewCellStyle7.NullValue = null;
+            this.col_date.DefaultCellStyle = dataGridViewCellStyle7;
             this.col_date.HeaderText = "Date Time";
             this.col_date.Name = "col_date";
             this.col_date.ReadOnly = true;
@@ -971,7 +973,7 @@ namespace GravityTidalCorrection
             // uTMInputToolStripMenuItem
             // 
             this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
-            this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.uTMInputToolStripMenuItem.Text = "Universal Transverse Mercator";
             this.uTMInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
             this.uTMInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
@@ -981,7 +983,7 @@ namespace GravityTidalCorrection
             this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBoxUTMZones});
             this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
-            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
             // 
             // toolStripComboBoxUTMZones
@@ -1062,13 +1064,13 @@ namespace GravityTidalCorrection
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLatSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongMin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numLongSec)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).EndInit();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numElevation)).EndInit();
@@ -1104,8 +1106,8 @@ namespace GravityTidalCorrection
         private FlowLayoutPanel flowLayoutPanel2;
         private NumericUpDown num_xPos;
         private Label labelPositionX_unit;
-        private NumericUpDown numLongMin;
-        private NumericUpDown numLongSec;
+        private NumericUpDown numXMinutes;
+        private NumericUpDown numXSeconds;
         private Label labelLonMin;
         private Label labelLonSec;
         private Label label9;
@@ -1136,9 +1138,9 @@ namespace GravityTidalCorrection
         private FlowLayoutPanel flowLayoutPanel3;
         private NumericUpDown num_yPos;
         private Label labelPositionY_unit;
-        private NumericUpDown numLatMin;
+        private NumericUpDown numYMinutes;
         private Label labelLatMin;
-        private NumericUpDown numLatSec;
+        private NumericUpDown numYSeconds;
         private Label labelLatSec;
         private ComboBox cboxLatSign;
         private ComboBox cboxLonSign;

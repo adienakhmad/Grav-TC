@@ -184,12 +184,12 @@ namespace GravityTidalCorrection
             if (useDegMinSecToolStrip.CheckState == CheckState.Checked)
             {
                 // Latitude, Longitude with degree minute seconds
-                _yPos = Convert.ToDouble(num_yPos.Value + (numLatMin.Value / (decimal)60.0) + (numLatSec.Value / (decimal)3600.0));
+                _yPos = Convert.ToDouble(num_yPos.Value + (numYMinutes.Value / (decimal)60.0) + (numYSeconds.Value / (decimal)3600.0));
                 if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
                 {
                     _yPos = _yPos * -1.0;
                 }
-                _xPos = Convert.ToDouble(num_xPos.Value + (numLongMin.Value / (decimal)60.0) + (numLongSec.Value / (decimal)3600.0));
+                _xPos = Convert.ToDouble(num_xPos.Value + (numXMinutes.Value / (decimal)60.0) + (numXSeconds.Value / (decimal)3600.0));
                 if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
                 {
                     _xPos = _xPos * -1.0;
@@ -369,6 +369,7 @@ namespace GravityTidalCorrection
             form1.Show();
         }
 
+/*If one of the input mode checked, the others should become unchecked.*/
         private void inputModeChange_click(object sender, EventArgs e)
         {
             var menu = sender as ToolStripMenuItem;
@@ -403,6 +404,7 @@ namespace GravityTidalCorrection
                 _utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex).DisplayName));
         }
 
+/*What happen when check state of the input mode change*/
         private void InputCheckStateChanged(object sender, EventArgs e)
         {
             var menu = sender as ToolStripMenuItem;
@@ -418,10 +420,10 @@ namespace GravityTidalCorrection
                         labelPositionX_unit.Visible = true;
                         labelPositionY_unit.Visible = true;
 
-                        numLongMin.Visible = false;
-                        numLongSec.Visible = false;
-                        numLatMin.Visible = false;
-                        numLatSec.Visible = false;
+                        numXMinutes.Visible = false;
+                        numXSeconds.Visible = false;
+                        numYMinutes.Visible = false;
+                        numYSeconds.Visible = false;
 
                         labelLatMin.Visible = false;
                         labelLatSec.Visible = false;
@@ -437,10 +439,10 @@ namespace GravityTidalCorrection
                         num_yPos.DecimalPlaces = 4;
                         num_xPos.DecimalPlaces = 4;
 
-                        numLongMin.Value = 0;
-                        numLongSec.Value = 0;
-                        numLatMin.Value = 0;
-                        numLatSec.Value = 0;
+                        numXMinutes.Value = 0;
+                        numXSeconds.Value = 0;
+                        numYMinutes.Value = 0;
+                        numYSeconds.Value = 0;
 
                         num_yPos.Maximum = 90;
                         num_xPos.Maximum = 180;
@@ -454,10 +456,10 @@ namespace GravityTidalCorrection
                         labelPositionX_unit.Visible = true;
                         labelPositionY_unit.Visible = true;
 
-                        numLongMin.Visible = true;
-                        numLongSec.Visible = true;
-                        numLatMin.Visible = true;
-                        numLatSec.Visible = true;
+                        numXMinutes.Visible = true;
+                        numXSeconds.Visible = true;
+                        numYMinutes.Visible = true;
+                        numYSeconds.Visible = true;
 
                         cboxLatSign.Visible = true;
                         cboxLonSign.Visible = true;
@@ -472,8 +474,8 @@ namespace GravityTidalCorrection
                         num_yPos.DecimalPlaces = 0;
                         num_xPos.DecimalPlaces = 0;
 
-                        num_yPos.Maximum = 179;
-                        num_xPos.Maximum = 89;
+                        num_yPos.Maximum = 90;
+                        num_xPos.Maximum = 180;
 
                         // Flooring value after switch back to deg min sec
                         num_yPos.Value = Decimal.Floor(num_yPos.Value);
@@ -488,10 +490,10 @@ namespace GravityTidalCorrection
                         labelPositionX_unit.Visible = false;
                         labelPositionY_unit.Visible = false;
 
-                        numLongMin.Visible = false;
-                        numLongSec.Visible = false;
-                        numLatMin.Visible = false;
-                        numLatSec.Visible = false;
+                        numXMinutes.Visible = false;
+                        numXSeconds.Visible = false;
+                        numYMinutes.Visible = false;
+                        numYSeconds.Visible = false;
 
                         cboxLatSign.Visible = false;
                         cboxLonSign.Visible = false;
@@ -510,15 +512,45 @@ namespace GravityTidalCorrection
                         num_yPos.DecimalPlaces = 2;
                         num_xPos.DecimalPlaces = 2;
 
-                        numLongMin.Value = 0;
-                        numLongSec.Value = 0;
-                        numLatMin.Value = 0;
-                        numLatSec.Value = 0;
+                        numXMinutes.Value = 0;
+                        numXSeconds.Value = 0;
+                        numYMinutes.Value = 0;
+                        numYSeconds.Value = 0;
 
                         var utmZone = toolStripComboBoxUTMZones.SelectedItem as UTMZone;
                         WriteLineConsoleLog(string.Format("Coord system changed to {0}", utmZone.DisplayName));
                         break;
                 }
+            }
+        }
+
+        
+/*When y position and x position are on its upper limit, set the maximum of minutes and seconds to zero*/
+        private void num_yPos_Validated(object sender, EventArgs e)
+        {
+            if (num_yPos.Value == 90)
+            {
+                numYMinutes.Maximum = new decimal(0);
+                numYSeconds.Maximum = new decimal(0);
+            }
+            else
+            {
+                numYMinutes.Maximum = new decimal(59);
+                numYSeconds.Maximum = new decimal(59);
+            }
+        }
+
+        private void num_xPos_Validated(object sender, EventArgs e)
+        {
+            if (num_xPos.Value == 180)
+            {
+                numXMinutes.Maximum = new decimal(0);
+                numXSeconds.Maximum = new decimal(0);
+            }
+            else
+            {
+                numXMinutes.Maximum = new decimal(59);
+                numXSeconds.Maximum = new decimal(59);
             }
         }
     }
