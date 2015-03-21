@@ -113,15 +113,22 @@ You can find the controls by clicking [File] and [Read From File]. A pop up wind
 # v1.0b
 	- First Beta Release
 # v1.0b2
-	- Bug Fixed: Incorrectly convert deg min sec to decimal
-	- Changed: Coordinate now only accept positive number.
-	- Added: Option to choose N/S and E/W
+	- Bug Fixed	: Incorrectly convert deg min sec to decimal
+	- Changed	: Coordinate now only accept positive number.
+	- Added		: Option to choose N/S and E/W
 # v1.0
-	- New: Tab Control and Chart
-	- Fixed: Application now show wait cursor on loading.
-# v1.1.0.0 (15 March 2015)
+	- New		: Tab Control and Chart
+	- Fixed		: Application now show wait cursor on loading.
+# v1.1.0 (15 March 2015)
 	- Code restructure.
 	- GUI Improvement
-	- New: added support for coordinate input in Projected Coordinate System (WGS84 UTM)
-	- New: Coordinate System menu to switch between different coordinate system and format.
-	- New: read from file mode
+	- New		: added support for coordinate input in Projected Coordinate System (WGS84 UTM)
+	- New		: Coordinate System menu to switch between different coordinate system and format.
+	- New		: read from file mode
+	- Changed	: Edit menu is removed. Replaced by Coordinate System menu.
+# v1.1.3 (21 March 2015)
+	- Fixed		: Wrong latitude and longitude limit on Deg Min Sec mode after switching from other input mode.
+	- Changed	: When latitude value are 90, minute and seconds value will automatically reset to zero.
+				  When longitude value are 180, minute and seconds value will automatically reset to zero.
+				
+				

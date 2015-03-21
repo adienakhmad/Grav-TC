@@ -16,7 +16,7 @@ namespace GravityTidalCorrection
 {
     public partial class MainForm : Form
     {
-        private const string VersionNumber = @"1.1";
+        private const string VersionNumber = @"1.1.3";
         private bool _onLoadDone;
         private double _yPos;
         private double _xPos;
