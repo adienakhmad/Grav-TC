@@ -1,5 +1,5 @@
 ==================================================================
-----	About Grav-TC Version 1.1.0.0
+----	About Grav-TC Version 1.1.3
 ==================================================================
 
 This is a program to generate correction table for measured gravity data.
