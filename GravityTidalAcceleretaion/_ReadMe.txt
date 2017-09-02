@@ -1,5 +1,5 @@
 ==================================================================
-----	About Grav-TC Version 1.1.3
+----	About Grav-TC Version 1.2
 ==================================================================
 
 This is a program to generate correction table for measured gravity data.
@@ -10,7 +10,7 @@ The algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Ac
 
 Math calculation are ported from TIDES program by J. L. Ahern which was written in QBASIC.
 
-Copyright © 2014-2015 Adien Akhmad
+Copyright © 2014-2017 Adien Akhmad
 Department of Geophysics, Universitas Gadjah Mada
 
 ==================================================================
@@ -130,5 +130,9 @@ You can find the controls by clicking [File] and [Read From File]. A pop up wind
 	- Fixed		: Wrong latitude and longitude limit on Deg Min Sec mode after switching from other input mode.
 	- Changed	: When latitude value are 90, minute and seconds value will automatically reset to zero.
 				  When longitude value are 180, minute and seconds value will automatically reset to zero.
+# v1.2 (02 September 2017)
+	- Internal code refactor
+	- Fixed		: Hour angle of the sun is not computed westward. This caused as if the latitude sign is reversed in calculation.
+	- Fixed		: Wrong unit label on y-axis
 				
 				
