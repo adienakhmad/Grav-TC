@@ -211,6 +211,7 @@ namespace GravityTidalCorrection
 
         public static TidalCorrection Calculate(DateTime date, TimeZoneInfo source, double lat, double lon, double alt)
         {
+            // TODO: Improve code clarity, explain all the variable compared to the original paper
             var dateInUtc = TimeZoneInfo.ConvertTime(date, source, TimeZoneInfo.Utc);
             var tz = source.BaseUtcOffset.TotalHours;
             var fmjd = UTC2ModifiedJulian(dateInUtc);
@@ -232,7 +233,10 @@ namespace GravityTidalCorrection
             pl1 = Poly(t, 4.908229467, 0.0300052641, 7.9024e-06, 0.0000000581);
             i = Math.Acos(0.9136975738 - 0.0356895353 * Math.Cos(n));
             nu = Math.Asin(0.0896765581 * Math.Sin(n) / Math.Sin(i));
-            tl = Radian(15 * tl0 + lon);
+
+            // (tl) Hour angle of mean sun measured west-ward from the place of observations
+            tl = Radian(15 * (tl0 - 12) + lon); // note that longman defined lon with W as + and E as -
+
             chi = tl + hl - nu;
             chi1 = tl + hl;
             ll1 = hl + 2 * el1 * Math.Sin(hl - pl1);
