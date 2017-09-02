@@ -788,21 +788,21 @@ namespace GravityTidalCorrection
             // 
             // col_gmoon
             // 
-            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.DataPropertyName = "gMoon";
             this.col_gmoon.HeaderText = "g Moon (mGal)";
             this.col_gmoon.Name = "col_gmoon";
             this.col_gmoon.ReadOnly = true;
             // 
             // col_gsun
             // 
-            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.DataPropertyName = "gSun";
             this.col_gsun.HeaderText = "g Sun (mGal)";
             this.col_gsun.Name = "col_gsun";
             this.col_gsun.ReadOnly = true;
             // 
             // col_gtotal
             // 
-            this.col_gtotal.DataPropertyName = "CorrectionTotal";
+            this.col_gtotal.DataPropertyName = "gTotal";
             this.col_gtotal.HeaderText = "g Total (mGal)";
             this.col_gtotal.Name = "col_gtotal";
             this.col_gtotal.ReadOnly = true;

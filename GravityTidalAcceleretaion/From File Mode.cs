@@ -14,7 +14,7 @@ namespace GravityTidalCorrection
     public partial class FromFileMode : Form
     {
         private static int windowID = 0;
-        private List<TidalCorrection> _corrections;
+        private List<TidalRecord> _corrections;
         public FromFileMode()
         {
             windowID++;
@@ -28,14 +28,14 @@ namespace GravityTidalCorrection
 
             if (result == DialogResult.OK)
             {
-                _corrections = new List<TidalCorrection>();
+                _corrections = new List<TidalRecord>();
 
-                var engine = new FileHelperEngine(typeof(TidalCorrection));
+                var engine = new FileHelperEngine(typeof(TidalRecord));
                 engine.ErrorManager.ErrorMode = ErrorMode.SaveAndContinue;
 
                 Cursor.Current = Cursors.WaitCursor;
                 Enabled = false;
-                var tides = engine.ReadFile(openFileDialog.FileName) as TidalCorrection[];
+                var tides = engine.ReadFile(openFileDialog.FileName) as TidalRecord[];
                 if (tides != null) _corrections = tides.ToList();
                 dgvFileMode.DataSource = _corrections;
                 Enabled = true;
@@ -133,9 +133,9 @@ namespace GravityTidalCorrection
                     items.Add(String.Format("{0,10:F6}",corr.XPosition));
                     items.Add(String.Format("{0,10:F6}", corr.YPosition));
                     items.Add(String.Format("{0,7:F2}",corr.Elevation));
-                    items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
-                    items.Add(String.Format("{0,10:F7}", corr.SunTidal));
-                    items.Add(String.Format("{0,10:F7}", corr.CorrectionTotal));
+                    items.Add(String.Format("{0,10:F7}", corr.gMoon));
+                    items.Add(String.Format("{0,10:F7}", corr.gSun));
+                    items.Add(String.Format("{0,10:F7}", corr.gTotal));
 
                     writer.WriteLine(String.Join("\t", items.ToArray()));
                     items.Clear();
@@ -195,12 +195,12 @@ namespace GravityTidalCorrection
                     {
                         if (tsComboBoxTimeZone.ComboBox != null)
                         {
-                            var result = TidalAcceleration.Calculate(tidalCorrection.Date, TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()), tidalCorrection.YPosition,
+                            var result = Longman1959.Compute(tidalCorrection.Date, TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()), tidalCorrection.YPosition,
                                 tidalCorrection.XPosition, tidalCorrection.Elevation);
 
-                            tidalCorrection.MoonTidal = result.MoonTidal;
-                            tidalCorrection.SunTidal = result.SunTidal;
-                            tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                            tidalCorrection.gMoon = result.gMoon;
+                            tidalCorrection.gSun = result.gSun;
+                            tidalCorrection.gTotal = result.gTotal;
                         }
                     }
                     break;
@@ -230,12 +230,12 @@ namespace GravityTidalCorrection
                                     Debug.WriteLine(string.Format("{0}\t{1}",eastNorth[0],eastNorth[1]));
 
                                     // Calculating tidal correction
-                                    var result = TidalAcceleration.Calculate(tidalCorrection.Date, TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),eastNorth[1],
+                                    var result = Longman1959.Compute(tidalCorrection.Date, TimeZoneInfo.FindSystemTimeZoneById(tsComboBoxTimeZone.ComboBox.SelectedValue.ToString()),eastNorth[1],
                                         eastNorth[0], tidalCorrection.Elevation);
 
-                                    tidalCorrection.MoonTidal = result.MoonTidal;
-                                    tidalCorrection.SunTidal = result.SunTidal;
-                                    tidalCorrection.CorrectionTotal = result.CorrectionTotal;
+                                    tidalCorrection.gMoon = result.gMoon;
+                                    tidalCorrection.gSun = result.gSun;
+                                    tidalCorrection.gTotal = result.gTotal;
                                 }
                             }
                         }

@@ -16,7 +16,7 @@ namespace GravityTidalCorrection
 {
     public partial class MainForm : Form
     {
-        private const string VersionNumber = @"1.1.3";
+        private const string VersionNumber = @"1.2";
         private bool _onLoadDone;
         private double _yPos;
         private double _xPos;
@@ -26,65 +26,64 @@ namespace GravityTidalCorrection
         private DateTime _endInUtc;
         private double _utcOffset;
         private double _timeInterval;
-        private BindingList<TidalCorrection> _corrections;
+        private BindingList<TidalRecord> _tidalRecords;
         private ReadOnlyCollection<UTMZone> _utmZones;
-        
+
         public MainForm()
         {
             InitializeComponent();
-
         }
 
-        private void DrawGraph(ZedGraphControl zgc, IEnumerable<TidalCorrection> corrlist,
-               string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
+        private void DrawGraph(ZedGraphControl zgc, IEnumerable<TidalRecord> corrlist,
+            string xAxisTitle, string yAxisTitle, string legend, Color clr, bool symbol)
         {
-               GraphPane myPane = zgc.GraphPane;
+            var myPane = zgc.GraphPane;
 
-               // clear previous graph
-               myPane.CurveList.Clear();
-               myPane.GraphObjList.Clear();
-               zgc.Invalidate();
+            // clear previous graph
+            myPane.CurveList.Clear();
+            myPane.GraphObjList.Clear();
+            zgc.Invalidate();
 
             myPane.Title.IsVisible = false;
-               myPane.XAxis.Title.Text = xAxisTitle;
-               myPane.YAxis.Title.Text = yAxisTitle;
-               myPane.XAxis.Type = AxisType.Date;
+            myPane.XAxis.Title.Text = xAxisTitle;
+            myPane.YAxis.Title.Text = yAxisTitle;
+            myPane.XAxis.Type = AxisType.Date;
 
-               var plotList = new PointPairList();
+            var plotList = new PointPairList();
 
-               foreach ( TidalCorrection corr in corrlist )
-               {
-                   plotList.Add(corr.Date.ToOADate(),corr.CorrectionTotal);
-               }
+            foreach (var corr in corrlist)
+            {
+                plotList.Add(corr.Date.ToOADate(), corr.gTotal);
+            }
 
-               LineItem myCurve = myPane.AddCurve(legend, plotList, clr, SymbolType.Square);
-               zgc.AxisChange();
+            var myCurve = myPane.AddCurve(legend, plotList, clr, SymbolType.Square);
+            zgc.AxisChange();
 
-               myCurve.Symbol.IsVisible = symbol;
-               myCurve.Symbol.Size = 5;
-               myCurve.Line.Width = 1.5f;
-               myCurve.Line.IsSmooth = true;
-               myCurve.Line.IsAntiAlias = true;
+            myCurve.Symbol.IsVisible = symbol;
+            myCurve.Symbol.Size = 5;
+            myCurve.Line.Width = 1.5f;
+            myCurve.Line.IsSmooth = true;
+            myCurve.Line.IsAntiAlias = true;
 
-               zgc.Refresh();
-         }
+            zgc.Refresh();
+        }
 
         private void SetSize(ZedGraphControl zgc)
         {
-               zgc.Location = new Point(10, 10);
-               // Leave a small margin around the outside of the control
-               zgc.Size = new Size(ClientRectangle.Width - 20,
-                                       ClientRectangle.Height - 20);
+            zgc.Location = new Point(10, 10);
+            // Leave a small margin around the outside of the control
+            zgc.Size = new Size(ClientRectangle.Width - 20,
+                ClientRectangle.Height - 20);
         }
-       
+
 
         private bool IsInputInvalid(double elev, double duration, double interval)
         {
-            bool valid = true;
+            var valid = true;
             if (Math.Abs(elev) < 5e-6)
             {
                 WriteErrorLog("Elevation cannot be zero.\t");
-                
+
                 valid = false;
             }
             if (duration < 0.0)
@@ -99,17 +98,17 @@ namespace GravityTidalCorrection
             }
 
             return !valid;
-           
         }
 
         private void WriteErrorLog(string sentence)
         {
-            textBoxInfo.AppendText(string.Format("{2}ERROR: {0}\t({1:yyyy-MM-dd HH:mm:ss})",sentence,DateTime.Now,Environment.NewLine));
+            textBoxInfo.AppendText(string.Format("{2}ERROR: {0}\t({1:yyyy-MM-dd HH:mm:ss})", sentence, DateTime.Now,
+                Environment.NewLine));
         }
 
         private void WriteLineConsoleLog(string sentence)
         {
-            textBoxInfo.AppendText(Environment.NewLine+sentence);
+            textBoxInfo.AppendText(Environment.NewLine + sentence);
         }
 
         private void WriteConsoleLog(string sentence)
@@ -137,14 +136,14 @@ namespace GravityTidalCorrection
             }
 
             var items = new List<string>();
-            foreach (TidalCorrection corr in _corrections)
+            foreach (var record in _tidalRecords)
             {
                 // the first is a date column
-                items.Add(String.Format("{0:dd-MMM-yyyy HH:mm:ss}", corr.Date));
-                items.Add(String.Format("{0,10:F7}", corr.MoonTidal));
-                items.Add(String.Format("{0,10:F7}", corr.SunTidal));
-                items.Add(String.Format("{0,10:F7}", corr.CorrectionTotal));
-                
+                items.Add($"{record.Date:dd-MMM-yyyy HH:mm:ss}");
+                items.Add($"{record.gMoon,10:F7}");
+                items.Add($"{record.gSun,10:F7}");
+                items.Add($"{record.gTotal,10:F7}");
+
                 writer.WriteLine(String.Join("\t", items.ToArray()));
                 items.Clear();
             }
@@ -164,7 +163,7 @@ namespace GravityTidalCorrection
             // Checks the input, if input is invalid, it return void.
             if (IsInputInvalid(_elev, _duration, _timeInterval))
             {
-               return;
+                return;
             }
             if (decimalDegreeInputToolStripMenuItem.CheckState == CheckState.Checked)
             {
@@ -184,12 +183,14 @@ namespace GravityTidalCorrection
             if (useDegMinSecToolStrip.CheckState == CheckState.Checked)
             {
                 // Latitude, Longitude with degree minute seconds
-                _yPos = Convert.ToDouble(num_yPos.Value + (numYMinutes.Value / (decimal)60.0) + (numYSeconds.Value / (decimal)3600.0));
+                _yPos = Convert.ToDouble(num_yPos.Value + (numYMinutes.Value / (decimal) 60.0) +
+                                         (numYSeconds.Value / (decimal) 3600.0));
                 if (cboxLatSign.SelectedIndex == 1) // if latitude sign is 'S' then apply minus value
                 {
                     _yPos = _yPos * -1.0;
                 }
-                _xPos = Convert.ToDouble(num_xPos.Value + (numXMinutes.Value / (decimal)60.0) + (numXSeconds.Value / (decimal)3600.0));
+                _xPos = Convert.ToDouble(num_xPos.Value + (numXMinutes.Value / (decimal) 60.0) +
+                                         (numXSeconds.Value / (decimal) 3600.0));
                 if (cboxLonSign.SelectedIndex == 1) // if longitude sign is 'W' then apply minus value
                 {
                     _xPos = _xPos * -1.0;
@@ -204,19 +205,19 @@ namespace GravityTidalCorrection
 
                 var utmzone = _utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex);
                 IGeographicCoordinateSystem geo = GeographicCoordinateSystem.WGS84;
-                IProjectedCoordinateSystem utm = ProjectedCoordinateSystem.WGS84_UTM(utmzone.Zone, utmzone.IsNorthHemisphere);
+                IProjectedCoordinateSystem utm =
+                    ProjectedCoordinateSystem.WGS84_UTM(utmzone.Zone, utmzone.IsNorthHemisphere);
 
                 var ctfac = new CoordinateTransformationFactory();
                 var trans = ctfac.CreateFromCoordinateSystems(utm, geo);
 
-                double[] fromPoint = {_xPos,_yPos};
-                double[] toPoint = trans.MathTransform.Transform(fromPoint);
+                double[] fromPoint = {_xPos, _yPos};
+                var toPoint = trans.MathTransform.Transform(fromPoint);
 
                 _xPos = toPoint[0];
                 _yPos = toPoint[1];
-                
             }
-            
+
 
             // convert input to UTC+00
             _beginInUtc = TimeZoneInfo.ConvertTime(datepickBegin.Value,
@@ -228,12 +229,12 @@ namespace GravityTidalCorrection
             // offset from UTC in hours
             _utcOffset =
                 TimeZoneInfo.FindSystemTimeZoneById((string) cboxTimeZone.SelectedValue).BaseUtcOffset.TotalHours;
-                    
+
             // interval
             _timeInterval = Convert.ToDouble(numInterval.Value);
 
             // Start writing to list and display on gridview
-            _corrections.Clear();
+            _tidalRecords.Clear();
             double minute = 0;
 
             Cursor.Current = Cursors.WaitCursor;
@@ -241,42 +242,43 @@ namespace GravityTidalCorrection
             Application.DoEvents();
             for (var i = 0; minute <= _duration; i++)
             {
-                var tidal = TidalAcceleration.Calculate(datepickBegin.Value.AddMinutes(minute), TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), _yPos, _xPos, _elev);
-                _corrections.Add(tidal);
+                var tidal = Longman1959.Compute(datepickBegin.Value.AddMinutes(minute),
+                    TimeZoneInfo.FindSystemTimeZoneById(cboxTimeZone.SelectedValue.ToString()), _yPos, _xPos, _elev);
+                _tidalRecords.Add(tidal);
                 minute += _timeInterval;
             }
 
-            DrawGraph(zedGraphControl1,_corrections,"Date Time","g0 (microGals)","Calculated Tides",Color.DeepSkyBlue,false);
+            DrawGraph(zedGraphControl1, _tidalRecords, "Date Time", "g0 (mGals)", "Calculated Tides",
+                Color.DeepSkyBlue, false);
 
             Cursor.Current = Cursors.Default;
 
             // write to console log
-            WriteLineConsoleLog(string.Format("Time Zone \t: {0} (UTC{1:'+'00;'-'00}) ", cboxTimeZone.SelectedValue, _utcOffset));
-            WriteLineConsoleLog(string.Format("Begin     \t\t: {0}\t({1} in UTC+00)", datepickBegin.Value, _beginInUtc));
-            WriteLineConsoleLog(string.Format("End       \t\t: {0}\t({1} in UTC+00) ", datepickEnd.Value, _endInUtc));
-            WriteLineConsoleLog(string.Format("Interval  \t\t: {0:F2} minutes ", _timeInterval));
-            WriteLineConsoleLog(string.Format("Time Span \t: {0:F2} minutes ", _duration));
-            WriteLineConsoleLog(string.Format("Latitude  \t: {0:F4}°\r\nLongitude\t: {1:F4}°", _yPos, _xPos));
-            WriteLineConsoleLog(string.Format("Elevation \t: {0:F2} meters", _elev));
-            WriteLineConsoleLog(string.Format("Completed...\t{0} data point(s).", dgvResult.RowCount));
+            WriteLineConsoleLog($"Time Zone \t: {cboxTimeZone.SelectedValue} (UTC{_utcOffset:'+'00;'-'00}) ");
+            WriteLineConsoleLog($"Begin     \t\t: {datepickBegin.Value}\t({_beginInUtc} in UTC+00)");
+            WriteLineConsoleLog($"End       \t\t: {datepickEnd.Value}\t({_endInUtc} in UTC+00) ");
+            WriteLineConsoleLog($"Interval  \t\t: {_timeInterval:F2} minutes ");
+            WriteLineConsoleLog($"Time Span \t: {_duration:F2} minutes ");
+            WriteLineConsoleLog($"Latitude  \t: {_yPos:F4}°\r\nLongitude\t: {_xPos:F4}°");
+            WriteLineConsoleLog($"Elevation \t: {_elev:F2} meters");
+            WriteLineConsoleLog($"Completed...\t{dgvResult.RowCount} data point(s).");
 
             saveAsToolStripMenuItem.Enabled = true;
             copyToolStripMenuItem.Enabled = true;
             zedGraphControl1.Visible = true;
-            
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Text = string.Format("Gravity Tidal Correction v{0}", VersionNumber);
+            Text = $@"Gravity Tidal Correction v{VersionNumber}";
             _utmZones = UTMZoneInfo.GetAllZones();
-            _corrections = new BindingList<TidalCorrection>();
-            dgvResult.DataSource = _corrections;
+            _tidalRecords = new BindingList<TidalRecord>();
+            dgvResult.DataSource = _tidalRecords;
             SetSize(zedGraphControl1);
             zedGraphControl1.Visible = false;
-            
+
             // Add Time Zones and Set Selected to Local TimeZone
-            ReadOnlyCollection<TimeZoneInfo> zones = TimeZoneInfo.GetSystemTimeZones();
+            var zones = TimeZoneInfo.GetSystemTimeZones();
             cboxTimeZone.DataSource = zones;
             cboxTimeZone.ValueMember = "Id";
             cboxTimeZone.DisplayMember = "DisplayName";
@@ -300,23 +302,21 @@ namespace GravityTidalCorrection
 
             toolStripComboBoxUTMZones.SelectedIndex = 97; // set default projection to WGS84 UTM Zone 49S
 
-            
-            
+
             // Tell the other if onload event is finished
             _onLoadDone = true;
             textBoxInfo.Clear();
             WriteConsoleLog("Welcome...");
-
         }
 
         private void cboxTimeZone_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (_onLoadDone)
             {
-                string tz = cboxTimeZone.SelectedValue.ToString();
-                WriteLineConsoleLog(string.Format("Time Zone changed to {0} (UTC{1:'+'00;'-'00}).", cboxTimeZone.SelectedValue, TimeZoneInfo.FindSystemTimeZoneById(tz).GetUtcOffset(datepickBegin.Value).TotalHours));
+                var tz = cboxTimeZone.SelectedValue.ToString();
+                WriteLineConsoleLog(
+                    $"Time Zone changed to {cboxTimeZone.SelectedValue} (UTC{TimeZoneInfo.FindSystemTimeZoneById(tz).GetUtcOffset(datepickBegin.Value).TotalHours:'+'00;'-'00}).");
             }
-
         }
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
@@ -326,7 +326,7 @@ namespace GravityTidalCorrection
                 Export(writer, true);
             }
 
-            WriteLineConsoleLog(string.Format("Successfully saved to {0}",saveFileDialog.FileName));
+            WriteLineConsoleLog($"Successfully saved to {saveFileDialog.FileName}");
             MessageBox.Show(@"File has been saved.");
             saveFileDialog.FileName = null;
         }
@@ -334,7 +334,7 @@ namespace GravityTidalCorrection
         private void CopyTableToClipBoard()
         {
             dgvResult.SelectAll();
-            DataObject dataObj = dgvResult.GetClipboardContent();
+            var dataObj = dgvResult.GetClipboardContent();
             if (dataObj != null)
                 Clipboard.SetDataObject(dataObj);
             WriteLineConsoleLog("Table has been copied to clipboard.");
@@ -352,15 +352,16 @@ namespace GravityTidalCorrection
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            BetterDialog.ShowDialog("About Grav-TC", string.Format("Gravity Tidal Correction v{0}",VersionNumber),
-                "This program can be used to generate corrections table for measured gravity data.\n\n" 
+            BetterDialog.ShowDialog("About Grav-TC", $"Gravity Tidal Correction v{VersionNumber}",
+                "This program can be used to generate corrections table for measured gravity data.\n\n"
                 + "Value calculated is the UPWARD pull due to the sun and moon. To use as correction to measured gravity data, you would need to ADD these numbers, not subtract them.\n\n"
                 +
-                "The algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n" 
+                "The algorithm used is that of Longman, I.M., Formulas for Computing the Tidal Acceleration Due to the Moon and the Sun., J. Geoph. Res., 1959.\n\n"
                 +
                 "Math calculation are ported from TIDES program by J. L. Ahern which was written in QBASIC. Some icons are the work of Yusuke Kamiyamane.\n\n" +
-                "Copyright © 2014-2015 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.", null, "Close",
-                (Image)Resources.ResourceManager.GetObject("Sites_icon"));
+                "Copyright © 2014-2017 Adien Akhmad\nDepartment of Geophysics, Universitas Gadjah Mada. All rights reserved.",
+                null, "Close",
+                (Image) Resources.ResourceManager.GetObject("Sites_icon"));
         }
 
         private void readGobsgobsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -378,10 +379,10 @@ namespace GravityTidalCorrection
             {
                 foreach (ToolStripMenuItem tsm in inputToolStripMenuItem.DropDownItems)
                 {
-                        tsm.CheckState = CheckState.Unchecked;
+                    tsm.CheckState = CheckState.Unchecked;
                 }
 
-                menu.CheckState = CheckState.Checked;    
+                menu.CheckState = CheckState.Checked;
             }
         }
 
@@ -397,11 +398,11 @@ namespace GravityTidalCorrection
             MessageBox.Show(@"Table has been copied to clipboard.");
         }
 
-        
+
         private void toolStripComboBoxUTMZones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            WriteLineConsoleLog(string.Format("UTM Projection is set to {0}",
-                _utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex).DisplayName));
+            WriteLineConsoleLog(
+                $"UTM Projection is set to {_utmZones.ElementAt(toolStripComboBoxUTMZones.SelectedIndex).DisplayName}");
         }
 
 /*What happen when check state of the input mode change*/
@@ -410,7 +411,7 @@ namespace GravityTidalCorrection
             var menu = sender as ToolStripMenuItem;
             if (menu != null && menu.CheckState == CheckState.Checked)
             {
-                int index = ((ToolStripMenuItem)menu.OwnerItem).DropDownItems.IndexOf(menu);
+                var index = ((ToolStripMenuItem) menu.OwnerItem).DropDownItems.IndexOf(menu);
 
                 switch (index)
                 {
@@ -478,8 +479,8 @@ namespace GravityTidalCorrection
                         num_xPos.Maximum = 180;
 
                         // Flooring value after switch back to deg min sec
-                        num_yPos.Value = Decimal.Floor(num_yPos.Value);
-                        num_xPos.Value = Decimal.Floor(num_xPos.Value);
+                        num_yPos.Value = decimal.Floor(num_yPos.Value);
+                        num_xPos.Value = decimal.Floor(num_xPos.Value);
 
                         WriteLineConsoleLog("Coord system changed to geographic deg min sec.");
                         break;
@@ -518,13 +519,13 @@ namespace GravityTidalCorrection
                         numYSeconds.Value = 0;
 
                         var utmZone = toolStripComboBoxUTMZones.SelectedItem as UTMZone;
-                        WriteLineConsoleLog(string.Format("Coord system changed to {0}", utmZone.DisplayName));
+                        WriteLineConsoleLog($"Coord system changed to {utmZone.DisplayName}");
                         break;
                 }
             }
         }
 
-        
+
 /*When y position and x position are on its upper limit, set the maximum of minutes and seconds to zero*/
         private void num_yPos_Validated(object sender, EventArgs e)
         {

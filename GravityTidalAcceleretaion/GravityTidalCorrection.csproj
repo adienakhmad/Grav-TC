@@ -75,9 +75,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TidalCorrection.cs" />
+    <Compile Include="TidalRecord.cs" />
     <Compile Include="UTMZone.cs" />
-    <Compile Include="TidalAcceleration.cs" />
+    <Compile Include="Longman1959.cs" />
     <EmbeddedResource Include="BetterDialog.resx">
       <DependentUpon>BetterDialog.cs</DependentUpon>
     </EmbeddedResource>

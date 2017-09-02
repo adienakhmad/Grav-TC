@@ -259,14 +259,14 @@
             // 
             // col_gmoon
             // 
-            this.col_gmoon.DataPropertyName = "MoonTidal";
+            this.col_gmoon.DataPropertyName = "gMoon";
             this.col_gmoon.HeaderText = "g Moon (mGal)";
             this.col_gmoon.Name = "col_gmoon";
             this.col_gmoon.Visible = false;
             // 
             // col_gsun
             // 
-            this.col_gsun.DataPropertyName = "SunTidal";
+            this.col_gsun.DataPropertyName = "gSun";
             this.col_gsun.HeaderText = "g Sun (mGal)";
             this.col_gsun.Name = "col_gsun";
             this.col_gsun.Visible = false;
@@ -299,7 +299,7 @@
             // 
             // col_gTotalTidal
             // 
-            this.col_gTotalTidal.DataPropertyName = "CorrectionTotal";
+            this.col_gTotalTidal.DataPropertyName = "gTotal";
             dataGridViewCellStyle13.Format = "N5";
             dataGridViewCellStyle13.NullValue = null;
             this.col_gTotalTidal.DefaultCellStyle = dataGridViewCellStyle13;
