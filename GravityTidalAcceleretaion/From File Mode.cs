@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FileHelpers;
+using GeoAPI.CoordinateSystems;
+using GeoAPI.CoordinateSystems.Transformations;
 using JR.Utils.GUI.Forms;
 using ProjNet.CoordinateSystems;
 using ProjNet.CoordinateSystems.Transformations;
