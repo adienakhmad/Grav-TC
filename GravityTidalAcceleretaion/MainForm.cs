@@ -461,8 +461,8 @@ namespace GravityTidalCorrection
       cboxTimeZone.SelectedValue = TimeZoneInfo.Local.Id;
 
       // Setting initial datetime value, begin to today, end to tomorrow
-      datepickBegin.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
-      datepickEnd.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 0, 0, 0);
+      datepickBegin.Value = DateTime.Today;
+      datepickEnd.Value = datepickBegin.Value.AddDays(1);
 
       // cbox lat long
       cboxLatSign.SelectedIndex = 0;
