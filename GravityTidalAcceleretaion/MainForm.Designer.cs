@@ -32,724 +32,749 @@ namespace GravityTidalCorrection
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.mainPanel = new System.Windows.Forms.Panel();
-            this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupLocation = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.labelPositionY = new System.Windows.Forms.Label();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.num_yPos = new System.Windows.Forms.NumericUpDown();
-            this.labelPositionY_unit = new System.Windows.Forms.Label();
-            this.numYMinutes = new System.Windows.Forms.NumericUpDown();
-            this.labelLatMin = new System.Windows.Forms.Label();
-            this.numYSeconds = new System.Windows.Forms.NumericUpDown();
-            this.labelLatSec = new System.Windows.Forms.Label();
-            this.cboxLatSign = new System.Windows.Forms.ComboBox();
-            this.labelPositionX = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.num_xPos = new System.Windows.Forms.NumericUpDown();
-            this.labelPositionX_unit = new System.Windows.Forms.Label();
-            this.numXMinutes = new System.Windows.Forms.NumericUpDown();
-            this.labelLonMin = new System.Windows.Forms.Label();
-            this.numXSeconds = new System.Windows.Forms.NumericUpDown();
-            this.labelLonSec = new System.Windows.Forms.Label();
-            this.cboxLonSign = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.numElevation = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.groupTime = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cboxTimeZone = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.datepickBegin = new System.Windows.Forms.DateTimePicker();
-            this.label10 = new System.Windows.Forms.Label();
-            this.datepickEnd = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.numInterval = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.buttonGo = new System.Windows.Forms.Button();
-            this.imageListButton = new System.Windows.Forms.ImageList(this.components);
-            this.splitContainerTableInfoWindow = new System.Windows.Forms.SplitContainer();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageTable = new System.Windows.Forms.TabPage();
-            this.dgvResult = new System.Windows.Forms.DataGridView();
-            this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPageChart = new System.Windows.Forms.TabPage();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.tabPageImageList = new System.Windows.Forms.ImageList(this.components);
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBoxInfo = new System.Windows.Forms.TextBox();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.openFilegObserved = new System.Windows.Forms.OpenFileDialog();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.readGobsgobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.decimalDegreeInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.useDegMinSecToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.uTMInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uTMZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripComboBoxUTMZones = new System.Windows.Forms.ToolStripComboBox();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.mainPanel.SuspendLayout();
-            this.splitContainerLeftRight.Panel1.SuspendLayout();
-            this.splitContainerLeftRight.Panel2.SuspendLayout();
-            this.splitContainerLeftRight.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.groupLocation.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).BeginInit();
-            this.flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).BeginInit();
-            this.flowLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numElevation)).BeginInit();
-            this.groupTime.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
-            this.splitContainerTableInfoWindow.Panel1.SuspendLayout();
-            this.splitContainerTableInfoWindow.Panel2.SuspendLayout();
-            this.splitContainerTableInfoWindow.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPageTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
-            this.tabPageChart.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.mainMenuStrip.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // mainPanel
-            // 
-            this.mainPanel.Controls.Add(this.splitContainerLeftRight);
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 24);
-            this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(761, 481);
-            this.mainPanel.TabIndex = 1;
-            // 
-            // splitContainerLeftRight
-            // 
-            this.splitContainerLeftRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerLeftRight.IsSplitterFixed = true;
-            this.splitContainerLeftRight.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerLeftRight.Name = "splitContainerLeftRight";
-            // 
-            // splitContainerLeftRight.Panel1
-            // 
-            this.splitContainerLeftRight.Panel1.Controls.Add(this.flowLayoutPanel1);
-            // 
-            // splitContainerLeftRight.Panel2
-            // 
-            this.splitContainerLeftRight.Panel2.Controls.Add(this.splitContainerTableInfoWindow);
-            this.splitContainerLeftRight.Size = new System.Drawing.Size(761, 481);
-            this.splitContainerLeftRight.SplitterDistance = 264;
-            this.splitContainerLeftRight.TabIndex = 1;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel1.Controls.Add(this.groupLocation);
-            this.flowLayoutPanel1.Controls.Add(this.groupTime);
-            this.flowLayoutPanel1.Controls.Add(this.buttonGo);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 10, 0, 0);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(264, 481);
-            this.flowLayoutPanel1.TabIndex = 0;
-            // 
-            // groupLocation
-            // 
-            this.groupLocation.Controls.Add(this.flowLayoutPanel6);
-            this.groupLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLocation.Location = new System.Drawing.Point(13, 13);
-            this.groupLocation.Name = "groupLocation";
-            this.groupLocation.Padding = new System.Windows.Forms.Padding(15, 10, 3, 3);
-            this.groupLocation.Size = new System.Drawing.Size(238, 175);
-            this.groupLocation.TabIndex = 10;
-            this.groupLocation.TabStop = false;
-            this.groupLocation.Text = "Location";
-            // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Controls.Add(this.labelPositionY);
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel3);
-            this.flowLayoutPanel6.Controls.Add(this.labelPositionX);
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel6.Controls.Add(this.label14);
-            this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel5);
-            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(15, 25);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(220, 147);
-            this.flowLayoutPanel6.TabIndex = 0;
-            // 
-            // labelPositionY
-            // 
-            this.labelPositionY.AutoSize = true;
-            this.labelPositionY.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labelPositionY.ImageIndex = 9;
-            this.labelPositionY.Location = new System.Drawing.Point(3, 0);
-            this.labelPositionY.Name = "labelPositionY";
-            this.labelPositionY.Size = new System.Drawing.Size(46, 13);
-            this.labelPositionY.TabIndex = 0;
-            this.labelPositionY.Text = "Latitude";
-            this.labelPositionY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.num_yPos);
-            this.flowLayoutPanel3.Controls.Add(this.labelPositionY_unit);
-            this.flowLayoutPanel3.Controls.Add(this.numYMinutes);
-            this.flowLayoutPanel3.Controls.Add(this.labelLatMin);
-            this.flowLayoutPanel3.Controls.Add(this.numYSeconds);
-            this.flowLayoutPanel3.Controls.Add(this.labelLatSec);
-            this.flowLayoutPanel3.Controls.Add(this.cboxLatSign);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(217, 30);
-            this.flowLayoutPanel3.TabIndex = 1;
-            // 
-            // num_yPos
-            // 
-            this.num_yPos.Increment = new decimal(new int[] {
+      this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      this.mainPanel = new System.Windows.Forms.Panel();
+      this.splitContainerLeftRight = new System.Windows.Forms.SplitContainer();
+      this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+      this.groupLocation = new System.Windows.Forms.GroupBox();
+      this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+      this.labelPositionY = new System.Windows.Forms.Label();
+      this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+      this.num_yPos = new System.Windows.Forms.NumericUpDown();
+      this.labelPositionY_unit = new System.Windows.Forms.Label();
+      this.numYMinutes = new System.Windows.Forms.NumericUpDown();
+      this.labelLatMin = new System.Windows.Forms.Label();
+      this.numYSeconds = new System.Windows.Forms.NumericUpDown();
+      this.labelLatSec = new System.Windows.Forms.Label();
+      this.cboxLatSign = new System.Windows.Forms.ComboBox();
+      this.labelPositionX = new System.Windows.Forms.Label();
+      this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+      this.num_xPos = new System.Windows.Forms.NumericUpDown();
+      this.labelPositionX_unit = new System.Windows.Forms.Label();
+      this.numXMinutes = new System.Windows.Forms.NumericUpDown();
+      this.labelLonMin = new System.Windows.Forms.Label();
+      this.numXSeconds = new System.Windows.Forms.NumericUpDown();
+      this.labelLonSec = new System.Windows.Forms.Label();
+      this.cboxLonSign = new System.Windows.Forms.ComboBox();
+      this.label14 = new System.Windows.Forms.Label();
+      this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+      this.numElevation = new System.Windows.Forms.NumericUpDown();
+      this.label15 = new System.Windows.Forms.Label();
+      this.groupTime = new System.Windows.Forms.GroupBox();
+      this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+      this.label11 = new System.Windows.Forms.Label();
+      this.cboxTimeZone = new System.Windows.Forms.ComboBox();
+      this.label9 = new System.Windows.Forms.Label();
+      this.datepickBegin = new System.Windows.Forms.DateTimePicker();
+      this.label10 = new System.Windows.Forms.Label();
+      this.datepickEnd = new System.Windows.Forms.DateTimePicker();
+      this.label12 = new System.Windows.Forms.Label();
+      this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+      this.numInterval = new System.Windows.Forms.NumericUpDown();
+      this.label13 = new System.Windows.Forms.Label();
+      this.buttonGo = new System.Windows.Forms.Button();
+      this.imageListButton = new System.Windows.Forms.ImageList(this.components);
+      this.splitContainerTableInfoWindow = new System.Windows.Forms.SplitContainer();
+      this.tabControl1 = new System.Windows.Forms.TabControl();
+      this.tabPageTable = new System.Windows.Forms.TabPage();
+      this.dgvResult = new System.Windows.Forms.DataGridView();
+      this.col_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_gmoon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_gsun = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_gtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_xpos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_ypos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.col_elev = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.tabPageChart = new System.Windows.Forms.TabPage();
+      this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+      this.tabPageImageList = new System.Windows.Forms.ImageList(this.components);
+      this.groupBox1 = new System.Windows.Forms.GroupBox();
+      this.textBoxInfo = new System.Windows.Forms.TextBox();
+      this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+      this.openFilegObserved = new System.Windows.Forms.OpenFileDialog();
+      this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.readGobsgobsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+      this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.inputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.decimalDegreeInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.useDegMinSecToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+      this.uTMInputToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.uTMZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolStripComboBoxUTMZones = new System.Windows.Forms.ToolStripComboBox();
+      this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+      this.mainPanel.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeftRight)).BeginInit();
+      this.splitContainerLeftRight.Panel1.SuspendLayout();
+      this.splitContainerLeftRight.Panel2.SuspendLayout();
+      this.splitContainerLeftRight.SuspendLayout();
+      this.flowLayoutPanel1.SuspendLayout();
+      this.groupLocation.SuspendLayout();
+      this.flowLayoutPanel6.SuspendLayout();
+      this.flowLayoutPanel3.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).BeginInit();
+      this.flowLayoutPanel2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).BeginInit();
+      this.flowLayoutPanel5.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numElevation)).BeginInit();
+      this.groupTime.SuspendLayout();
+      this.flowLayoutPanel7.SuspendLayout();
+      this.flowLayoutPanel4.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numInterval)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainerTableInfoWindow)).BeginInit();
+      this.splitContainerTableInfoWindow.Panel1.SuspendLayout();
+      this.splitContainerTableInfoWindow.Panel2.SuspendLayout();
+      this.splitContainerTableInfoWindow.SuspendLayout();
+      this.tabControl1.SuspendLayout();
+      this.tabPageTable.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).BeginInit();
+      this.tabPageChart.SuspendLayout();
+      this.groupBox1.SuspendLayout();
+      this.mainMenuStrip.SuspendLayout();
+      this.SuspendLayout();
+      // 
+      // mainPanel
+      // 
+      this.mainPanel.Controls.Add(this.splitContainerLeftRight);
+      this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.mainPanel.Location = new System.Drawing.Point(0, 28);
+      this.mainPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.mainPanel.Name = "mainPanel";
+      this.mainPanel.Size = new System.Drawing.Size(1015, 594);
+      this.mainPanel.TabIndex = 1;
+      // 
+      // splitContainerLeftRight
+      // 
+      this.splitContainerLeftRight.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainerLeftRight.IsSplitterFixed = true;
+      this.splitContainerLeftRight.Location = new System.Drawing.Point(0, 0);
+      this.splitContainerLeftRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.splitContainerLeftRight.Name = "splitContainerLeftRight";
+      // 
+      // splitContainerLeftRight.Panel1
+      // 
+      this.splitContainerLeftRight.Panel1.Controls.Add(this.flowLayoutPanel1);
+      // 
+      // splitContainerLeftRight.Panel2
+      // 
+      this.splitContainerLeftRight.Panel2.Controls.Add(this.splitContainerTableInfoWindow);
+      this.splitContainerLeftRight.Size = new System.Drawing.Size(1015, 594);
+      this.splitContainerLeftRight.SplitterDistance = 352;
+      this.splitContainerLeftRight.SplitterWidth = 5;
+      this.splitContainerLeftRight.TabIndex = 1;
+      // 
+      // flowLayoutPanel1
+      // 
+      this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.flowLayoutPanel1.Controls.Add(this.groupLocation);
+      this.flowLayoutPanel1.Controls.Add(this.groupTime);
+      this.flowLayoutPanel1.Controls.Add(this.buttonGo);
+      this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.flowLayoutPanel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+      this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+      this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(13, 12, 0, 0);
+      this.flowLayoutPanel1.Size = new System.Drawing.Size(352, 594);
+      this.flowLayoutPanel1.TabIndex = 0;
+      // 
+      // groupLocation
+      // 
+      this.groupLocation.Controls.Add(this.flowLayoutPanel6);
+      this.groupLocation.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.groupLocation.Location = new System.Drawing.Point(17, 16);
+      this.groupLocation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.groupLocation.Name = "groupLocation";
+      this.groupLocation.Padding = new System.Windows.Forms.Padding(20, 12, 4, 4);
+      this.groupLocation.Size = new System.Drawing.Size(317, 215);
+      this.groupLocation.TabIndex = 10;
+      this.groupLocation.TabStop = false;
+      this.groupLocation.Text = "Location";
+      // 
+      // flowLayoutPanel6
+      // 
+      this.flowLayoutPanel6.Controls.Add(this.labelPositionY);
+      this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel3);
+      this.flowLayoutPanel6.Controls.Add(this.labelPositionX);
+      this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel2);
+      this.flowLayoutPanel6.Controls.Add(this.label14);
+      this.flowLayoutPanel6.Controls.Add(this.flowLayoutPanel5);
+      this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.flowLayoutPanel6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.flowLayoutPanel6.Location = new System.Drawing.Point(20, 31);
+      this.flowLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+      this.flowLayoutPanel6.Size = new System.Drawing.Size(293, 180);
+      this.flowLayoutPanel6.TabIndex = 0;
+      // 
+      // labelPositionY
+      // 
+      this.labelPositionY.AutoSize = true;
+      this.labelPositionY.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.labelPositionY.ImageIndex = 9;
+      this.labelPositionY.Location = new System.Drawing.Point(4, 0);
+      this.labelPositionY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.labelPositionY.Name = "labelPositionY";
+      this.labelPositionY.Size = new System.Drawing.Size(57, 17);
+      this.labelPositionY.TabIndex = 0;
+      this.labelPositionY.Text = "Latitude";
+      this.labelPositionY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // flowLayoutPanel3
+      // 
+      this.flowLayoutPanel3.Controls.Add(this.num_yPos);
+      this.flowLayoutPanel3.Controls.Add(this.labelPositionY_unit);
+      this.flowLayoutPanel3.Controls.Add(this.numYMinutes);
+      this.flowLayoutPanel3.Controls.Add(this.labelLatMin);
+      this.flowLayoutPanel3.Controls.Add(this.numYSeconds);
+      this.flowLayoutPanel3.Controls.Add(this.labelLatSec);
+      this.flowLayoutPanel3.Controls.Add(this.cboxLatSign);
+      this.flowLayoutPanel3.Location = new System.Drawing.Point(4, 21);
+      this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+      this.flowLayoutPanel3.Size = new System.Drawing.Size(289, 37);
+      this.flowLayoutPanel3.TabIndex = 1;
+      // 
+      // num_yPos
+      // 
+      this.num_yPos.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.num_yPos.Location = new System.Drawing.Point(3, 3);
-            this.num_yPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.num_yPos.Maximum = new decimal(new int[] {
+      this.num_yPos.Location = new System.Drawing.Point(4, 4);
+      this.num_yPos.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+      this.num_yPos.Maximum = new decimal(new int[] {
             90,
             0,
             0,
             0});
-            this.num_yPos.Name = "num_yPos";
-            this.num_yPos.Size = new System.Drawing.Size(45, 21);
-            this.num_yPos.TabIndex = 0;
-            this.num_yPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.num_yPos.Validated += new System.EventHandler(this.num_yPos_Validated);
-            // 
-            // labelPositionY_unit
-            // 
-            this.labelPositionY_unit.AutoSize = true;
-            this.labelPositionY_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelPositionY_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.labelPositionY_unit.Location = new System.Drawing.Point(48, 3);
-            this.labelPositionY_unit.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.labelPositionY_unit.Name = "labelPositionY_unit";
-            this.labelPositionY_unit.Size = new System.Drawing.Size(13, 13);
-            this.labelPositionY_unit.TabIndex = 1;
-            this.labelPositionY_unit.Text = "°";
-            this.labelPositionY_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numYMinutes
-            // 
-            this.numYMinutes.Location = new System.Drawing.Point(64, 3);
-            this.numYMinutes.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numYMinutes.Maximum = new decimal(new int[] {
+      this.num_yPos.Name = "num_yPos";
+      this.num_yPos.Size = new System.Drawing.Size(60, 24);
+      this.num_yPos.TabIndex = 0;
+      this.num_yPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.num_yPos.Validated += new System.EventHandler(this.OnNumYPosValidated);
+      // 
+      // labelPositionY_unit
+      // 
+      this.labelPositionY_unit.AutoSize = true;
+      this.labelPositionY_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelPositionY_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
+      this.labelPositionY_unit.Location = new System.Drawing.Point(64, 4);
+      this.labelPositionY_unit.Margin = new System.Windows.Forms.Padding(0, 4, 4, 0);
+      this.labelPositionY_unit.Name = "labelPositionY_unit";
+      this.labelPositionY_unit.Size = new System.Drawing.Size(16, 17);
+      this.labelPositionY_unit.TabIndex = 1;
+      this.labelPositionY_unit.Text = "°";
+      this.labelPositionY_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // numYMinutes
+      // 
+      this.numYMinutes.Location = new System.Drawing.Point(84, 4);
+      this.numYMinutes.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+      this.numYMinutes.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numYMinutes.Name = "numYMinutes";
-            this.numYMinutes.Size = new System.Drawing.Size(40, 21);
-            this.numYMinutes.TabIndex = 2;
-            this.numYMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelLatMin
-            // 
-            this.labelLatMin.AutoSize = true;
-            this.labelLatMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelLatMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLatMin.Location = new System.Drawing.Point(104, 3);
-            this.labelLatMin.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.labelLatMin.Name = "labelLatMin";
-            this.labelLatMin.Size = new System.Drawing.Size(11, 16);
-            this.labelLatMin.TabIndex = 3;
-            this.labelLatMin.Text = "\'";
-            this.labelLatMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numYSeconds
-            // 
-            this.numYSeconds.Location = new System.Drawing.Point(118, 3);
-            this.numYSeconds.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numYSeconds.Maximum = new decimal(new int[] {
+      this.numYMinutes.Name = "numYMinutes";
+      this.numYMinutes.Size = new System.Drawing.Size(53, 24);
+      this.numYMinutes.TabIndex = 2;
+      this.numYMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      // 
+      // labelLatMin
+      // 
+      this.labelLatMin.AutoSize = true;
+      this.labelLatMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelLatMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelLatMin.Location = new System.Drawing.Point(137, 4);
+      this.labelLatMin.Margin = new System.Windows.Forms.Padding(0, 4, 4, 0);
+      this.labelLatMin.Name = "labelLatMin";
+      this.labelLatMin.Size = new System.Drawing.Size(14, 20);
+      this.labelLatMin.TabIndex = 3;
+      this.labelLatMin.Text = "\'";
+      this.labelLatMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // numYSeconds
+      // 
+      this.numYSeconds.Location = new System.Drawing.Point(155, 4);
+      this.numYSeconds.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+      this.numYSeconds.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numYSeconds.Name = "numYSeconds";
-            this.numYSeconds.Size = new System.Drawing.Size(40, 21);
-            this.numYSeconds.TabIndex = 3;
-            this.numYSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelLatSec
-            // 
-            this.labelLatSec.AutoSize = true;
-            this.labelLatSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelLatSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLatSec.Location = new System.Drawing.Point(158, 3);
-            this.labelLatSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.labelLatSec.Name = "labelLatSec";
-            this.labelLatSec.Size = new System.Drawing.Size(13, 16);
-            this.labelLatSec.TabIndex = 5;
-            this.labelLatSec.Text = "\"";
-            this.labelLatSec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cboxLatSign
-            // 
-            this.cboxLatSign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxLatSign.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cboxLatSign.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxLatSign.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cboxLatSign.FormattingEnabled = true;
-            this.cboxLatSign.Items.AddRange(new object[] {
+      this.numYSeconds.Name = "numYSeconds";
+      this.numYSeconds.Size = new System.Drawing.Size(53, 24);
+      this.numYSeconds.TabIndex = 3;
+      this.numYSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      // 
+      // labelLatSec
+      // 
+      this.labelLatSec.AutoSize = true;
+      this.labelLatSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelLatSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelLatSec.Location = new System.Drawing.Point(208, 4);
+      this.labelLatSec.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+      this.labelLatSec.Name = "labelLatSec";
+      this.labelLatSec.Size = new System.Drawing.Size(17, 20);
+      this.labelLatSec.TabIndex = 5;
+      this.labelLatSec.Text = "\"";
+      this.labelLatSec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // cboxLatSign
+      // 
+      this.cboxLatSign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cboxLatSign.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.cboxLatSign.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.cboxLatSign.ForeColor = System.Drawing.SystemColors.WindowText;
+      this.cboxLatSign.FormattingEnabled = true;
+      this.cboxLatSign.Items.AddRange(new object[] {
             "N",
             "S"});
-            this.cboxLatSign.Location = new System.Drawing.Point(174, 3);
-            this.cboxLatSign.MaxDropDownItems = 2;
-            this.cboxLatSign.Name = "cboxLatSign";
-            this.cboxLatSign.Size = new System.Drawing.Size(36, 22);
-            this.cboxLatSign.TabIndex = 6;
-            // 
-            // labelPositionX
-            // 
-            this.labelPositionX.AutoSize = true;
-            this.labelPositionX.Location = new System.Drawing.Point(3, 49);
-            this.labelPositionX.Name = "labelPositionX";
-            this.labelPositionX.Size = new System.Drawing.Size(54, 13);
-            this.labelPositionX.TabIndex = 2;
-            this.labelPositionX.Text = "Longitude";
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.Controls.Add(this.num_xPos);
-            this.flowLayoutPanel2.Controls.Add(this.labelPositionX_unit);
-            this.flowLayoutPanel2.Controls.Add(this.numXMinutes);
-            this.flowLayoutPanel2.Controls.Add(this.labelLonMin);
-            this.flowLayoutPanel2.Controls.Add(this.numXSeconds);
-            this.flowLayoutPanel2.Controls.Add(this.labelLonSec);
-            this.flowLayoutPanel2.Controls.Add(this.cboxLonSign);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 65);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(217, 30);
-            this.flowLayoutPanel2.TabIndex = 3;
-            this.flowLayoutPanel2.TabStop = true;
-            // 
-            // num_xPos
-            // 
-            this.num_xPos.Increment = new decimal(new int[] {
+      this.cboxLatSign.Location = new System.Drawing.Point(229, 4);
+      this.cboxLatSign.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.cboxLatSign.MaxDropDownItems = 2;
+      this.cboxLatSign.Name = "cboxLatSign";
+      this.cboxLatSign.Size = new System.Drawing.Size(47, 26);
+      this.cboxLatSign.TabIndex = 6;
+      // 
+      // labelPositionX
+      // 
+      this.labelPositionX.AutoSize = true;
+      this.labelPositionX.Location = new System.Drawing.Point(4, 62);
+      this.labelPositionX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.labelPositionX.Name = "labelPositionX";
+      this.labelPositionX.Size = new System.Drawing.Size(69, 17);
+      this.labelPositionX.TabIndex = 2;
+      this.labelPositionX.Text = "Longitude";
+      // 
+      // flowLayoutPanel2
+      // 
+      this.flowLayoutPanel2.Controls.Add(this.num_xPos);
+      this.flowLayoutPanel2.Controls.Add(this.labelPositionX_unit);
+      this.flowLayoutPanel2.Controls.Add(this.numXMinutes);
+      this.flowLayoutPanel2.Controls.Add(this.labelLonMin);
+      this.flowLayoutPanel2.Controls.Add(this.numXSeconds);
+      this.flowLayoutPanel2.Controls.Add(this.labelLonSec);
+      this.flowLayoutPanel2.Controls.Add(this.cboxLonSign);
+      this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 83);
+      this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+      this.flowLayoutPanel2.Size = new System.Drawing.Size(289, 37);
+      this.flowLayoutPanel2.TabIndex = 3;
+      this.flowLayoutPanel2.TabStop = true;
+      // 
+      // num_xPos
+      // 
+      this.num_xPos.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.num_xPos.Location = new System.Drawing.Point(3, 3);
-            this.num_xPos.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.num_xPos.Maximum = new decimal(new int[] {
+      this.num_xPos.Location = new System.Drawing.Point(4, 4);
+      this.num_xPos.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+      this.num_xPos.Maximum = new decimal(new int[] {
             180,
             0,
             0,
             0});
-            this.num_xPos.Name = "num_xPos";
-            this.num_xPos.Size = new System.Drawing.Size(45, 21);
-            this.num_xPos.TabIndex = 0;
-            this.num_xPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.num_xPos.Validated += new System.EventHandler(this.num_xPos_Validated);
-            // 
-            // labelPositionX_unit
-            // 
-            this.labelPositionX_unit.AutoSize = true;
-            this.labelPositionX_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelPositionX_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
-            this.labelPositionX_unit.Location = new System.Drawing.Point(48, 3);
-            this.labelPositionX_unit.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.labelPositionX_unit.Name = "labelPositionX_unit";
-            this.labelPositionX_unit.Size = new System.Drawing.Size(13, 13);
-            this.labelPositionX_unit.TabIndex = 1;
-            this.labelPositionX_unit.Text = "°";
-            this.labelPositionX_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numXMinutes
-            // 
-            this.numXMinutes.Location = new System.Drawing.Point(64, 3);
-            this.numXMinutes.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numXMinutes.Maximum = new decimal(new int[] {
+      this.num_xPos.Name = "num_xPos";
+      this.num_xPos.Size = new System.Drawing.Size(60, 24);
+      this.num_xPos.TabIndex = 0;
+      this.num_xPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.num_xPos.Validated += new System.EventHandler(this.OnNumXPosValidated);
+      // 
+      // labelPositionX_unit
+      // 
+      this.labelPositionX_unit.AutoSize = true;
+      this.labelPositionX_unit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelPositionX_unit.Font = new System.Drawing.Font("Verdana", 8.25F);
+      this.labelPositionX_unit.Location = new System.Drawing.Point(64, 4);
+      this.labelPositionX_unit.Margin = new System.Windows.Forms.Padding(0, 4, 4, 0);
+      this.labelPositionX_unit.Name = "labelPositionX_unit";
+      this.labelPositionX_unit.Size = new System.Drawing.Size(16, 17);
+      this.labelPositionX_unit.TabIndex = 1;
+      this.labelPositionX_unit.Text = "°";
+      this.labelPositionX_unit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // numXMinutes
+      // 
+      this.numXMinutes.Location = new System.Drawing.Point(84, 4);
+      this.numXMinutes.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+      this.numXMinutes.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numXMinutes.Name = "numXMinutes";
-            this.numXMinutes.Size = new System.Drawing.Size(40, 21);
-            this.numXMinutes.TabIndex = 1;
-            this.numXMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelLonMin
-            // 
-            this.labelLonMin.AutoSize = true;
-            this.labelLonMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelLonMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLonMin.Location = new System.Drawing.Point(104, 3);
-            this.labelLonMin.Margin = new System.Windows.Forms.Padding(0, 3, 3, 0);
-            this.labelLonMin.Name = "labelLonMin";
-            this.labelLonMin.Size = new System.Drawing.Size(11, 16);
-            this.labelLonMin.TabIndex = 3;
-            this.labelLonMin.Text = "\'";
-            this.labelLonMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // numXSeconds
-            // 
-            this.numXSeconds.Location = new System.Drawing.Point(118, 3);
-            this.numXSeconds.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
-            this.numXSeconds.Maximum = new decimal(new int[] {
+      this.numXMinutes.Name = "numXMinutes";
+      this.numXMinutes.Size = new System.Drawing.Size(53, 24);
+      this.numXMinutes.TabIndex = 1;
+      this.numXMinutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      // 
+      // labelLonMin
+      // 
+      this.labelLonMin.AutoSize = true;
+      this.labelLonMin.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelLonMin.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelLonMin.Location = new System.Drawing.Point(137, 4);
+      this.labelLonMin.Margin = new System.Windows.Forms.Padding(0, 4, 4, 0);
+      this.labelLonMin.Name = "labelLonMin";
+      this.labelLonMin.Size = new System.Drawing.Size(14, 20);
+      this.labelLonMin.TabIndex = 3;
+      this.labelLonMin.Text = "\'";
+      this.labelLonMin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // numXSeconds
+      // 
+      this.numXSeconds.Location = new System.Drawing.Point(155, 4);
+      this.numXSeconds.Margin = new System.Windows.Forms.Padding(0, 4, 0, 4);
+      this.numXSeconds.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
-            this.numXSeconds.Name = "numXSeconds";
-            this.numXSeconds.Size = new System.Drawing.Size(40, 21);
-            this.numXSeconds.TabIndex = 2;
-            this.numXSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // labelLonSec
-            // 
-            this.labelLonSec.AutoSize = true;
-            this.labelLonSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.labelLonSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLonSec.Location = new System.Drawing.Point(158, 3);
-            this.labelLonSec.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.labelLonSec.Name = "labelLonSec";
-            this.labelLonSec.Size = new System.Drawing.Size(13, 16);
-            this.labelLonSec.TabIndex = 5;
-            this.labelLonSec.Text = "\"";
-            this.labelLonSec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cboxLonSign
-            // 
-            this.cboxLonSign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxLonSign.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cboxLonSign.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxLonSign.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cboxLonSign.FormattingEnabled = true;
-            this.cboxLonSign.Items.AddRange(new object[] {
+      this.numXSeconds.Name = "numXSeconds";
+      this.numXSeconds.Size = new System.Drawing.Size(53, 24);
+      this.numXSeconds.TabIndex = 2;
+      this.numXSeconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      // 
+      // labelLonSec
+      // 
+      this.labelLonSec.AutoSize = true;
+      this.labelLonSec.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.labelLonSec.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelLonSec.Location = new System.Drawing.Point(208, 4);
+      this.labelLonSec.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+      this.labelLonSec.Name = "labelLonSec";
+      this.labelLonSec.Size = new System.Drawing.Size(17, 20);
+      this.labelLonSec.TabIndex = 5;
+      this.labelLonSec.Text = "\"";
+      this.labelLonSec.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // cboxLonSign
+      // 
+      this.cboxLonSign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cboxLonSign.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.cboxLonSign.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.cboxLonSign.ForeColor = System.Drawing.SystemColors.WindowText;
+      this.cboxLonSign.FormattingEnabled = true;
+      this.cboxLonSign.Items.AddRange(new object[] {
             "E",
             "W"});
-            this.cboxLonSign.Location = new System.Drawing.Point(174, 3);
-            this.cboxLonSign.MaxDropDownItems = 2;
-            this.cboxLonSign.Name = "cboxLonSign";
-            this.cboxLonSign.Size = new System.Drawing.Size(36, 22);
-            this.cboxLonSign.TabIndex = 7;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 98);
-            this.label14.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 13);
-            this.label14.TabIndex = 2;
-            this.label14.Text = "Elevation";
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.numElevation);
-            this.flowLayoutPanel5.Controls.Add(this.label15);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 114);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(151, 30);
-            this.flowLayoutPanel5.TabIndex = 4;
-            // 
-            // numElevation
-            // 
-            this.numElevation.BackColor = System.Drawing.SystemColors.Window;
-            this.numElevation.DecimalPlaces = 2;
-            this.numElevation.Increment = new decimal(new int[] {
+      this.cboxLonSign.Location = new System.Drawing.Point(229, 4);
+      this.cboxLonSign.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.cboxLonSign.MaxDropDownItems = 2;
+      this.cboxLonSign.Name = "cboxLonSign";
+      this.cboxLonSign.Size = new System.Drawing.Size(47, 26);
+      this.cboxLonSign.TabIndex = 7;
+      // 
+      // label14
+      // 
+      this.label14.AutoSize = true;
+      this.label14.Location = new System.Drawing.Point(4, 124);
+      this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
+      this.label14.Name = "label14";
+      this.label14.Size = new System.Drawing.Size(63, 17);
+      this.label14.TabIndex = 2;
+      this.label14.Text = "Elevation";
+      // 
+      // flowLayoutPanel5
+      // 
+      this.flowLayoutPanel5.Controls.Add(this.numElevation);
+      this.flowLayoutPanel5.Controls.Add(this.label15);
+      this.flowLayoutPanel5.Location = new System.Drawing.Point(301, 0);
+      this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 4);
+      this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+      this.flowLayoutPanel5.Size = new System.Drawing.Size(201, 37);
+      this.flowLayoutPanel5.TabIndex = 4;
+      // 
+      // numElevation
+      // 
+      this.numElevation.BackColor = System.Drawing.SystemColors.Window;
+      this.numElevation.DecimalPlaces = 2;
+      this.numElevation.Increment = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numElevation.Location = new System.Drawing.Point(3, 3);
-            this.numElevation.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.numElevation.Maximum = new decimal(new int[] {
+      this.numElevation.Location = new System.Drawing.Point(4, 4);
+      this.numElevation.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+      this.numElevation.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
-            this.numElevation.Name = "numElevation";
-            this.numElevation.Size = new System.Drawing.Size(80, 21);
-            this.numElevation.TabIndex = 0;
-            this.numElevation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label15.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(86, 6);
-            this.label15.Margin = new System.Windows.Forms.Padding(3, 6, 3, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(47, 13);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "meters";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupTime
-            // 
-            this.groupTime.Controls.Add(this.flowLayoutPanel7);
-            this.groupTime.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupTime.Location = new System.Drawing.Point(13, 194);
-            this.groupTime.Name = "groupTime";
-            this.groupTime.Padding = new System.Windows.Forms.Padding(15, 10, 3, 3);
-            this.groupTime.Size = new System.Drawing.Size(238, 215);
-            this.groupTime.TabIndex = 11;
-            this.groupTime.TabStop = false;
-            this.groupTime.Text = "Time";
-            // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.label11);
-            this.flowLayoutPanel7.Controls.Add(this.cboxTimeZone);
-            this.flowLayoutPanel7.Controls.Add(this.label9);
-            this.flowLayoutPanel7.Controls.Add(this.datepickBegin);
-            this.flowLayoutPanel7.Controls.Add(this.label10);
-            this.flowLayoutPanel7.Controls.Add(this.datepickEnd);
-            this.flowLayoutPanel7.Controls.Add(this.label12);
-            this.flowLayoutPanel7.Controls.Add(this.flowLayoutPanel4);
-            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(15, 25);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(220, 187);
-            this.flowLayoutPanel7.TabIndex = 0;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(31, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Zone";
-            // 
-            // cboxTimeZone
-            // 
-            this.cboxTimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxTimeZone.DropDownWidth = 300;
-            this.cboxTimeZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cboxTimeZone.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboxTimeZone.FormattingEnabled = true;
-            this.cboxTimeZone.Location = new System.Drawing.Point(3, 16);
-            this.cboxTimeZone.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.cboxTimeZone.Name = "cboxTimeZone";
-            this.cboxTimeZone.Size = new System.Drawing.Size(208, 21);
-            this.cboxTimeZone.TabIndex = 5;
-            this.cboxTimeZone.SelectedIndexChanged += new System.EventHandler(this.cboxTimeZone_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 47);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Begin";
-            // 
-            // datepickBegin
-            // 
-            this.datepickBegin.CustomFormat = "dd MMM yyyy - HH:mm";
-            this.datepickBegin.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datepickBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datepickBegin.Location = new System.Drawing.Point(3, 63);
-            this.datepickBegin.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.datepickBegin.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.datepickBegin.Name = "datepickBegin";
-            this.datepickBegin.Size = new System.Drawing.Size(151, 21);
-            this.datepickBegin.TabIndex = 6;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 94);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(25, 13);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "End";
-            // 
-            // datepickEnd
-            // 
-            this.datepickEnd.CustomFormat = "dd MMM yyyy - HH:mm";
-            this.datepickEnd.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datepickEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.datepickEnd.Location = new System.Drawing.Point(3, 110);
-            this.datepickEnd.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.datepickEnd.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.datepickEnd.Name = "datepickEnd";
-            this.datepickEnd.Size = new System.Drawing.Size(151, 21);
-            this.datepickEnd.TabIndex = 7;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(3, 141);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(45, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Interval";
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.numInterval);
-            this.flowLayoutPanel4.Controls.Add(this.label13);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 157);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(185, 26);
-            this.flowLayoutPanel4.TabIndex = 8;
-            // 
-            // numInterval
-            // 
-            this.numInterval.Location = new System.Drawing.Point(3, 3);
-            this.numInterval.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
-            this.numInterval.Maximum = new decimal(new int[] {
+      this.numElevation.Name = "numElevation";
+      this.numElevation.Size = new System.Drawing.Size(107, 24);
+      this.numElevation.TabIndex = 0;
+      this.numElevation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.label15.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label15.Location = new System.Drawing.Point(115, 7);
+      this.label15.Margin = new System.Windows.Forms.Padding(4, 7, 4, 0);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(57, 17);
+      this.label15.TabIndex = 1;
+      this.label15.Text = "meters";
+      this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // groupTime
+      // 
+      this.groupTime.Controls.Add(this.flowLayoutPanel7);
+      this.groupTime.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.groupTime.Location = new System.Drawing.Point(17, 239);
+      this.groupTime.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.groupTime.Name = "groupTime";
+      this.groupTime.Padding = new System.Windows.Forms.Padding(20, 12, 4, 4);
+      this.groupTime.Size = new System.Drawing.Size(317, 265);
+      this.groupTime.TabIndex = 11;
+      this.groupTime.TabStop = false;
+      this.groupTime.Text = "Time";
+      // 
+      // flowLayoutPanel7
+      // 
+      this.flowLayoutPanel7.Controls.Add(this.label11);
+      this.flowLayoutPanel7.Controls.Add(this.cboxTimeZone);
+      this.flowLayoutPanel7.Controls.Add(this.label9);
+      this.flowLayoutPanel7.Controls.Add(this.datepickBegin);
+      this.flowLayoutPanel7.Controls.Add(this.label10);
+      this.flowLayoutPanel7.Controls.Add(this.datepickEnd);
+      this.flowLayoutPanel7.Controls.Add(this.label12);
+      this.flowLayoutPanel7.Controls.Add(this.flowLayoutPanel4);
+      this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.flowLayoutPanel7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.flowLayoutPanel7.Location = new System.Drawing.Point(20, 31);
+      this.flowLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+      this.flowLayoutPanel7.Size = new System.Drawing.Size(293, 230);
+      this.flowLayoutPanel7.TabIndex = 0;
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(4, 0);
+      this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(39, 17);
+      this.label11.TabIndex = 3;
+      this.label11.Text = "Zone";
+      // 
+      // cboxTimeZone
+      // 
+      this.cboxTimeZone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.cboxTimeZone.DropDownWidth = 300;
+      this.cboxTimeZone.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.cboxTimeZone.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.cboxTimeZone.FormattingEnabled = true;
+      this.cboxTimeZone.Location = new System.Drawing.Point(4, 21);
+      this.cboxTimeZone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+      this.cboxTimeZone.Name = "cboxTimeZone";
+      this.cboxTimeZone.Size = new System.Drawing.Size(276, 25);
+      this.cboxTimeZone.TabIndex = 5;
+      this.cboxTimeZone.SelectedIndexChanged += new System.EventHandler(this.OnCboxTimeZoneSelectedIndexChanged);
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Location = new System.Drawing.Point(4, 58);
+      this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(41, 17);
+      this.label9.TabIndex = 4;
+      this.label9.Text = "Begin";
+      // 
+      // datepickBegin
+      // 
+      this.datepickBegin.CustomFormat = "dd MMM yyyy - HH:mm";
+      this.datepickBegin.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.datepickBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+      this.datepickBegin.Location = new System.Drawing.Point(4, 79);
+      this.datepickBegin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+      this.datepickBegin.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+      this.datepickBegin.Name = "datepickBegin";
+      this.datepickBegin.Size = new System.Drawing.Size(200, 24);
+      this.datepickBegin.TabIndex = 6;
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(4, 115);
+      this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(32, 17);
+      this.label10.TabIndex = 5;
+      this.label10.Text = "End";
+      // 
+      // datepickEnd
+      // 
+      this.datepickEnd.CustomFormat = "dd MMM yyyy - HH:mm";
+      this.datepickEnd.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.datepickEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+      this.datepickEnd.Location = new System.Drawing.Point(4, 136);
+      this.datepickEnd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 12);
+      this.datepickEnd.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+      this.datepickEnd.Name = "datepickEnd";
+      this.datepickEnd.Size = new System.Drawing.Size(200, 24);
+      this.datepickEnd.TabIndex = 7;
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Location = new System.Drawing.Point(4, 172);
+      this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(54, 17);
+      this.label12.TabIndex = 6;
+      this.label12.Text = "Interval";
+      // 
+      // flowLayoutPanel4
+      // 
+      this.flowLayoutPanel4.Controls.Add(this.numInterval);
+      this.flowLayoutPanel4.Controls.Add(this.label13);
+      this.flowLayoutPanel4.Location = new System.Drawing.Point(4, 193);
+      this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+      this.flowLayoutPanel4.Size = new System.Drawing.Size(247, 32);
+      this.flowLayoutPanel4.TabIndex = 8;
+      // 
+      // numInterval
+      // 
+      this.numInterval.Location = new System.Drawing.Point(4, 4);
+      this.numInterval.Margin = new System.Windows.Forms.Padding(4, 4, 0, 4);
+      this.numInterval.Maximum = new decimal(new int[] {
             14400,
             0,
             0,
             0});
-            this.numInterval.Name = "numInterval";
-            this.numInterval.Size = new System.Drawing.Size(80, 21);
-            this.numInterval.TabIndex = 0;
-            this.numInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.label13.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(83, 6);
-            this.label13.Margin = new System.Windows.Forms.Padding(0, 6, 3, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "minutes";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonGo
-            // 
-            this.buttonGo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonGo.ImageIndex = 0;
-            this.buttonGo.ImageList = this.imageListButton;
-            this.buttonGo.Location = new System.Drawing.Point(25, 417);
-            this.buttonGo.Margin = new System.Windows.Forms.Padding(15, 5, 5, 5);
-            this.buttonGo.Name = "buttonGo";
-            this.buttonGo.Size = new System.Drawing.Size(214, 37);
-            this.buttonGo.TabIndex = 9;
-            this.buttonGo.Text = "Generate";
-            this.buttonGo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.buttonGo.UseVisualStyleBackColor = true;
-            this.buttonGo.Click += new System.EventHandler(this.buttonGo_Click);
-            // 
-            // imageListButton
-            // 
-            this.imageListButton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButton.ImageStream")));
-            this.imageListButton.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListButton.Images.SetKeyName(0, "table--arrow.png");
-            this.imageListButton.Images.SetKeyName(1, "disk-return-black.png");
-            this.imageListButton.Images.SetKeyName(2, "blue-document-copy.png");
-            this.imageListButton.Images.SetKeyName(3, "address-book-open.png");
-            this.imageListButton.Images.SetKeyName(4, "direction.png");
-            this.imageListButton.Images.SetKeyName(5, "alarm-clock-blue.png");
-            this.imageListButton.Images.SetKeyName(6, "compass--pencil.png");
-            this.imageListButton.Images.SetKeyName(7, "globe-green.png");
-            this.imageListButton.Images.SetKeyName(8, "grid.png");
-            this.imageListButton.Images.SetKeyName(9, "marker.png");
-            this.imageListButton.Images.SetKeyName(10, "zones.png");
-            // 
-            // splitContainerTableInfoWindow
-            // 
-            this.splitContainerTableInfoWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerTableInfoWindow.IsSplitterFixed = true;
-            this.splitContainerTableInfoWindow.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerTableInfoWindow.Name = "splitContainerTableInfoWindow";
-            this.splitContainerTableInfoWindow.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainerTableInfoWindow.Panel1
-            // 
-            this.splitContainerTableInfoWindow.Panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainerTableInfoWindow.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainerTableInfoWindow.Panel2
-            // 
-            this.splitContainerTableInfoWindow.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerTableInfoWindow.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.splitContainerTableInfoWindow.Size = new System.Drawing.Size(493, 481);
-            this.splitContainerTableInfoWindow.SplitterDistance = 381;
-            this.splitContainerTableInfoWindow.TabIndex = 0;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPageTable);
-            this.tabControl1.Controls.Add(this.tabPageChart);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.ImageList = this.tabPageImageList;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(493, 381);
-            this.tabControl1.TabIndex = 14;
-            // 
-            // tabPageTable
-            // 
-            this.tabPageTable.BackColor = System.Drawing.Color.Transparent;
-            this.tabPageTable.Controls.Add(this.dgvResult);
-            this.tabPageTable.ImageIndex = 0;
-            this.tabPageTable.Location = new System.Drawing.Point(4, 23);
-            this.tabPageTable.Name = "tabPageTable";
-            this.tabPageTable.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTable.Size = new System.Drawing.Size(485, 354);
-            this.tabPageTable.TabIndex = 0;
-            this.tabPageTable.Text = "Table";
-            // 
-            // dgvResult
-            // 
-            this.dgvResult.AllowUserToAddRows = false;
-            this.dgvResult.AllowUserToDeleteRows = false;
-            this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvResult.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dgvResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+      this.numInterval.Name = "numInterval";
+      this.numInterval.Size = new System.Drawing.Size(107, 24);
+      this.numInterval.TabIndex = 0;
+      this.numInterval.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+      // 
+      // label13
+      // 
+      this.label13.AutoSize = true;
+      this.label13.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.label13.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.label13.Location = new System.Drawing.Point(111, 7);
+      this.label13.Margin = new System.Windows.Forms.Padding(0, 7, 4, 0);
+      this.label13.Name = "label13";
+      this.label13.Size = new System.Drawing.Size(64, 17);
+      this.label13.TabIndex = 1;
+      this.label13.Text = "minutes";
+      this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
+      // buttonGo
+      // 
+      this.buttonGo.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.buttonGo.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.buttonGo.ImageIndex = 0;
+      this.buttonGo.ImageList = this.imageListButton;
+      this.buttonGo.Location = new System.Drawing.Point(33, 514);
+      this.buttonGo.Margin = new System.Windows.Forms.Padding(20, 6, 7, 6);
+      this.buttonGo.Name = "buttonGo";
+      this.buttonGo.Size = new System.Drawing.Size(285, 46);
+      this.buttonGo.TabIndex = 9;
+      this.buttonGo.Text = "Generate";
+      this.buttonGo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+      this.buttonGo.UseVisualStyleBackColor = true;
+      this.buttonGo.Click += new System.EventHandler(this.OnButtonGoClick);
+      // 
+      // imageListButton
+      // 
+      this.imageListButton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListButton.ImageStream")));
+      this.imageListButton.TransparentColor = System.Drawing.Color.Transparent;
+      this.imageListButton.Images.SetKeyName(0, "table--arrow.png");
+      this.imageListButton.Images.SetKeyName(1, "disk-return-black.png");
+      this.imageListButton.Images.SetKeyName(2, "blue-document-copy.png");
+      this.imageListButton.Images.SetKeyName(3, "address-book-open.png");
+      this.imageListButton.Images.SetKeyName(4, "direction.png");
+      this.imageListButton.Images.SetKeyName(5, "alarm-clock-blue.png");
+      this.imageListButton.Images.SetKeyName(6, "compass--pencil.png");
+      this.imageListButton.Images.SetKeyName(7, "globe-green.png");
+      this.imageListButton.Images.SetKeyName(8, "grid.png");
+      this.imageListButton.Images.SetKeyName(9, "marker.png");
+      this.imageListButton.Images.SetKeyName(10, "zones.png");
+      // 
+      // splitContainerTableInfoWindow
+      // 
+      this.splitContainerTableInfoWindow.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.splitContainerTableInfoWindow.IsSplitterFixed = true;
+      this.splitContainerTableInfoWindow.Location = new System.Drawing.Point(0, 0);
+      this.splitContainerTableInfoWindow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.splitContainerTableInfoWindow.Name = "splitContainerTableInfoWindow";
+      this.splitContainerTableInfoWindow.Orientation = System.Windows.Forms.Orientation.Horizontal;
+      // 
+      // splitContainerTableInfoWindow.Panel1
+      // 
+      this.splitContainerTableInfoWindow.Panel1.BackColor = System.Drawing.SystemColors.Control;
+      this.splitContainerTableInfoWindow.Panel1.Controls.Add(this.tabControl1);
+      // 
+      // splitContainerTableInfoWindow.Panel2
+      // 
+      this.splitContainerTableInfoWindow.Panel2.Controls.Add(this.groupBox1);
+      this.splitContainerTableInfoWindow.Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
+      this.splitContainerTableInfoWindow.Size = new System.Drawing.Size(658, 594);
+      this.splitContainerTableInfoWindow.SplitterDistance = 470;
+      this.splitContainerTableInfoWindow.SplitterWidth = 5;
+      this.splitContainerTableInfoWindow.TabIndex = 0;
+      // 
+      // tabControl1
+      // 
+      this.tabControl1.Controls.Add(this.tabPageTable);
+      this.tabControl1.Controls.Add(this.tabPageChart);
+      this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.tabControl1.ImageList = this.tabPageImageList;
+      this.tabControl1.Location = new System.Drawing.Point(0, 0);
+      this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.tabControl1.Multiline = true;
+      this.tabControl1.Name = "tabControl1";
+      this.tabControl1.SelectedIndex = 0;
+      this.tabControl1.Size = new System.Drawing.Size(658, 470);
+      this.tabControl1.TabIndex = 14;
+      // 
+      // tabPageTable
+      // 
+      this.tabPageTable.BackColor = System.Drawing.Color.Transparent;
+      this.tabPageTable.Controls.Add(this.dgvResult);
+      this.tabPageTable.ImageIndex = 0;
+      this.tabPageTable.Location = new System.Drawing.Point(4, 25);
+      this.tabPageTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.tabPageTable.Name = "tabPageTable";
+      this.tabPageTable.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.tabPageTable.Size = new System.Drawing.Size(650, 441);
+      this.tabPageTable.TabIndex = 0;
+      this.tabPageTable.Text = "Table";
+      // 
+      // dgvResult
+      // 
+      this.dgvResult.AllowUserToAddRows = false;
+      this.dgvResult.AllowUserToDeleteRows = false;
+      this.dgvResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+      this.dgvResult.BackgroundColor = System.Drawing.SystemColors.Control;
+      this.dgvResult.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.dgvResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      this.dgvResult.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.col_date,
             this.col_gmoon,
             this.col_gsun,
@@ -757,342 +782,354 @@ namespace GravityTidalCorrection
             this.col_xpos,
             this.col_ypos,
             this.col_elev});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.Format = "F4";
-            dataGridViewCellStyle8.NullValue = null;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvResult.DefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvResult.Location = new System.Drawing.Point(3, 3);
-            this.dgvResult.Name = "dgvResult";
-            this.dgvResult.ReadOnly = true;
-            this.dgvResult.Size = new System.Drawing.Size(479, 348);
-            this.dgvResult.TabIndex = 13;
-            this.dgvResult.TabStop = false;
-            // 
-            // col_date
-            // 
-            this.col_date.DataPropertyName = "Date";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.Format = "dd-MMM-yy HH:mm";
-            dataGridViewCellStyle7.NullValue = null;
-            this.col_date.DefaultCellStyle = dataGridViewCellStyle7;
-            this.col_date.HeaderText = "Date Time";
-            this.col_date.Name = "col_date";
-            this.col_date.ReadOnly = true;
-            // 
-            // col_gmoon
-            // 
-            this.col_gmoon.DataPropertyName = "gMoon";
-            this.col_gmoon.HeaderText = "g Moon (mGal)";
-            this.col_gmoon.Name = "col_gmoon";
-            this.col_gmoon.ReadOnly = true;
-            // 
-            // col_gsun
-            // 
-            this.col_gsun.DataPropertyName = "gSun";
-            this.col_gsun.HeaderText = "g Sun (mGal)";
-            this.col_gsun.Name = "col_gsun";
-            this.col_gsun.ReadOnly = true;
-            // 
-            // col_gtotal
-            // 
-            this.col_gtotal.DataPropertyName = "gTotal";
-            this.col_gtotal.HeaderText = "g Total (mGal)";
-            this.col_gtotal.Name = "col_gtotal";
-            this.col_gtotal.ReadOnly = true;
-            // 
-            // col_xpos
-            // 
-            this.col_xpos.DataPropertyName = "XPosition";
-            this.col_xpos.HeaderText = "X-Position";
-            this.col_xpos.Name = "col_xpos";
-            this.col_xpos.ReadOnly = true;
-            this.col_xpos.Visible = false;
-            // 
-            // col_ypos
-            // 
-            this.col_ypos.DataPropertyName = "YPosition";
-            this.col_ypos.HeaderText = "Y-Position";
-            this.col_ypos.Name = "col_ypos";
-            this.col_ypos.ReadOnly = true;
-            this.col_ypos.Visible = false;
-            // 
-            // col_elev
-            // 
-            this.col_elev.DataPropertyName = "Elevation";
-            this.col_elev.HeaderText = "Elevation";
-            this.col_elev.Name = "col_elev";
-            this.col_elev.ReadOnly = true;
-            this.col_elev.Visible = false;
-            // 
-            // tabPageChart
-            // 
-            this.tabPageChart.Controls.Add(this.zedGraphControl1);
-            this.tabPageChart.ImageIndex = 1;
-            this.tabPageChart.Location = new System.Drawing.Point(4, 23);
-            this.tabPageChart.Name = "tabPageChart";
-            this.tabPageChart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageChart.Size = new System.Drawing.Size(485, 354);
-            this.tabPageChart.TabIndex = 1;
-            this.tabPageChart.Text = "Chart";
-            this.tabPageChart.UseVisualStyleBackColor = true;
-            // 
-            // zedGraphControl1
-            // 
-            this.zedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.zedGraphControl1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.zedGraphControl1.Location = new System.Drawing.Point(3, 3);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(479, 348);
-            this.zedGraphControl1.TabIndex = 0;
-            // 
-            // tabPageImageList
-            // 
-            this.tabPageImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tabPageImageList.ImageStream")));
-            this.tabPageImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.tabPageImageList.Images.SetKeyName(0, "table.png");
-            this.tabPageImageList.Images.SetKeyName(1, "chart-up.png");
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBoxInfo);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(493, 91);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Log Console";
-            // 
-            // textBoxInfo
-            // 
-            this.textBoxInfo.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInfo.Location = new System.Drawing.Point(3, 16);
-            this.textBoxInfo.Multiline = true;
-            this.textBoxInfo.Name = "textBoxInfo";
-            this.textBoxInfo.ReadOnly = true;
-            this.textBoxInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxInfo.Size = new System.Drawing.Size(487, 72);
-            this.textBoxInfo.TabIndex = 12;
-            this.textBoxInfo.TabStop = false;
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.Filter = "Text Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat|All Files (*.*)|*.*";
-            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
-            // 
-            // openFilegObserved
-            // 
-            this.openFilegObserved.Filter = "Gravity Observed Data (*.gobs)|*.gobs";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+      dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+      dataGridViewCellStyle2.Format = "F4";
+      dataGridViewCellStyle2.NullValue = null;
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.dgvResult.DefaultCellStyle = dataGridViewCellStyle2;
+      this.dgvResult.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dgvResult.Location = new System.Drawing.Point(4, 4);
+      this.dgvResult.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.dgvResult.Name = "dgvResult";
+      this.dgvResult.ReadOnly = true;
+      this.dgvResult.Size = new System.Drawing.Size(642, 433);
+      this.dgvResult.TabIndex = 13;
+      this.dgvResult.TabStop = false;
+      // 
+      // col_date
+      // 
+      this.col_date.DataPropertyName = "Date";
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+      dataGridViewCellStyle1.Format = "dd-MMM-yy HH:mm";
+      dataGridViewCellStyle1.NullValue = null;
+      this.col_date.DefaultCellStyle = dataGridViewCellStyle1;
+      this.col_date.HeaderText = "Date Time";
+      this.col_date.Name = "col_date";
+      this.col_date.ReadOnly = true;
+      // 
+      // col_gmoon
+      // 
+      this.col_gmoon.DataPropertyName = "gMoon";
+      this.col_gmoon.HeaderText = "g Moon (mGal)";
+      this.col_gmoon.Name = "col_gmoon";
+      this.col_gmoon.ReadOnly = true;
+      // 
+      // col_gsun
+      // 
+      this.col_gsun.DataPropertyName = "gSun";
+      this.col_gsun.HeaderText = "g Sun (mGal)";
+      this.col_gsun.Name = "col_gsun";
+      this.col_gsun.ReadOnly = true;
+      // 
+      // col_gtotal
+      // 
+      this.col_gtotal.DataPropertyName = "gTotal";
+      this.col_gtotal.HeaderText = "g Total (mGal)";
+      this.col_gtotal.Name = "col_gtotal";
+      this.col_gtotal.ReadOnly = true;
+      // 
+      // col_xpos
+      // 
+      this.col_xpos.DataPropertyName = "XPosition";
+      this.col_xpos.HeaderText = "X-Position";
+      this.col_xpos.Name = "col_xpos";
+      this.col_xpos.ReadOnly = true;
+      this.col_xpos.Visible = false;
+      // 
+      // col_ypos
+      // 
+      this.col_ypos.DataPropertyName = "YPosition";
+      this.col_ypos.HeaderText = "Y-Position";
+      this.col_ypos.Name = "col_ypos";
+      this.col_ypos.ReadOnly = true;
+      this.col_ypos.Visible = false;
+      // 
+      // col_elev
+      // 
+      this.col_elev.DataPropertyName = "Elevation";
+      this.col_elev.HeaderText = "Elevation";
+      this.col_elev.Name = "col_elev";
+      this.col_elev.ReadOnly = true;
+      this.col_elev.Visible = false;
+      // 
+      // tabPageChart
+      // 
+      this.tabPageChart.Controls.Add(this.zedGraphControl1);
+      this.tabPageChart.ImageIndex = 1;
+      this.tabPageChart.Location = new System.Drawing.Point(4, 25);
+      this.tabPageChart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.tabPageChart.Name = "tabPageChart";
+      this.tabPageChart.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.tabPageChart.Size = new System.Drawing.Size(649, 440);
+      this.tabPageChart.TabIndex = 1;
+      this.tabPageChart.Text = "Chart";
+      this.tabPageChart.UseVisualStyleBackColor = true;
+      // 
+      // zedGraphControl1
+      // 
+      this.zedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.zedGraphControl1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.zedGraphControl1.Location = new System.Drawing.Point(4, 4);
+      this.zedGraphControl1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+      this.zedGraphControl1.Name = "zedGraphControl1";
+      this.zedGraphControl1.ScrollGrace = 0D;
+      this.zedGraphControl1.ScrollMaxX = 0D;
+      this.zedGraphControl1.ScrollMaxY = 0D;
+      this.zedGraphControl1.ScrollMaxY2 = 0D;
+      this.zedGraphControl1.ScrollMinX = 0D;
+      this.zedGraphControl1.ScrollMinY = 0D;
+      this.zedGraphControl1.ScrollMinY2 = 0D;
+      this.zedGraphControl1.Size = new System.Drawing.Size(641, 432);
+      this.zedGraphControl1.TabIndex = 0;
+      this.zedGraphControl1.UseExtendedPrintDialog = true;
+      // 
+      // tabPageImageList
+      // 
+      this.tabPageImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("tabPageImageList.ImageStream")));
+      this.tabPageImageList.TransparentColor = System.Drawing.Color.Transparent;
+      this.tabPageImageList.Images.SetKeyName(0, "table.png");
+      this.tabPageImageList.Images.SetKeyName(1, "chart-up.png");
+      // 
+      // groupBox1
+      // 
+      this.groupBox1.Controls.Add(this.textBoxInfo);
+      this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.groupBox1.Location = new System.Drawing.Point(0, 0);
+      this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.groupBox1.Name = "groupBox1";
+      this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.groupBox1.Size = new System.Drawing.Size(658, 113);
+      this.groupBox1.TabIndex = 0;
+      this.groupBox1.TabStop = false;
+      this.groupBox1.Text = "Log Console";
+      // 
+      // textBoxInfo
+      // 
+      this.textBoxInfo.BackColor = System.Drawing.SystemColors.Window;
+      this.textBoxInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.textBoxInfo.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textBoxInfo.Location = new System.Drawing.Point(4, 20);
+      this.textBoxInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.textBoxInfo.Multiline = true;
+      this.textBoxInfo.Name = "textBoxInfo";
+      this.textBoxInfo.ReadOnly = true;
+      this.textBoxInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+      this.textBoxInfo.Size = new System.Drawing.Size(650, 89);
+      this.textBoxInfo.TabIndex = 12;
+      this.textBoxInfo.TabStop = false;
+      // 
+      // saveFileDialog
+      // 
+      this.saveFileDialog.Filter = "Text Files (*.txt)|*.txt|DAT Files (*.dat)|*.dat|All Files (*.*)|*.*";
+      this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.OnSaveFileDialogFileOk);
+      // 
+      // openFilegObserved
+      // 
+      this.openFilegObserved.Filter = "Gravity Observed Data (*.gobs)|*.gobs";
+      // 
+      // fileToolStripMenuItem
+      // 
+      this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readGobsgobsToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // readGobsgobsToolStripMenuItem
-            // 
-            this.readGobsgobsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("readGobsgobsToolStripMenuItem.Image")));
-            this.readGobsgobsToolStripMenuItem.Name = "readGobsgobsToolStripMenuItem";
-            this.readGobsgobsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.readGobsgobsToolStripMenuItem.Text = "Read From File";
-            this.readGobsgobsToolStripMenuItem.Click += new System.EventHandler(this.readGobsgobsToolStripMenuItem_Click);
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Enabled = false;
-            this.saveAsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem.Image")));
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveAsToolStripMenuItem.Text = "Save &As";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click_1);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
-            // 
-            // inputToolStripMenuItem
-            // 
-            this.inputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+      this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+      this.fileToolStripMenuItem.Text = "&File";
+      // 
+      // readGobsgobsToolStripMenuItem
+      // 
+      this.readGobsgobsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("readGobsgobsToolStripMenuItem.Image")));
+      this.readGobsgobsToolStripMenuItem.Name = "readGobsgobsToolStripMenuItem";
+      this.readGobsgobsToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+      this.readGobsgobsToolStripMenuItem.Text = "Read From File";
+      this.readGobsgobsToolStripMenuItem.Click += new System.EventHandler(this.OnReadGobsgobsToolStripMenuItemClick);
+      // 
+      // saveAsToolStripMenuItem
+      // 
+      this.saveAsToolStripMenuItem.Enabled = false;
+      this.saveAsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem.Image")));
+      this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+      this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+      this.saveAsToolStripMenuItem.Text = "Save &As";
+      this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.OnSaveAsToolStripMenuItem1Click1);
+      // 
+      // toolStripSeparator1
+      // 
+      this.toolStripSeparator1.Name = "toolStripSeparator1";
+      this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+      // 
+      // exitToolStripMenuItem
+      // 
+      this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+      this.exitToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
+      this.exitToolStripMenuItem.Text = "E&xit";
+      this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItem1Click);
+      // 
+      // inputToolStripMenuItem
+      // 
+      this.inputToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.decimalDegreeInputToolStripMenuItem,
             this.useDegMinSecToolStrip,
             this.uTMInputToolStripMenuItem,
             this.uTMZoneToolStripMenuItem});
-            this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
-            this.inputToolStripMenuItem.Size = new System.Drawing.Size(119, 20);
-            this.inputToolStripMenuItem.Text = "&Coordinate System";
-            // 
-            // decimalDegreeInputToolStripMenuItem
-            // 
-            this.decimalDegreeInputToolStripMenuItem.Name = "decimalDegreeInputToolStripMenuItem";
-            this.decimalDegreeInputToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.decimalDegreeInputToolStripMenuItem.Text = "Geographic Decimal Degree";
-            this.decimalDegreeInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
-            this.decimalDegreeInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
-            // 
-            // useDegMinSecToolStrip
-            // 
-            this.useDegMinSecToolStrip.Checked = true;
-            this.useDegMinSecToolStrip.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.useDegMinSecToolStrip.Name = "useDegMinSecToolStrip";
-            this.useDegMinSecToolStrip.Size = new System.Drawing.Size(273, 22);
-            this.useDegMinSecToolStrip.Text = "Geographic Degrees Minutes Seconds";
-            this.useDegMinSecToolStrip.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
-            this.useDegMinSecToolStrip.Click += new System.EventHandler(this.inputModeChange_click);
-            // 
-            // uTMInputToolStripMenuItem
-            // 
-            this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
-            this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.uTMInputToolStripMenuItem.Text = "Universal Transverse Mercator";
-            this.uTMInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.InputCheckStateChanged);
-            this.uTMInputToolStripMenuItem.Click += new System.EventHandler(this.inputModeChange_click);
-            // 
-            // uTMZoneToolStripMenuItem
-            // 
-            this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.inputToolStripMenuItem.Name = "inputToolStripMenuItem";
+      this.inputToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+      this.inputToolStripMenuItem.Text = "&Coordinate System";
+      // 
+      // decimalDegreeInputToolStripMenuItem
+      // 
+      this.decimalDegreeInputToolStripMenuItem.Name = "decimalDegreeInputToolStripMenuItem";
+      this.decimalDegreeInputToolStripMenuItem.Size = new System.Drawing.Size(335, 26);
+      this.decimalDegreeInputToolStripMenuItem.Text = "Geographic Decimal Degree";
+      this.decimalDegreeInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.OnInputCheckStateChanged);
+      this.decimalDegreeInputToolStripMenuItem.Click += new System.EventHandler(this.OnInputModeChangeClick);
+      // 
+      // useDegMinSecToolStrip
+      // 
+      this.useDegMinSecToolStrip.Checked = true;
+      this.useDegMinSecToolStrip.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.useDegMinSecToolStrip.Name = "useDegMinSecToolStrip";
+      this.useDegMinSecToolStrip.Size = new System.Drawing.Size(335, 26);
+      this.useDegMinSecToolStrip.Text = "Geographic Degrees Minutes Seconds";
+      this.useDegMinSecToolStrip.CheckStateChanged += new System.EventHandler(this.OnInputCheckStateChanged);
+      this.useDegMinSecToolStrip.Click += new System.EventHandler(this.OnInputModeChangeClick);
+      // 
+      // uTMInputToolStripMenuItem
+      // 
+      this.uTMInputToolStripMenuItem.Name = "uTMInputToolStripMenuItem";
+      this.uTMInputToolStripMenuItem.Size = new System.Drawing.Size(335, 26);
+      this.uTMInputToolStripMenuItem.Text = "Universal Transverse Mercator";
+      this.uTMInputToolStripMenuItem.CheckStateChanged += new System.EventHandler(this.OnInputCheckStateChanged);
+      this.uTMInputToolStripMenuItem.Click += new System.EventHandler(this.OnInputModeChangeClick);
+      // 
+      // uTMZoneToolStripMenuItem
+      // 
+      this.uTMZoneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripComboBoxUTMZones});
-            this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
-            this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
-            this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
-            // 
-            // toolStripComboBoxUTMZones
-            // 
-            this.toolStripComboBoxUTMZones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxUTMZones.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.toolStripComboBoxUTMZones.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.toolStripComboBoxUTMZones.Name = "toolStripComboBoxUTMZones";
-            this.toolStripComboBoxUTMZones.Size = new System.Drawing.Size(150, 21);
-            this.toolStripComboBoxUTMZones.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBoxUTMZones_SelectedIndexChanged);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.uTMZoneToolStripMenuItem.Name = "uTMZoneToolStripMenuItem";
+      this.uTMZoneToolStripMenuItem.Size = new System.Drawing.Size(335, 26);
+      this.uTMZoneToolStripMenuItem.Text = "UTM Projection";
+      // 
+      // toolStripComboBoxUTMZones
+      // 
+      this.toolStripComboBoxUTMZones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.toolStripComboBoxUTMZones.FlatStyle = System.Windows.Forms.FlatStyle.System;
+      this.toolStripComboBoxUTMZones.Font = new System.Drawing.Font("Segoe UI", 8F);
+      this.toolStripComboBoxUTMZones.Name = "toolStripComboBoxUTMZones";
+      this.toolStripComboBoxUTMZones.Size = new System.Drawing.Size(150, 27);
+      this.toolStripComboBoxUTMZones.SelectedIndexChanged += new System.EventHandler(this.OnToolStripComboBoxUtmZonesSelectedIndexChanged);
+      // 
+      // helpToolStripMenuItem
+      // 
+      this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.aboutToolStripMenuItem.Text = "&About GravTC";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+      this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+      this.helpToolStripMenuItem.Text = "&Help";
+      // 
+      // aboutToolStripMenuItem
+      // 
+      this.aboutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("aboutToolStripMenuItem.Image")));
+      this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+      this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
+      this.aboutToolStripMenuItem.Text = "&About GravTC";
+      this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnAboutToolStripMenuItem1Click);
+      // 
+      // toolsToolStripMenuItem
+      // 
+      this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.copyToolStripMenuItem.Text = "Copy Table";
-            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
-            // 
-            // mainMenuStrip
-            // 
-            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+      this.toolsToolStripMenuItem.Size = new System.Drawing.Size(56, 24);
+      this.toolsToolStripMenuItem.Text = "Tools";
+      // 
+      // copyToolStripMenuItem
+      // 
+      this.copyToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("copyToolStripMenuItem.Image")));
+      this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+      this.copyToolStripMenuItem.Size = new System.Drawing.Size(157, 26);
+      this.copyToolStripMenuItem.Text = "Copy Table";
+      this.copyToolStripMenuItem.Click += new System.EventHandler(this.OnCopyToolStripMenuItemClick);
+      // 
+      // mainMenuStrip
+      // 
+      this.mainMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+      this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.inputToolStripMenuItem,
             this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
-            this.mainMenuStrip.Name = "mainMenuStrip";
-            this.mainMenuStrip.Size = new System.Drawing.Size(761, 24);
-            this.mainMenuStrip.TabIndex = 0;
-            this.mainMenuStrip.Text = "menuStrip1";
-            // 
-            // MainForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(761, 505);
-            this.Controls.Add(this.mainPanel);
-            this.Controls.Add(this.mainMenuStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "MainForm";
-            this.Text = "Gravity Tidal Correction";
-            this.Load += new System.EventHandler(this.MainForm_Load);
-            this.mainPanel.ResumeLayout(false);
-            this.splitContainerLeftRight.Panel1.ResumeLayout(false);
-            this.splitContainerLeftRight.Panel2.ResumeLayout(false);
-            this.splitContainerLeftRight.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.groupLocation.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).EndInit();
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).EndInit();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numElevation)).EndInit();
-            this.groupTime.ResumeLayout(false);
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
-            this.splitContainerTableInfoWindow.Panel1.ResumeLayout(false);
-            this.splitContainerTableInfoWindow.Panel2.ResumeLayout(false);
-            this.splitContainerTableInfoWindow.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPageTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
-            this.tabPageChart.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.mainMenuStrip.ResumeLayout(false);
-            this.mainMenuStrip.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+      this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+      this.mainMenuStrip.Name = "mainMenuStrip";
+      this.mainMenuStrip.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+      this.mainMenuStrip.Size = new System.Drawing.Size(1015, 28);
+      this.mainMenuStrip.TabIndex = 0;
+      this.mainMenuStrip.Text = "menuStrip1";
+      // 
+      // MainForm
+      // 
+      this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.ClientSize = new System.Drawing.Size(1015, 622);
+      this.Controls.Add(this.mainPanel);
+      this.Controls.Add(this.mainMenuStrip);
+      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+      this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+      this.MaximizeBox = false;
+      this.Name = "MainForm";
+      this.Text = "Gravity Tidal Correction";
+      this.Load += new System.EventHandler(this.OnMainFormLoad);
+      this.mainPanel.ResumeLayout(false);
+      this.splitContainerLeftRight.Panel1.ResumeLayout(false);
+      this.splitContainerLeftRight.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeftRight)).EndInit();
+      this.splitContainerLeftRight.ResumeLayout(false);
+      this.flowLayoutPanel1.ResumeLayout(false);
+      this.groupLocation.ResumeLayout(false);
+      this.flowLayoutPanel6.ResumeLayout(false);
+      this.flowLayoutPanel6.PerformLayout();
+      this.flowLayoutPanel3.ResumeLayout(false);
+      this.flowLayoutPanel3.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.num_yPos)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numYMinutes)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numYSeconds)).EndInit();
+      this.flowLayoutPanel2.ResumeLayout(false);
+      this.flowLayoutPanel2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.num_xPos)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numXMinutes)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.numXSeconds)).EndInit();
+      this.flowLayoutPanel5.ResumeLayout(false);
+      this.flowLayoutPanel5.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numElevation)).EndInit();
+      this.groupTime.ResumeLayout(false);
+      this.flowLayoutPanel7.ResumeLayout(false);
+      this.flowLayoutPanel7.PerformLayout();
+      this.flowLayoutPanel4.ResumeLayout(false);
+      this.flowLayoutPanel4.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.numInterval)).EndInit();
+      this.splitContainerTableInfoWindow.Panel1.ResumeLayout(false);
+      this.splitContainerTableInfoWindow.Panel2.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.splitContainerTableInfoWindow)).EndInit();
+      this.splitContainerTableInfoWindow.ResumeLayout(false);
+      this.tabControl1.ResumeLayout(false);
+      this.tabPageTable.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.dgvResult)).EndInit();
+      this.tabPageChart.ResumeLayout(false);
+      this.groupBox1.ResumeLayout(false);
+      this.groupBox1.PerformLayout();
+      this.mainMenuStrip.ResumeLayout(false);
+      this.mainMenuStrip.PerformLayout();
+      this.ResumeLayout(false);
+      this.PerformLayout();
 
         }
 

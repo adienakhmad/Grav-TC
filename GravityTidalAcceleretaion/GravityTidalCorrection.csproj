@@ -67,11 +67,11 @@
     </Compile>
     <Compile Include="EmbeddedAssembly.cs" />
     <Compile Include="FlexibleMessageBox.cs" />
-    <Compile Include="From File Mode.cs">
+    <Compile Include="FromFileMode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="From File Mode.Designer.cs">
-      <DependentUpon>From File Mode.cs</DependentUpon>
+    <Compile Include="FromFileMode.Designer.cs">
+      <DependentUpon>FromFileMode.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -87,8 +87,8 @@
     <EmbeddedResource Include="BetterDialog.resx">
       <DependentUpon>BetterDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="From File Mode.resx">
-      <DependentUpon>From File Mode.cs</DependentUpon>
+    <EmbeddedResource Include="FromFileMode.resx">
+      <DependentUpon>FromFileMode.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

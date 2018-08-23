@@ -92,7 +92,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(56, 22);
             this.openToolStripButton.Text = "&Open";
-            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
+            this.openToolStripButton.Click += new System.EventHandler(this.OnOpenToolStripButtonClick);
             // 
             // toolStripSeparator1
             // 
@@ -115,7 +115,7 @@
             this.tsComboBoxCoordSystem.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.tsComboBoxCoordSystem.Name = "tsComboBoxCoordSystem";
             this.tsComboBoxCoordSystem.Size = new System.Drawing.Size(150, 25);
-            this.tsComboBoxCoordSystem.SelectedIndexChanged += new System.EventHandler(this.tsComboBoxCoordSystem_SelectedIndexChanged);
+            this.tsComboBoxCoordSystem.SelectedIndexChanged += new System.EventHandler(this.OnTsComboBoxCoordSystemSelectedIndexChanged);
             // 
             // toolStripSeparator2
             // 
@@ -130,7 +130,7 @@
             this.toolStripButtonGenerate.Name = "toolStripButtonGenerate";
             this.toolStripButtonGenerate.Size = new System.Drawing.Size(74, 22);
             this.toolStripButtonGenerate.Text = "Generate";
-            this.toolStripButtonGenerate.Click += new System.EventHandler(this.toolStripButtonGenerate_Click);
+            this.toolStripButtonGenerate.Click += new System.EventHandler(this.OnToolStripButtonGenerateClick);
             // 
             // saveToolStripButton
             // 
@@ -139,7 +139,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(67, 22);
             this.saveToolStripButton.Text = "&Save As";
-            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
+            this.saveToolStripButton.Click += new System.EventHandler(this.OnSaveToolStripButtonClick);
             // 
             // copyToolStripButton
             // 
@@ -148,7 +148,7 @@
             this.copyToolStripButton.Name = "copyToolStripButton";
             this.copyToolStripButton.Size = new System.Drawing.Size(55, 22);
             this.copyToolStripButton.Text = "&Copy";
-            this.copyToolStripButton.Click += new System.EventHandler(this.copyToolStripButton_Click);
+            this.copyToolStripButton.Click += new System.EventHandler(this.OnCopyToolStripButtonClick);
             // 
             // openFileDialog
             // 
@@ -324,7 +324,7 @@
             this.Padding = new System.Windows.Forms.Padding(10, 3, 10, 10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GravTC - Read From File";
-            this.Load += new System.EventHandler(this.FromFileMode_Load);
+            this.Load += new System.EventHandler(this.OnFromFileModeLoad);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
